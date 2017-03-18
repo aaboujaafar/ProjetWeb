@@ -1,0 +1,71 @@
+@font-face {
+    font-family: Bebas Regular;
+    src: url(../fonts/BEBAS.woff);
+}
+body{
+	background-image: url('http://lea.verou.me/ft2010/img/darker_wood.jpg');
+	
+}
+.form-group label{
+	
+	color: white;
+	font-size-adjust: 0.75;
+	font-weight : bold;
+	font-family: 'Ranga', cursive; 
+	letter-spacing: 2px;
+	
+}
+.form-group input{
+	border-radius: 5px;
+	padding-left: 15px;
+	height : 35px;
+	width:70%;
+	font-size-adjust: 0.58;
+	background-color:rgba(255,255,255,0);
+	color:white;
+	border: none;	
+	border-bottom : solid gray 2px;
+	font-family: 'Ranga', cursive; 
+	letter-spacing: 2px;
+}
+.form-group input:focus{
+	background-color:rgba(255,255,255,0.1);
+	border: none;
+	border-bottom : solid #40A497 2px;
+}
+.navbar{
+	font-family: 'Bebas Regular'; 
+}
+.lienMenu{
+	color:white;
+	font-size : 17px;
+	text-decoration:none;
+	margin : 10px 10px 10px 0px;
+	font-family: Bebas Regular;
+}
+.lienMenu:hover{
+
+	color:red;
+	text-decoration:none;
+	margin : 10px 10px 10px 0px;
+	font-family: Bebas Regular;
+}
+.boutonMenu{
+	
+}
+.form-horizontal div{ 
+	margin-bottom : 10px;
+}
+.form-horizontal{
+	position: absolute;
+	top: 25%;
+	left:20%;
+	height: 50%;
+  	float: none;
+	padding: 15px;
+	padding-left:10%;
+	border-radius: 10px;
+    margin: 0 auto;
+	width:60%;
+	border-radius: 10px;
+}

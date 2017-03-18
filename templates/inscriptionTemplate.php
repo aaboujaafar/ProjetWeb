@@ -3,32 +3,47 @@
 		if(isset($inscErrorText))
 		echo '<span class="error">' . $inscErrorText . '</span>';
 	?>
-	<form action="index.php" method="post">
+	<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
+	<fieldset>
 		<input type="hidden" name="action" value="validateInscription" />
-		<table>
-			<tr>
-				<th>Pseudo* :</th>
-				<td><input type="text" name="inscLogin"/></td>
-			</tr>
-			<tr>
-				<th>Mot de passe* :</th>
-				<td><input type="password" name="inscPassword"/></td>
-			</tr>
-			<tr>
-				<th>Mail* :</th>
-				<td><input type="text" name="mail"/></td>
-			</tr>
-			<tr>
-				<th>Nom :</th>
-				<td><input type="text" name="nom"/></td>
-			</tr>
-			<tr>
-				<th>Prenom :</th>
-				<td><input type="text" name="prenom"/></td>
-			</tr>
-			<tr>
-				<th />
-				<td><input type="submit" value="Creer mon compte..." /></td>
-			</tr>
-		</table>
+		<div class="form-group">
+			<label class="col-sm-2 control-label ">Pseudo <span>*</span></label>
+			<div class="col-sm-10">
+			  <input type="text" name="inscLogin" id="test"  placeholder="maitreJedi" required/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Mot de passe <span>*</span></label>
+			<div class="col-sm-10">
+			  <input type="password" name="inscPassword" placeholder="Votre mot de passe" required/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Mail <span>*</span></label>
+			<div class="col-sm-10">
+			  <input  type="email" name="mail" placeholder="exemple@exemple.com" required/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Nom <span>*</span></label>
+			<div class="col-sm-10">
+			  <input  type="text" name="nom" placeholder="Dupont" required/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Prénom <span>*</span></label>
+			<div class="col-sm-10">
+			  <input type="text" name="prenom" placeholder="Dupont" required/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >S'inscrire</Button>
+		</div>
+		</fieldset>
 	</form>
+	
