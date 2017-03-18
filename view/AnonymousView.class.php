@@ -8,6 +8,5 @@
 			$this->loadTemplate($this->templateNames['content'], $this->args);
 			$this->loadTemplate($this->templateNames['foot'], $this->args);
 		}
-		//testCommitS
 	}
 ?>
