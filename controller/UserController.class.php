@@ -7,6 +7,9 @@
 		
 		public function defaultAction($arg) {
 			$view = new UserView($this,"homeConnecte");
+			$request = Request::getCurrentRequest();
+			$user = User::getUser($request->read("user"));
+			$view->setArg("Pseudo", $user->PSEUDO);
 			$view->render();
 		}
 		

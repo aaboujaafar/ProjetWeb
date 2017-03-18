@@ -1,3 +1,3 @@
 <div id="JoueurMenu">
-	<p>vous êtes connecté <?php echo "" ?>  test</p>
+	<p>Bonjour     <b><?php echo $Pseudo ?></b></p>
 </div>
