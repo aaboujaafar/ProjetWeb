@@ -28,8 +28,6 @@
 				if(isset($args))
 					foreach($args as $key => $value)
 						$$key = $value;
-						
-						
 				require_once($templateFileName);
 			}
 			else
