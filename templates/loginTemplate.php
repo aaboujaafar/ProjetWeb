@@ -21,7 +21,7 @@
 		</div>
 		
 		<div class="form-group">
-			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >S'inscrire</Button>
+			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Se connecter</Button>
 		</div>
 		</fieldset>
 	</form>
