@@ -29,8 +29,8 @@
 			} 
 			else{
 				$password = $args->read('connexionPassword');
-				$user = User::getUser($login);
-				if($user->MDP != $password){
+				$user = User::getUser($login, $password);
+				if($user == NULL ){
 					$view = new LoginView($this,'login');
 					$view->setArg('inscErrorText','Mot de passe incorrecte, veuillez insérer le bon mot de passe');
 					$view->render();
@@ -40,7 +40,8 @@
 					$newRequest->write('controller','user');
 					$newRequest->write('action','Anonymous');
 					$newRequest->write('user',$user->PSEUDO);
-						
+					setcookie("user",$user->PSEUDO, time()+ 3600*24);
+		
 					try {
 						// Instantiate the adequat controller according to the current request
 						$controller = Dispatcher::dispatch($newRequest);
@@ -94,6 +95,7 @@
 						$newRequest->write('controller','user');
 						$newRequest->write('action','Anonymous');
 						$newRequest->write('user',$user->PSEUDO);
+					setcookie("user",$user->PSEUDO, time()+ 3600*24);
 						
 						try {
 							// Instantiate the adequat controller according to the current request

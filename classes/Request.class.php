@@ -28,6 +28,9 @@
 			else if(isset($_COOKIE["controller"])) {
 				return $_COOKIE["controller"];
 			}
+			else if(isset($_SESSION["controller"])) {
+				return $_SESSION["controller"];
+			}
 			else{
 				return "anonymous";
 			}
@@ -42,6 +45,9 @@
 			}
 			else if(isset($_COOKIE["action"])) {
 				return $_COOKIE["action"];
+			}
+			else if(isset($_SESSION["action"])) {
+				return $_SESSION["action"];
 			}
 			else{
 				return "Anonymous";
@@ -58,6 +64,9 @@
 			else if(isset($_COOKIE[$name])) {
 				return $_COOKIE[$name];
 			}
+			else if(isset($_SESSION[$name])) {
+				return $_SESSION[$name];
+			}
 			else{
 				return "";
 			}
@@ -71,6 +80,9 @@
 			}
 			else if(isset($_COOKIE[$name])) {
 				$_COOKIE[$name] = $value;
+			}
+			else if(isset($_SESSION[$name])) {
+				$_SESSION[$name] = $value;
 			}
 			else{
 				$_POST[$name] = $value;
