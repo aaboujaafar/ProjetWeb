@@ -57,9 +57,8 @@ body{
 	margin-bottom : 10px;
 }
 .form-horizontal{
-	position: absolute;
+	position: relative;
 	top: 25%;
-	left:20%;
 	height: 50%;
   	float: none;
 	padding: 15px;
@@ -68,4 +67,112 @@ body{
     margin: 0 auto;
 	width:60%;
 	border-radius: 10px;
+}
+.alert-danger{
+	width:20%;
+	position: relative;
+	margin: 0 auto;
+}
+.container{
+	width:100%;
+}
+.img-circle{
+	border: solid white;
+}
+#chg-cov{
+	border:1px solid #2d2d2d;
+	background-color: #f9f9f9;
+	padding:5px 10px 5px 10px;
+	color: #2d2d2d;
+	position:relative;
+	z-index:2;
+}
+#chg-cov:hover{
+	background-color: #eeeeee;
+}
+.name{
+    padding-left:200px;
+    font-size:30px;
+    margin-top: 250px;
+    color: white;
+	position:absolute;
+	background-color: rgba(0, 0, 0, 0.3);
+	padding-left: 15px;
+	padding-right: 15px;	
+	width:100%;
+	margin-right:30px;
+	height:50px;
+	z-index:0;	
+	 -webkit-text-stroke-width: 1px;
+-webkit-text-stroke-color: #000;
+}
+.pic{
+	margin-top:200px; 
+	width:170px;
+	height:170px;
+	margin-left:50px;
+	margin-bottom:-60px;
+	position:relative;
+	z-index:1;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+	margin-left:55%;
+    padding: 0px;
+	margin-top:-45px;
+    overflow: hidden;
+	color: white;
+}
+
+li {
+    float: left;
+}
+
+li span {
+    display: block;
+    padding: 2px;
+	padding-left:35%;
+	color: white;
+}
+.panel{
+    background-image:url("https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17017039_10206544624094298_6037340313071994155_o.jpg?oh=114e15f4655967ea0f0a68cf3fc87cb4&oe=59547340"); 
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center;
+	box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7); 
+}
+.well{
+	margin-left:10px;
+	margin-right:10px;
+	padding:0px;
+	background-color:transparent;
+	border:none;
+}
+.row{
+	margin-left:10px;
+	margin-right:10px;
+}
+.cov{
+	padding-left:10px;
+	padding-right:10px;
+}
+.panel{
+	border:none;
+	border-radius:10px;
+}
+.navbar{
+	margin-bottom:10px;
+}
+.bjr-mess{
+	margin-left:250px;	
+}
+.lesTroisBoutonsdeJimmy{
+	position: relative;
+	margin-top:10%;
+	margin-left:40%;
+}
+.lesTroisBoutonsdeJimmy button{
+margin-left:20px;
 }

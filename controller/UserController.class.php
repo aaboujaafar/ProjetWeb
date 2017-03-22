@@ -56,10 +56,7 @@
 			$oldRequest = Request::getCurrentRequest();
 			$friends = Friends::getFriends($oldRequest->read('id'));
 			$view->setArg("friends", $friends);
-			/*int i = 0;
-			foreach($friends as $friend) {
-				$view->setArg("Pseudo", $oldRequest->read('user'));
-			}*/
+
 			$oldRequest = Request::getCurrentRequest();
 			$view->setArg("Pseudo", $oldRequest->read('user'));
 			$view->setArg("photoC", $oldRequest->read('photoC'));
@@ -72,6 +69,26 @@
 			$view->render();
 		}
 		
+		public function creatGame($arg) {
+			$view = new CreatGameView($this,"creatGame");
+			
+			$view->render();
+		}
+		
+		public function joinGame($arg) {
+			$view = new JoinGameView($this,"joinGame");
+			
+			$partiePublic = ListePartie::getPartiePublic();
+			$view->setArg("partiesPublic", $partiePublic);
+			
+			$view->render();
+		}
+		
+		public function continueGame($arg) {
+			$view = new ContinueGameView($this,"continueGame");
+			
+			$view->render();
+		}
 		public function execute(){
 			$request = Request::getCurrentRequest();
 			$action = $request->getActionName();
@@ -86,6 +103,15 @@
 			}
 			else if($action === "friends"){
 				$this->showFriends($request);
+			}
+			else if($action === "creatGame"){
+				$this->creatGame($request);
+			}
+			else if($action === "joinGame"){
+				$this->joinGame($request);
+			}
+			else if($action === "continueGame"){
+				$this->continueGame($request);
 			}
 		}
 		

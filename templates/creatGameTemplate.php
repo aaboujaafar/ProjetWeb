@@ -1,4 +1,4 @@
 <div id="JoueurMenu">
 	<br>
-	<p>FriendsConected</p>
+	<p>create</p>
 </div>

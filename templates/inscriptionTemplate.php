@@ -1,7 +1,9 @@
 <h2>Inscription</h2>
 	<?php
 		if(isset($inscErrorText))
-		echo '<span class="error">' . $inscErrorText . '</span>';
+		echo '<div class="alert alert-danger" role="alert">
+	
+				<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorText . '</span></div></br>';
 	?>
 	<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 	<fieldset>
