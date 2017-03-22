@@ -40,7 +40,31 @@
 					$newRequest->write('controller','user');
 					$newRequest->write('action','Anonymous');
 					$newRequest->write('user',$user->PSEUDO);
+					$newRequest->write('partieG',$user->NBRPARTIEGAGNEE);
+					$newRequest->write('partieP',($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE));
+					$newRequest->write('partieT',$user->NBRPARTIEJOUEE);
+					if($user->NBRPARTIEJOUEE ==0){
+						$newRequest->write('averageWin',0);
+					}
+					else{
+						$newRequest->write('averageWin',($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE));
+					}
+					$newRequest->write('photoP',$user->PHOTOPROFIL);
+					$newRequest->write('photoC',$user->PHOTOCOVER);
+					
 					setcookie("user",$user->PSEUDO, time()+ 3600*24);
+					setcookie("partieG",$user->NBRPARTIEGAGNEE, time()+ 3600*24);
+					setcookie("partieP",($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE), time()+ 3600*24);
+					setcookie("partieT",$user->NBRPARTIEJOUEE, time()+ 3600*24);
+					if($user->NBRPARTIEJOUEE ==0){
+						setcookie("averageWin",0, time()+ 3600*24);
+					}
+					else{
+						setcookie("averageWin",($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE), time()+ 3600*24);
+					}
+					setcookie("photoP",$user->PHOTOCOVER, time()+ 3600*24);
+					setcookie("photoC",$user->PHOTOPROFIL, time()+ 3600*24);
+					
 		
 					try {
 						// Instantiate the adequat controller according to the current request
@@ -95,7 +119,30 @@
 						$newRequest->write('controller','user');
 						$newRequest->write('action','Anonymous');
 						$newRequest->write('user',$user->PSEUDO);
-					setcookie("user",$user->PSEUDO, time()+ 3600*24);
+						$newRequest->write('partieG',$user->NBRPARTIEGAGNEE);
+						$newRequest->write('partieP',($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE));
+						$newRequest->write('partieT',$user->NBRPARTIEJOUEE);
+						if($user->NBRPARTIEJOUEE ==0){
+							$newRequest->write('averageWin',0);
+						}
+						else{
+							$newRequest->write('averageWin',($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE));
+						}
+						$newRequest->write('photoP',$user->PHOTOPROFIL);
+						$newRequest->write('photoC',$user->PHOTOCOVER);
+						
+						setcookie("user",$user->PSEUDO, time()+ 3600*24);
+						setcookie("partieG",$user->NBRPARTIEGAGNEE, time()+ 3600*24);
+						setcookie("partieP",($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE), time()+ 3600*24);
+						setcookie("partieT",$user->NBRPARTIEJOUEE, time()+ 3600*24);
+						if($user->NBRPARTIEJOUEE ==0){
+							setcookie("averageWin",0, time()+ 3600*24);
+						}
+						else{
+							setcookie("averageWin",($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE), time()+ 3600*24);
+						}
+						setcookie("photoP",$user->PHOTOCOVER, time()+ 3600*24);
+						setcookie("photoC",$user->PHOTOPROFIL, time()+ 3600*24);
 						
 						try {
 							// Instantiate the adequat controller according to the current request

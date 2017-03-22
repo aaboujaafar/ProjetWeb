@@ -1,5 +1,5 @@
 <?php
-	class UserView extends View
+	class UserFriendsView extends View
 	{			
 		public function __construct($controller, $templateName,$args = array()) {
 			$this->templateNames = array();
@@ -8,7 +8,7 @@
 			$this->templateNames['menu'] = 'menuUser';
 			$this->templateNames['foot'] = 'foot';
 			$this->templateNames['content'] = $templateName;
-			$this->templateNames['AccueilConnected'] = 'AccueilConnected';
+			$this->templateNames['profilFriends'] = 'profilFriends';
 			$this->args = $args;
 			$this->args['controller'] = $controller;
 		}
@@ -19,7 +19,7 @@
 			$this->loadTemplate($this->templateNames['menu'], $this->args);
 			$this->loadTemplate($this->templateNames['content'], $this->args);
 			$this->loadTemplate($this->templateNames['foot'], $this->args);
-			$this->loadTemplate($this->templateNames['AccueilConnected'], $this->args);
+			$this->loadTemplate($this->templateNames['profilFriends'], $this->args);
 		}
 	}
 ?>
