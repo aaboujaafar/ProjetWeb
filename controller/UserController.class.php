@@ -61,6 +61,7 @@
 			$view->setArg("partieG", $oldRequest->read('partieG'));
 			$view->setArg("partieP", $oldRequest->read('partieP'));
 			$view->setArg("averageWin", $oldRequest->read('averageWin'));
+			
 			$view->render();
 		}
 		
