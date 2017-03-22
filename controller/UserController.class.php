@@ -30,6 +30,7 @@
 			setcookie ("photoP", "", time() - 3600);
 			setcookie ("photoC", "", time() - 3600);
 			setcookie ("afficheAmis", "", time() - 3600);
+			setcookie ("id", "", time() - 3600);
 			
 			$view = new AnonymousView($this,"home");
 			$view->render();
@@ -52,7 +53,13 @@
 		
 		public function showFriends($arg) {
 			$view = new UserFriendsView($this,"profilHaut");
-			
+			$oldRequest = Request::getCurrentRequest();
+			$friends = Friends::getFriends($oldRequest->read('id'));
+			$view->setArg("friends", $friends);
+			/*int i = 0;
+			foreach($friends as $friend) {
+				$view->setArg("Pseudo", $oldRequest->read('user'));
+			}*/
 			$oldRequest = Request::getCurrentRequest();
 			$view->setArg("Pseudo", $oldRequest->read('user'));
 			$view->setArg("photoC", $oldRequest->read('photoC'));

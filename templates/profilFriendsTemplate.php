@@ -1,4 +1,8 @@
 <div id="JoueurMenu">
 	<br>
-	<p>FriendsConected</p>
+	<p><?php 
+	foreach($friends as $friend) {
+		echo $friend->PSEUDO."<br />";
+	}
+	?></p>
 </div>

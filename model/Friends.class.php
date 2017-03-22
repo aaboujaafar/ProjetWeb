@@ -2,10 +2,10 @@
 	class Friends extends Model
 	{				
 		public static function getFriends($id) {
-			$sql = "SELECT joueur.PSEUDO FROM joueur, amis WHERE amis.IDAMIS = joueur.IDJOUEUR and amis.IDJOUEUR ='".$login."'";
+			$sql = "SELECT joueur.PSEUDO from joueur, amis WHERE amis.IDAMIS = joueur.IDJOUEUR and amis.IDJOUEUR ='".$id."'";
 			$st = self::query($sql);
-			$u = $st->fetch();
-			if(isset($u->props)){
+			$u = $st->fetchAll();
+			if(isset($u[0])){
 				return $u;
 			}
 			else{
