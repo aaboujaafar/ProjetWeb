@@ -45,6 +45,43 @@
 			
 			$view->render();
 		}
+
+		public function showFriendProfil($arg) {
+			$view = new FriendProfilView($this,"profilHaut");
+
+			$oldRequest = Request::getCurrentRequest();
+			$view->setArg("Pseudo", $oldRequest->read('user'));
+			$view->setArg("photoC", $oldRequest->read('photoC'));
+			$view->setArg("photoP", $oldRequest->read('photoP'));
+			$view->setArg("partieT", $oldRequest->read('partieT'));
+			$view->setArg("partieG", $oldRequest->read('partieG'));
+			$view->setArg("partieP", $oldRequest->read('partieP'));
+			$view->setArg("averageWin", $oldRequest->read('averageWin'));
+			
+
+			$friend = User::getUserOnly('tanakal');
+			print_r($friend);
+
+			if($friend == NULL){
+
+				print_r("hello");
+			}
+
+			/*$view->setArg("Pseudo", $friend->PSEUDO);
+			$view->setArg("photoC",  $friend->PHOTOCOVER);
+			$view->setArg("photoP",  $friend->PHOTOPROFIL);
+			$view->setArg("partieT",  $friend->NBRPARTIEJOUEE);
+			$view->setArg("partieG",  $friend->NBRPARTIEGAGNEE);
+			$view->setArg("partieP",  $friend->NBRPARTIEJOUEE - $friend->NBRPARTIEGAGNEE);
+			if($friend->NBRPARTIEJOUEE ==0){
+					$view->setArg("averageWin",  0);
+			}
+			else{
+					$view->setArg("averageWin",  $friend->NBRPARTIEGAGNEE/$friend->NBRPARTIEJOUEE);
+			}*/
+			
+			$view->render();
+		}
 		
 		public function showFriends($arg) {
 			$view = new UserFriendsView($this,"profilFriends");
@@ -93,6 +130,9 @@
 			}
 			else if($action === "friends"){
 				$this->showFriends($request);
+			}
+			else if($action === "FriendProfil"){
+				$this->showFriendProfil($request);
 			}
 			else if($action === "creatGame"){
 				$this->creatGame($request);

@@ -12,10 +12,12 @@
 				return NULL;;
 			}
 		}
+
 		public static function AddFriend($id, $pseudo) {
 			$sql = "INSERT INTO `amis`(`IDJOUEUR`, `IDAMIS`) VALUES (".$id.", (SELECT joueur.IDJOUEUR from joueur WHERE joueur.PSEUDO ='".$pseudo."'))";
 			$st = self::query($sql);
 		}
+
 		public static function RemoveFriend($id, $pseudo) {
 			$sql = "DELETE FROM `amis` WHERE amis.IDJOUEUR =".$id." and amis.IDAMIS = (SELECT joueur.IDJOUEUR from joueur WHERE joueur.PSEUDO ='".$pseudo."')";
 			$st = self::query($sql);
