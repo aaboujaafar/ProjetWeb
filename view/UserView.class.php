@@ -8,7 +8,6 @@
 			$this->templateNames['menu'] = 'menuUser';
 			$this->templateNames['foot'] = 'foot';
 			$this->templateNames['content'] = $templateName;
-			$this->templateNames['AccueilConnected'] = 'AccueilConnected';
 			$this->args = $args;
 			$this->args['controller'] = $controller;
 		}
@@ -19,7 +18,6 @@
 			$this->loadTemplate($this->templateNames['menu'], $this->args);
 			$this->loadTemplate($this->templateNames['content'], $this->args);
 			$this->loadTemplate($this->templateNames['foot'], $this->args);
-			$this->loadTemplate($this->templateNames['AccueilConnected'], $this->args);
 		}
 	}
 ?>

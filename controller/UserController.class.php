@@ -6,16 +6,11 @@
 		}
 		
 		public function defaultAction($arg) {
-			$view = new UserView($this,"profilHaut");
+			$view = new UserView($this,"AccueilConnected");
 			
 			$oldRequest = Request::getCurrentRequest();
 			$view->setArg("Pseudo", $oldRequest->read('user'));
-			$view->setArg("photoC", $oldRequest->read('photoC'));
 			$view->setArg("photoP", $oldRequest->read('photoP'));
-			$view->setArg("partieT", $oldRequest->read('partieT'));
-			$view->setArg("partieG", $oldRequest->read('partieG'));
-			$view->setArg("partieP", $oldRequest->read('partieP'));
-			$view->setArg("averageWin", $oldRequest->read('averageWin'));
 			
 			$view->render();
 		}
@@ -52,19 +47,14 @@
 		}
 		
 		public function showFriends($arg) {
-			$view = new UserFriendsView($this,"profilHaut");
+			$view = new UserFriendsView($this,"profilFriends");
 			$oldRequest = Request::getCurrentRequest();
 			$friends = Friends::getFriends($oldRequest->read('id'));
 			$view->setArg("friends", $friends);
 
 			$oldRequest = Request::getCurrentRequest();
 			$view->setArg("Pseudo", $oldRequest->read('user'));
-			$view->setArg("photoC", $oldRequest->read('photoC'));
 			$view->setArg("photoP", $oldRequest->read('photoP'));
-			$view->setArg("partieT", $oldRequest->read('partieT'));
-			$view->setArg("partieG", $oldRequest->read('partieG'));
-			$view->setArg("partieP", $oldRequest->read('partieP'));
-			$view->setArg("averageWin", $oldRequest->read('averageWin'));
 			
 			$view->render();
 		}
