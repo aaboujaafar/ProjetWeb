@@ -2,11 +2,12 @@
 	<br>
 	<p>ProfilConected
 	<br>
-	<?php 
+	<?php
 	echo $Pseudo."<br>";
 	echo "partieT  ".$partieT."<br>";
 	echo "partieG  ".$partieG."<br>";
 	echo "partieP  ".$partieP."<br>";
+	echo "partieP  ".$photoP."<br>";
 	echo "averageWin  ".$averageWin."<br>";
 	?>
 	</p>

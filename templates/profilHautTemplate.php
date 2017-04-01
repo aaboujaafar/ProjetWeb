@@ -4,16 +4,44 @@
 						<div class="panel">
 							<div class="name">
 								<span class="bjr-mess"><strong> <?php echo $Pseudo ?></strong></span>
-							<ul>
-							  <li><span>Home</span></li>
-							  <li><span>News</span></li>
-							  <li><span>Contact</span></li>
-							  <li><span>About</span></li>
+							<button id="chg-cov" type="button" class="btn pull-right" data-toggle="modal" data-target="#coverSelector"><span class="glyphicon glyphicon-picture"></span> Change cover</button>
+							<ul class="pull-right">
+							  <li><span><?php echo $partieT ?></span></li>
+							  <li><span><?php echo $partieG ?></span></li>
+							  <li><span><?php echo $partieP ?></span></li>
+							  <li><span><?php echo $averageWin ?></span></li>
 							</ul>
-							</div><img class="pic img-circle" alt="..." src="https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-9/15355698_10205936992703893_1304928688902745919_n.jpg?oh=3604667f9a3242451833210f249e047b&oe=595EA5C9">
-							
-							<a href="#" id="chg-cov" style="margin:260px 10px 10px 10px;" class="btn pull-right"><span class="glyphicon glyphicon-picture"></span> Change cover</a>
+							</div>
+							<img class="pic img-circle" alt="..." src=<?php echo('"photo/'.$partieP.'.png"')  ?>/>
 						</div>
 			 </div>
+			</div>
+			<div id="coverSelector" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-sm popup">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">Changer la photo de couverture</h4>
+				      </div>
+				      <div class="modal-body">
+									<form id="popUpForm" class="form-horizontal well" method="post" action="process_form.php" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="contenu" class="col-lg-2 control-label">Illustration</label>
+                                <div class="col-lg-10">
+                                    <input type="file" class="form-control" name="image" accept="image/*">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+																	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+				      </div>
+				      </div>
+				    </div>
+				  </div>
 			</div>
 			</div>

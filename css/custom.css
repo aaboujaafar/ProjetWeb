@@ -4,16 +4,16 @@
 }
 body{
 	background-image: url('http://lea.verou.me/ft2010/img/darker_wood.jpg');
-	
+
 }
 .form-group label{
-	
+
 	color: white;
 	font-size-adjust: 0.75;
 	font-weight : bold;
-	font-family: 'Ranga', cursive; 
+	font-family: 'Ranga', cursive;
 	letter-spacing: 2px;
-	
+
 }
 .form-group input{
 	border-radius: 5px;
@@ -23,9 +23,9 @@ body{
 	font-size-adjust: 0.58;
 	background-color:rgba(255,255,255,0);
 	color:white;
-	border: none;	
+	border: none;
 	border-bottom : solid gray 2px;
-	font-family: 'Ranga', cursive; 
+	font-family: 'Ranga', cursive;
 	letter-spacing: 2px;
 }
 .form-group input:focus{
@@ -34,7 +34,7 @@ body{
 	border-bottom : solid #40A497 2px;
 }
 .navbar{
-	font-family: 'Bebas Regular'; 
+	font-family: 'Bebas Regular';
 }
 .lienMenu{
 	color:white;
@@ -51,9 +51,9 @@ body{
 	font-family: Bebas Regular;
 }
 .boutonMenu{
-	
+
 }
-.form-horizontal div{ 
+.form-horizontal div{
 	margin-bottom : 10px;
 }
 .form-horizontal{
@@ -80,9 +80,11 @@ body{
 	border: solid white;
 }
 #chg-cov{
+  margin-top: 10px;
 	border:1px solid #2d2d2d;
 	background-color: #f9f9f9;
 	padding:5px 10px 5px 10px;
+  margin-right: 20px;
 	color: #2d2d2d;
 	position:relative;
 	z-index:2;
@@ -91,23 +93,23 @@ body{
 	background-color: #eeeeee;
 }
 .name{
-    padding-left:200px;
-    font-size:30px;
-    margin-top: 250px;
-    color: white;
+  padding-left:200px;
+  font-size:30px;
+  margin-top: 250px;
+  color: white;
 	position:absolute;
 	background-color: rgba(0, 0, 0, 0.3);
 	padding-left: 15px;
-	padding-right: 15px;	
+	padding-right: 15px;
 	width:100%;
 	margin-right:30px;
 	height:50px;
-	z-index:0;	
-	 -webkit-text-stroke-width: 1px;
--webkit-text-stroke-color: #000;
+	z-index:0;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
 }
 .pic{
-	margin-top:200px; 
+	margin-top:200px;
 	width:170px;
 	height:170px;
 	margin-left:50px;
@@ -115,33 +117,32 @@ body{
 	position:relative;
 	z-index:1;
 }
-ul {
-    list-style-type: none;
-    margin: 0;
-	margin-left:55%;
-    padding: 0px;
-	margin-top:-45px;
-    overflow: hidden;
+.name ul {
+  list-style-type: none;
+  margin: 0;
+  margin-right: 20px;
+  padding: 0px;
+  overflow: hidden;
 	color: white;
 }
 
-li {
-    float: left;
+.name li {
+    float: right;
 }
 
-li span {
-    display: block;
-    padding: 2px;
-	padding-left:35%;
+.name li span {
+  display: block;
+  padding: 2px;
+  	padding-left:50%;
 	color: white;
 }
 .panel{
-    background-image:url("https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17017039_10206544624094298_6037340313071994155_o.jpg?oh=114e15f4655967ea0f0a68cf3fc87cb4&oe=59547340"); 
-    height: 300px;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    background-position: center;
-	box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7); 
+  background-image:url("https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17017039_10206544624094298_6037340313071994155_o.jpg?oh=114e15f4655967ea0f0a68cf3fc87cb4&oe=59547340");
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+	box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.7);
 }
 .well{
 	margin-left:10px;
@@ -166,7 +167,7 @@ li span {
 	margin-bottom:10px;
 }
 .bjr-mess{
-	margin-left:250px;	
+	margin-left:250px;
 }
 .lesTroisBoutonsdeJimmy{
 	position: relative;
@@ -175,4 +176,15 @@ li span {
 }
 .lesTroisBoutonsdeJimmy button{
 margin-left:20px;
+}
+
+/* Formulaire du popup*/
+
+#popUpForm{
+  width:100%;
+  border: none;
+}
+
+.popup{
+  margin-top:20%;
 }
