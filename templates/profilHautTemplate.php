@@ -12,7 +12,7 @@
 							  <li><span><?php echo $averageWin ?></span></li>
 							</ul>
 							</div>
-							<img class="pic img-circle" alt="..." src=<?php echo('"photo/'.$partieP.'.png"')  ?>/>
+							<img class="pic img-circle" alt="..." src=<?php echo('"'.$photoP.'"')  ?>/>
 						</div>
 			 </div>
 			</div>
@@ -33,7 +33,6 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-2">
-																	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
                                 </div>
                             </div>
