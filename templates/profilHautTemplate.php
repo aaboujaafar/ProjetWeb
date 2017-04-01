@@ -6,10 +6,10 @@
 								<span class="bjr-mess"><strong> <?php echo $Pseudo ?></strong></span>
 							<button id="chg-cov" type="button" class="btn pull-right" data-toggle="modal" data-target="#coverSelector"><span class="glyphicon glyphicon-picture"></span> Change cover</button>
 							<ul class="pull-right">
-							  <li><span><?php echo $partieT ?></span></li>
-							  <li><span><?php echo $partieG ?></span></li>
-							  <li><span><?php echo $partieP ?></span></li>
-							  <li><span><?php echo $averageWin ?></span></li>
+							  <li><span data-toggle="tooltip" title="Parties jouées" data-placement="bottom" class="glyphicon glyphicon-saved icon"></span><span><?php echo $partieT ?></span></li>
+							  <li><span data-toggle="tooltip" title="Parties gagnées" data-placement="bottom" class="glyphicon glyphicon-thumbs-up icon"></span><span><?php echo $partieG ?></span></li>
+							  <li><span data-toggle="tooltip" title="Parties perdues" data-placement="bottom" class="glyphicon glyphicon-thumbs-down icon"></span><span><?php echo $partieP ?></span></li>
+							  <li><span data-toggle="tooltip" title="Rapport parties gagnées/jouées" data-placement="bottom" class="glyphicon glyphicon-stats icon"></span><span><?php echo $averageWin ?></span></li>
 							</ul>
 							</div>
 							<img class="pic img-circle" alt="..." src=<?php echo('"'.$photoP.'"')  ?>/>

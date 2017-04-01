@@ -127,14 +127,16 @@ body{
 }
 
 .name li {
-    float: right;
+    float: left;
+    display: block;
+    padding: 2px;
+    padding-left:15px;
+    color: white;
 }
-
-.name li span {
-  display: block;
-  padding: 2px;
-  	padding-left:50%;
-	color: white;
+.icon {
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff;
+  padding-right: 10px;
 }
 .panel{
   background-image:url("https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17017039_10206544624094298_6037340313071994155_o.jpg?oh=114e15f4655967ea0f0a68cf3fc87cb4&oe=59547340");
