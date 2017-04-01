@@ -1,4 +1,11 @@
 <div id="JoueurMenu">
-	<br>
-	<p>continue</p>
+	<p>game en cours</p><br>
+	<?php
+		echo "<br>Jeu:<br>";
+		if($startGame != NULL){
+			foreach ($startGame as $sg){
+				echo $sg->NOMPARTIE; echo "<br>";
+			}
+		}
+	?>
 </div>

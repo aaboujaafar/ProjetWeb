@@ -99,7 +99,7 @@
 			$view = new JoinGameView($this,"joinGame");
 			$oldRequest = Request::getCurrentRequest();
 
-			$publicGame = ListePartie::getPartiePublic();
+			$publicGame = ListePartie::getPartiePublic($oldRequest->read('id'));
 			$userGame = ListePartie::getParticipantGame($oldRequest->read('id'));
 			$ownerGame = ListePartie::getOwnerGame($oldRequest->read('id'));
 			
@@ -113,9 +113,44 @@
 		
 		public function continueGame($arg) {
 			$view = new ContinueGameView($this,"continueGame");
+			$oldRequest = Request::getCurrentRequest();
+
+			$startGame = ListePartie::getPartieStarted($oldRequest->read('id'));
+			
+			$view->setArg("startGame", $startGame);
 			
 			$view->render();
 		}
+
+		public function validateGameCreation($args){
+			$name = $args->read('name');
+			if($name == NULL ){
+				$view = new CreatGameView($this,"creatGame");
+				$view->setArg('inscErrorText','Veuillez insérer un nom de partie');
+				$view->render();
+			}
+			else if(ListePartie::isGameNameUsed($name) == true){
+				$view = new CreatGameView($this,"creatGame");
+				$view->setArg('inscErrorText','Nom de partie déjà utilisé');
+				$view->render();
+			}
+			else{
+				$isPublic = $args->read('public');
+				if($isPublic == NULL){
+					$isPublic = 0;
+				}
+				else{
+					$isPublic = 1;
+				}
+				ListePartie::creatGame($args->read('id'), $isPublic , 0 , $name);
+				ListePartie::AddPlayer($args->read('id'),$name);	
+				$this->defaultAction($args);
+				
+			}
+		}
+			
+
+
 		public function execute(){
 			$request = Request::getCurrentRequest();
 			$action = $request->getActionName();
@@ -143,6 +178,9 @@
 			else if($action === "continueGame"){
 				$this->continueGame($request);
 			}
+			else if($action === "validateGameCreation"){
+				$this->validateGameCreation($request);
+			} 
 		}
 		
 	}

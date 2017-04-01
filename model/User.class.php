@@ -22,7 +22,7 @@
 				return $u;
 			}
 			else{
-				return NULL;;
+				return NULL;
 			}
 		}
 		public static function getUserOnly($login) {
@@ -33,7 +33,7 @@
 				return $u;
 			}
 			else{
-				return NULL;;
+				return NULL;
 			}
 		}
 	} 	 	 	 		
