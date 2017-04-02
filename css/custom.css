@@ -142,7 +142,7 @@ body{
   padding-right: 10px;
 }
 .panel{
-  background-image:url("https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17017039_10206544624094298_6037340313071994155_o.jpg?oh=114e15f4655967ea0f0a68cf3fc87cb4&oe=59547340");
+  /*background-image:url("https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17017039_10206544624094298_6037340313071994155_o.jpg?oh=114e15f4655967ea0f0a68cf3fc87cb4&oe=59547340");*/
   height: 300px;
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -223,4 +223,8 @@ margin-left:20px;
 }
 .friendName {
     color:#5bc0de;
+}
+#amis{
+  width : 400px ;
+  height: 90vh;
 }

@@ -1,7 +1,7 @@
 <div id="JoueurMenu">
 			<div class="row well ">
 				<div class="col-md-12 cov">
-						<div class="panel">
+						<div class="panel" style="background-image:url(<?php echo($photoC)?>);">
 							<div class="name">
 								<span class="bjr-mess"><strong> <?php echo $Pseudo ?></strong></span>
 							<button id="chg-cov" type="button" class="btn pull-right" data-toggle="modal" data-target="#coverSelector"><span class="glyphicon glyphicon-picture"></span> Change cover</button>
@@ -26,7 +26,6 @@
 				      <div class="modal-body">
 									<form id="popUpForm" class="form-horizontal well" method="post" action="process_form.php" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="contenu" class="col-lg-2 control-label">Illustration</label>
                                 <div class="col-lg-10">
                                     <input type="file" class="form-control" name="image" accept="image/*">
                                 </div>
