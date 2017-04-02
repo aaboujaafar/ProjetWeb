@@ -1,20 +1,20 @@
 <?php
 	class UserController extends Controller
-	{	
+	{
 		public function __construct($req) {
-			
+
 		}
-		
+
 		public function defaultAction($arg) {
 			$view = new UserView($this,"AccueilConnected");
-			
+
 			$oldRequest = Request::getCurrentRequest();
 			$view->setArg("Pseudo", $oldRequest->read('user'));
 			$view->setArg("photoP", $oldRequest->read('photoP'));
-			
+
 			$view->render();
 		}
-		
+
 		public function logout($arg) {
 			//unset($_COOKIE["user"]);
 			setcookie ("user", "", time() - 3600);
@@ -26,14 +26,14 @@
 			setcookie ("photoC", "", time() - 3600);
 			setcookie ("afficheAmis", "", time() - 3600);
 			setcookie ("id", "", time() - 3600);
-			
+
 			$view = new AnonymousView($this,"home");
 			$view->render();
 		}
-		
+
 		public function showProfil($arg) {
 			$view = new UserProfilView($this,"profilHaut");
-			
+
 			$oldRequest = Request::getCurrentRequest();
 			$view->setArg("Pseudo", $oldRequest->read('user'));
 			$view->setArg("photoC", $oldRequest->read('photoC'));
@@ -42,7 +42,7 @@
 			$view->setArg("partieG", $oldRequest->read('partieG'));
 			$view->setArg("partieP", $oldRequest->read('partieP'));
 			$view->setArg("averageWin", $oldRequest->read('averageWin'));
-			
+
 			$view->render();
 		}
 
@@ -70,10 +70,10 @@
 				$view->setArg("Pseudo", $oldRequest->read('user'));
 				$view->setArg("photoP", $oldRequest->read('photoP'));
 			}
-			
+
 			$view->render();
 		}
-		
+
 		public function showFriends($arg) {
 			$view = new UserFriendsView($this,"profilFriends");
 
@@ -85,16 +85,16 @@
 
 			$view->setArg("Pseudo", $oldRequest->read('user'));
 			$view->setArg("photoP", $oldRequest->read('photoP'));
-			
+
 			$view->render();
 		}
-		
+
 		public function creatGame($arg) {
 			$view = new CreatGameView($this,"creatGame");
-			
+
 			$view->render();
 		}
-		
+
 		public function joinGame($arg) {
 			$view = new JoinGameView($this,"joinGame");
 			$oldRequest = Request::getCurrentRequest();
@@ -102,23 +102,23 @@
 			$publicGame = ListePartie::getPartiePublic($oldRequest->read('id'));
 			$userGame = ListePartie::getParticipantGame($oldRequest->read('id'));
 			$ownerGame = ListePartie::getOwnerGame($oldRequest->read('id'));
-			
+
 			$view->setArg("publicGame", $publicGame);
 			$view->setArg("userGame", $userGame);
 			$view->setArg("ownerGame", $ownerGame);
-			
+
 			$view->render();
 
 		}
-		
+
 		public function continueGame($arg) {
 			$view = new ContinueGameView($this,"continueGame");
 			$oldRequest = Request::getCurrentRequest();
 
 			$startGame = ListePartie::getPartieStarted($oldRequest->read('id'));
-			
+
 			$view->setArg("startGame", $startGame);
-			
+
 			$view->render();
 		}
 
@@ -143,12 +143,12 @@
 					$isPublic = 1;
 				}
 				ListePartie::creatGame($args->read('id'), $isPublic , 0 , $name);
-				ListePartie::AddPlayer($args->read('id'),$name);	
+				ListePartie::AddPlayer($args->read('id'),$name);
 				$this->defaultAction($args);
-				
+
 			}
 		}
-			
+
 
 
 		public function execute(){
@@ -180,8 +180,8 @@
 			}
 			else if($action === "validateGameCreation"){
 				$this->validateGameCreation($request);
-			} 
+			}
 		}
-		
+
 	}
 ?>

@@ -193,3 +193,34 @@ margin-left:20px;
 .popup{
   margin-top:20%;
 }
+
+/* Friend page*/
+
+.list-content{
+ min-height:300px;
+}
+.list-content .list-group .title{
+  background:#5bc0de;
+  border:2px solid #DDDDDD;
+  font-weight:bold;
+  color:#FFFFFF;
+}
+.list-group-item img {
+    height:80px;
+    width:80px;
+}
+
+.jumbotron .btn {
+    padding: 5px 5px !important;
+    font-size: 12px !important;
+}
+.prj-name {
+    color:#5bc0de;
+}
+.break{
+    width:100%;
+    margin:20px;
+}
+.friendName {
+    color:#5bc0de;
+}
