@@ -48,7 +48,7 @@
 
 		public function showFriendProfil($arg) {
 			$oldRequest = Request::getCurrentRequest();
-			$friend = ListePartie::getFriendGame($oldRequest->read('friend'));
+			$friend = Friends::getAFriend($oldRequest->read('friend'));
 
 			$view = new FriendProfilView($this,"profilHaut");
 			if($friend != NULL){
@@ -148,6 +148,12 @@
 
 			}
 		}
+		public function deleteFriend($args){
+			$oldRequest = Request::getCurrentRequest();
+			Friends::deleteFriend($oldRequest->read('friend'), $oldRequest->read('id'));
+			$this->showFriends($oldRequest);
+		}
+		
 
 
 
@@ -180,6 +186,9 @@
 			}
 			else if($action === "validateGameCreation"){
 				$this->validateGameCreation($request);
+			}
+			else if($action === "deleteFriend"){
+				$this->deleteFriend($request);
 			}
 		}
 
