@@ -8,9 +8,8 @@
 		public function defaultAction($arg) {
 			$view = new UserView($this,"AccueilConnected");
 
-			$oldRequest = Request::getCurrentRequest();
-			$view->setArg("Pseudo", $oldRequest->read('user'));
-			$view->setArg("photoP", $oldRequest->read('photoP'));
+			$view->setArg("Pseudo", $arg->read('user'));
+			$view->setArg("photoP", $arg->read('photoP'));
 
 			$view->render();
 		}
@@ -34,21 +33,19 @@
 		public function showProfil($arg) {
 			$view = new UserProfilView($this,"profilHaut");
 
-			$oldRequest = Request::getCurrentRequest();
-			$view->setArg("Pseudo", $oldRequest->read('user'));
-			$view->setArg("photoC", $oldRequest->read('photoC'));
-			$view->setArg("photoP", $oldRequest->read('photoP'));
-			$view->setArg("partieT", $oldRequest->read('partieT'));
-			$view->setArg("partieG", $oldRequest->read('partieG'));
-			$view->setArg("partieP", $oldRequest->read('partieP'));
-			$view->setArg("averageWin", $oldRequest->read('averageWin'));
+			$view->setArg("Pseudo", $arg->read('user'));
+			$view->setArg("photoC", $arg->read('photoC'));
+			$view->setArg("photoP", $arg->read('photoP'));
+			$view->setArg("partieT", $arg->read('partieT'));
+			$view->setArg("partieG", $arg->read('partieG'));
+			$view->setArg("partieP", $arg->read('partieP'));
+			$view->setArg("averageWin", $arg->read('averageWin'));
 
 			$view->render();
 		}
 
 		public function showFriendProfil($arg) {
-			$oldRequest = Request::getCurrentRequest();
-			$friend = Friends::getAFriend($oldRequest->read('friend'));
+			$friend = Friends::getAFriend($arg->read('friend'));
 
 			$view = new FriendProfilView($this,"profilHaut");
 			if($friend != NULL){
@@ -67,8 +64,8 @@
 			}
 			else{
 				$view = new UserView($this,"AccueilConnected");
-				$view->setArg("Pseudo", $oldRequest->read('user'));
-				$view->setArg("photoP", $oldRequest->read('photoP'));
+				$view->setArg("Pseudo", $arg->read('user'));
+				$view->setArg("photoP", $arg->read('photoP'));
 			}
 
 			$view->render();
@@ -77,14 +74,13 @@
 		public function showFriends($arg) {
 			$view = new UserFriendsView($this,"profilFriends");
 
-			$oldRequest = Request::getCurrentRequest();
-			$friends = Friends::getFriends($oldRequest->read('id'));
-			$friendGame = ListePartie::getFriendGame($oldRequest->read('id'));
+			$friends = Friends::getFriends($arg->read('id'));
+			$friendGame = ListePartie::getFriendGame($arg->read('id'));
 			$view->setArg("friends", $friends);
 			$view->setArg("friendGame", $friendGame);
 
-			$view->setArg("Pseudo", $oldRequest->read('user'));
-			$view->setArg("photoP", $oldRequest->read('photoP'));
+			$view->setArg("Pseudo", $arg->read('user'));
+			$view->setArg("photoP", $arg->read('photoP'));
 
 			$view->render();
 		}
@@ -97,11 +93,10 @@
 
 		public function joinGame($arg) {
 			$view = new JoinGameView($this,"joinGame");
-			$oldRequest = Request::getCurrentRequest();
 
-			$publicGame = ListePartie::getPartiePublic($oldRequest->read('id'));
-			$userGame = ListePartie::getParticipantGame($oldRequest->read('id'));
-			$ownerGame = ListePartie::getOwnerGame($oldRequest->read('id'));
+			$publicGame = ListePartie::getPartiePublic($arg->read('id'));
+			$userGame = ListePartie::getParticipantGame($arg->read('id'));
+			$ownerGame = ListePartie::getOwnerGame($arg->read('id'));
 
 			$view->setArg("publicGame", $publicGame);
 			$view->setArg("userGame", $userGame);
@@ -113,9 +108,8 @@
 
 		public function continueGame($arg) {
 			$view = new ContinueGameView($this,"continueGame");
-			$oldRequest = Request::getCurrentRequest();
 
-			$startGame = ListePartie::getPartieStarted($oldRequest->read('id'));
+			$startGame = ListePartie::getPartieStarted($arg->read('id'));
 
 			$view->setArg("startGame", $startGame);
 
@@ -149,13 +143,46 @@
 			}
 		}
 		public function deleteFriend($args){
-			$oldRequest = Request::getCurrentRequest();
-			Friends::deleteFriend($oldRequest->read('friend'), $oldRequest->read('id'));
-			$this->showFriends($oldRequest);
+			Friends::deleteFriend($args->read('friend'), $args->read('id'));
+			$this->showFriends($args);
 		}
-		
 
+		public function goWaitingRoom($arg) {
+			$creator = WaitingRoom::getGameCreator("bestGameEver");
+			$participants= WaitingRoom::getParticipant("bestGameEver");
+			$isParticipant = false;
+			foreach ($participants as $participant){
+				if($participant->PSEUDO === $arg->read('user')){
+					$isParticipant = true;
+				}
+			}
 
+			if($creator->PSEUDO === $arg->read('user')){
+				$view = new WaitingRoomView($this,"waitingRoomBasCreator");
+			}
+			else if($isParticipant){
+				$view = new WaitingRoomView($this,"waitingRoomBasParticipant");
+			}
+			else{
+				$this->defaultAction($arg);
+			}
+
+			$public= WaitingRoom::isPublic("bestGameEver");
+			$view->setArg("creator", $creator);
+			$view->setArg("participant", $participants);
+			$view->setArg("public", $public);
+			$view->render();
+		}
+		public function changePublic($args){
+			$public = WaitingRoom::isPublic("bestGameEver");
+			if($public){
+				WaitingRoom::putPrivate("bestGameEver");
+			}
+			else{
+				WaitingRoom::putPublic("bestGameEver");
+			}		
+			$this->goWaitingRoom($args);
+		}
 
 		public function execute(){
 			$request = Request::getCurrentRequest();
@@ -189,6 +216,12 @@
 			}
 			else if($action === "deleteFriend"){
 				$this->deleteFriend($request);
+			}
+			if($action === "goWaitingRoom"){
+				$this->goWaitingRoom($request);
+			}
+			if($action === "changePublic"){
+				$this->changePublic($request);
 			}
 		}
 

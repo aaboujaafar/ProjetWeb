@@ -20,4 +20,12 @@
 			}
 		}
 	?>
+	<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="get">
+	<fieldset>
+		<input type="hidden" name="action" value="goWaitingRoom" />
+		<div class="form-group">
+			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >TEST : rejoindre creator</Button>
+		</div>
+		</fieldset>
+	</form>
 </div>
