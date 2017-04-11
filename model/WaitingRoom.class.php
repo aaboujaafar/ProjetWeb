@@ -38,11 +38,18 @@
 		//Verifier si la partie est publique ou non
 		//------------------------------------------
 		public static function isPublic($gameName) {
+
 			$sql = "SELECT partie.PUBLIQUE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."'";
 			$st = self::query($sql);
 			$u = $st->fetch();
-			$isPublic =  $u;
-			return  $isPublic->PUBLIQUE;
+			if(isset($u->props)){
+				$temp = $u->PUBLIQUE;
+				return  $temp;
+			}
+			else{
+				return NULL;
+			}
+			
 		}
 
 		//------------------------------------------

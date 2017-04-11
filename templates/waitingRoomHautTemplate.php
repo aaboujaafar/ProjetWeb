@@ -1,3 +1,4 @@
+<p align="center"><FONT color="white"><?php echo $gameName; ?></FONT></p> <br>
 <?php
 echo '<FONT color="white"> Participant :</FONT>';
 foreach($participant as $p){

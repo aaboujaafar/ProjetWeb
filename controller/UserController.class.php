@@ -8,8 +8,15 @@
 		public function defaultAction($arg) {
 			$view = new UserView($this,"AccueilConnected");
 
+			//------------------
+			// demande d'amis + demande joindre partie
+			//------------------
+			$evenementFriend = Friends::Evenement_FriendAdding($arg->read('id'));
+			//$evenementPartie = ...
+
 			$view->setArg("Pseudo", $arg->read('user'));
 			$view->setArg("photoP", $arg->read('photoP'));
+			$view->setArg("evenementFriend", $evenementFriend);
 
 			$view->render();
 		}
@@ -25,6 +32,7 @@
 			setcookie ("photoC", "", time() - 3600);
 			setcookie ("afficheAmis", "", time() - 3600);
 			setcookie ("id", "", time() - 3600);
+			setcookie("gameName",time() - 3600);
 
 			$view = new AnonymousView($this,"home");
 			$view->render();
@@ -64,6 +72,8 @@
 			}
 			else{
 				$view = new UserView($this,"AccueilConnected");
+				$evenementFriend = Friends::Evenement_FriendAdding($arg->read('id'));
+				$view->setArg("evenementFriend", $evenementFriend);
 				$view->setArg("Pseudo", $arg->read('user'));
 				$view->setArg("photoP", $arg->read('photoP'));
 			}
@@ -138,18 +148,23 @@
 				}
 				ListePartie::creatGame($args->read('id'), $isPublic , 0 , $name);
 				ListePartie::AddPlayer($args->read('id'),$name);
-				$this->defaultAction($args);
+				$this->defaultAction($args); // TODO : modifier en redirection vers la partie concernée.
 
 			}
 		}
 		public function deleteFriend($args){
-			Friends::deleteFriend($args->read('friend'), $args->read('id'));
+			Friends::RemoveFriendP1($args->read('id'), $args->read('friend'));
+			Friends::RemoveFriendP2($args->read('id'), $args->read('friend'));
 			$this->showFriends($args);
 		}
 
 		public function goWaitingRoom($arg) {
-			$creator = WaitingRoom::getGameCreator("bestGameEver");
-			$participants= WaitingRoom::getParticipant("bestGameEver");
+			$arg->write('gameName',$arg->read('gameName'));
+			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
+			$gameName = $arg->read('gameName');
+
+			$creator = WaitingRoom::getGameCreator($gameName);
+			$participants= WaitingRoom::getParticipant($gameName);
 			$isParticipant = false;
 			foreach ($participants as $participant){
 				if($participant->PSEUDO === $arg->read('user')){
@@ -159,29 +174,98 @@
 
 			if($creator->PSEUDO === $arg->read('user')){
 				$view = new WaitingRoomView($this,"waitingRoomBasCreator");
+				$public= WaitingRoom::isPublic($gameName);
+
+				$view->setArg("creator", $creator);
+				$view->setArg("gameName", $gameName);
+				$view->setArg("participant", $participants);
+				$view->setArg("public", $public);
+
+				$view->render();
 			}
 			else if($isParticipant){
 				$view = new WaitingRoomView($this,"waitingRoomBasParticipant");
+				$public= WaitingRoom::isPublic($gameName);
+
+				$view->setArg("creator", $creator);
+				$view->setArg("gameName", $gameName);
+				$view->setArg("participant", $participants);
+				$view->setArg("public", $public);
+				
+				$view->render();
 			}
 			else{
 				$this->defaultAction($arg);
 			}
-
-			$public= WaitingRoom::isPublic("bestGameEver");
-			$view->setArg("creator", $creator);
-			$view->setArg("participant", $participants);
-			$view->setArg("public", $public);
-			$view->render();
 		}
-		public function changePublic($args){
-			$public = WaitingRoom::isPublic("bestGameEver");
-			if($public){
-				WaitingRoom::putPrivate("bestGameEver");
+
+		public function changePublic($arg){
+			$isPublic = WaitingRoom::isPublic($arg->read('gameName'));
+			if($isPublic){
+				WaitingRoom::putPrivate($arg->read('gameName'));
 			}
 			else{
-				WaitingRoom::putPublic("bestGameEver");
+				WaitingRoom::putPublic($arg->read('gameName'));
 			}		
-			$this->goWaitingRoom($args);
+			$this->goWaitingRoom($arg);
+		}
+
+		public function showFriendAsking($arg){
+			$view = new UserFriendsView($this,"evenementFriendAsking");
+
+			$friendsAsking = Friends::Evenement_FriendAdding($arg->read('id'));
+			
+			$view->setArg("friendsAsking", $friendsAsking);
+
+			$view->setArg("Pseudo", $arg->read('user'));
+			$view->setArg("photoP", $arg->read('photoP'));
+
+			$view->render();
+		}
+
+		public function accepetFriend($arg){
+			Friends::AddFriend($arg->read('id'), $arg->read('friend'));
+			$this->defaultAction($arg);
+		}
+
+		public function refuseFriend($args){
+			Friends::RemoveFriendP1($args->read('id'), $args->read('friend'));
+			Friends::RemoveFriendP2($args->read('id'), $args->read('friend'));
+			$this->defaultAction($arg);
+		}
+
+		public function addFriend($arg){
+			$view = new UserFriendsView($this,"profilFriends");
+
+			$friends = Friends::getFriends($arg->read('id'));
+			$friendGame = ListePartie::getFriendGame($arg->read('id'));
+			$view->setArg("friends", $friends);
+			$view->setArg("friendGame", $friendGame);
+
+			$view->setArg("Pseudo", $arg->read('user'));
+			$view->setArg("photoP", $arg->read('photoP'));
+
+			if($arg->read('user') === $arg->read('friendName')){
+				$view->setArg('inscErrorText',"Vous ne pouvez pas vous ajouter en ami");
+			}
+			else{
+				$try = Friends::AskFriend($arg->read('id'), $arg->read('friendName'));
+				if($try){
+					$view->setArg('inscOKText',"demande d'ami envoyé");
+				}
+
+				else{
+					if(Friends::isFriend($arg->read('id'), $arg->read('friendName'))){
+						$view->setArg('inscErrorText',"Vous êtes déjà ami avec ". $arg->read('friendName'));
+					}
+					else{
+						$view->setArg('inscErrorText',"demande d'ami déjà envoyé à ce joueur");
+					}
+				}
+			}
+
+			$view->render();
+
 		}
 
 		public function execute(){
@@ -222,6 +306,18 @@
 			}
 			if($action === "changePublic"){
 				$this->changePublic($request);
+			}
+			if($action === "evenementFriend"){
+				$this->showFriendAsking($request);
+			}
+			if($action === "acceptFriend"){
+				$this->accepetFriend($request);
+			}
+			if($action === "refuseFriend"){
+				$this->refuseFriend($request);
+			}
+			if($action === "addFriend"){
+				$this->addFriend($request);
 			}
 		}
 
