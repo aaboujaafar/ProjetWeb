@@ -24,5 +24,25 @@
 			echo ' (seul le créateur voit ce bouton)'; ?>
 			</Button>
 		</div>
-		</fieldset>
-	</form>
+	</fieldset>
+</form>
+<?php
+	if(isset($inscErrorFull)){
+		echo '<div class="alert alert-warning" role="alert">
+				<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorFull . '</span></div></br>';
+	}
+	if(isset($inscOKFull)){
+		echo '<div class="alert alert-success" role="alert">
+				<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscOKFull . '</span></div></br>';
+	}	
+?>
+<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
+	<fieldset>
+		<input type="hidden" name="action" value="addFriendInGame" />					
+		<div class="form-group">
+			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Ajouter un ami
+			</Button>
+		</div>
+	</fieldset>
+</form>
+		 

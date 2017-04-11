@@ -12,11 +12,12 @@
 			// demande d'amis + demande joindre partie
 			//------------------
 			$evenementFriend = Friends::Evenement_FriendAdding($arg->read('id'));
-			//$evenementPartie = ...
+			$evenementGame = WaitingRoom::Evenement_FriendAddingInGame($arg->read('id'));
 
 			$view->setArg("Pseudo", $arg->read('user'));
 			$view->setArg("photoP", $arg->read('photoP'));
 			$view->setArg("evenementFriend", $evenementFriend);
+			$view->setArg("evenementGame", $evenementGame);
 
 			$view->render();
 		}
@@ -265,9 +266,79 @@
 			}
 
 			$view->render();
-
 		}
 
+		public function addFriendInGame($arg){
+			$arg->write('gameName',$arg->read('gameName'));
+			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
+			$gameName = $arg->read('gameName');
+
+			$creator = WaitingRoom::getGameCreator($gameName);
+			$participants= WaitingRoom::getParticipant($gameName);
+			$friends = Friends::getFriends($arg->read('id'));
+
+			$view = new WaitingRoomAddingFriendView($this,"waitingRoomBasAddingFriend");
+			$public= WaitingRoom::isPublic($gameName);
+
+			$view->setArg("friends", $friends);
+			$view->setArg("creator", $creator);
+			$view->setArg("gameName", $gameName);
+			$view->setArg("participant", $participants);
+			$view->setArg("public", $public);
+			$view->render();
+		}
+
+		public function addInGame($arg){
+			
+			$inGameAsking = waitingRoom::isFriendInGameAsking($arg->read('gameName'), $arg->read('friend'));
+			$inGame = waitingRoom::isFriendInGame($arg->read('gameName'), $arg->read('friend'));
+
+			$arg->write('gameName',$arg->read('gameName'));
+			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
+			$gameName = $arg->read('gameName');
+
+			$creator = WaitingRoom::getGameCreator($gameName);
+			$participants= WaitingRoom::getParticipant($gameName);
+			$friends = Friends::getFriends($arg->read('id'));
+
+			$view = new WaitingRoomView($this,"waitingRoomBasCreator");
+			$public= WaitingRoom::isPublic($gameName);
+
+			$view->setArg("friends", $friends);
+			$view->setArg("creator", $creator);
+			$view->setArg("gameName", $gameName);
+			$view->setArg("participant", $participants);
+			$view->setArg("public", $public);
+
+			if($inGameAsking){
+				$view->setArg("inscErrorFull", "invitation déjà envoyé à cet ami");
+				$view->render();
+
+			}
+			else if($inGame){
+				$view->setArg("inscErrorFull", "ami déjà dans la partie");
+				$view->render();
+			}
+			else{
+			waitingRoom::AskFriendInGame($arg->read('gameName'), $arg->read('friend'));
+				$view->setArg("inscOKFull", "invitation envoyée");
+				$view->render();
+			}
+		}
+
+		public function evenementGame($arg){
+			$view = new UserFriendsView($this,"evenementFriendAskingInGame");
+
+			$joinedGame = WaitingRoom::Evenement_FriendAddingInGame($arg->read('id'));
+			
+			$view->setArg("joinedGame", $joinedGame);
+
+			$view->setArg("Pseudo", $arg->read('user'));
+			$view->setArg("photoP", $arg->read('photoP'));
+
+			$view->render();
+		}
+		
 		public function execute(){
 			$request = Request::getCurrentRequest();
 			$action = $request->getActionName();
@@ -318,6 +389,15 @@
 			}
 			if($action === "addFriend"){
 				$this->addFriend($request);
+			}
+			if($action === "addFriendInGame"){
+				$this->addFriendInGame($request);
+			}
+			if($action === "addInGame"){
+				$this->addInGame($request);
+			}
+			if($action === "evenementGame"){
+				$this->evenementGame($request);
 			}
 		}
 

@@ -68,5 +68,64 @@
 			$st = self::query($sql);
 		}
 
+
+		//------------------------------------------
+		//méthode pour l'ivnvitation et le suivi d'invitation de joueur
+		//------------------------------------------
+		public static function AskFriendInGame($gameName, $friendName) {
+			$sql = "INSERT INTO `inviter`(`IDPARTIE`, `IDJOUEUR`) VALUES ((SELECT partie.IDPARTIE FROM partie where partie.NOMPARTIE ='".$gameName."'),(SELECT joueur.IDJOUEUR from joueur WHERE joueur.PSEUDO ='".$friendName."'))";
+			$st = self::query($sql);
+		}
+
+		public static function isFriendInGame($gameName, $friendName) {
+			$participant = static::getParticipant($gameName);
+			foreach ($participant as $p) {
+				if($p->PSEUDO === $friendName){
+					return 1;
+				}
+			}
+			return 0;
+		}
+
+		public static function isFriendInGameAsking($gameName, $friendName) {
+			$sql = "SELECT * FROM inviter WHERE inviter.IDPARTIE = (SELECT partie.IDPARTIE FROM partie where partie.NOMPARTIE ='".$gameName."') AND inviter.IDJOUEUR = (SELECT joueur.IDJOUEUR from joueur WHERE joueur.PSEUDO ='".$friendName."')";
+			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return 1;
+			}
+			else{
+				return 0;
+			}
+		}
+
+		public static function AddInGame($gameName, $friendName) {
+			$isFriend =  static::isFriendInGame($gameName, $friendName) || static::isFriendInGameAsking($gameName, $friendName);
+			if($isFriend){
+				return 0;
+			}
+
+			static::removeInvit($gameName, $friendName);
+			$sql = "INSERT INTO `participe`(`IDJOUEUR`, `IDPARTIE`, `SCORE`) VALUES ((SELECT joueur.IDJOUEUR from joueur WHERE joueur.PSEUDO ='".$friendName."'),(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."'),0)";
+			$request = self::query($sql);
+			return 1;
+		}
+
+		public static function removeInvit($gameName, $friendName) {
+			$sql = "DELETE FROM inviter WHERE inviter.IDPARTIE = (SELECT partie.IDPARTIE FROM partie where partie.NOMPARTIE ='".$gameName."') AND inviter.IDJOUEUR = (SELECT joueur.IDJOUEUR from joueur WHERE joueur.PSEUDO ='".$friendName."')";
+			$st = self::query($sql);
+		}
+
+		public static function Evenement_FriendAddingInGame($id) {
+			$sql = "SELECT * FROM inviter WHERE inviter.IDJOUEUR = '".$id."'";
+			$st = self::query($sql);
+			$u = $st->fetchAll();
+			if(isset($u[0])){
+				return $u;
+			}
+			else{
+				return NULL;;
+			}
+		}
 	} 	 	 	 		
 ?>

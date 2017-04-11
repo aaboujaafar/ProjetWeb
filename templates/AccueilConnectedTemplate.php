@@ -13,6 +13,18 @@
 				</fieldset>
 			</form>';
 		}
+		if($evenementGame != NULL){
+			echo '<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
+				<fieldset>
+					<input type="hidden" name="action" value="evenementGame" />
+					<div class="form-group">
+						<button class="boutonMenu btn btn-Secondary col-sm-offset-5" id="bouton" type="submit" >
+							Vous avez été invité dans une partie
+						</Button>
+					</div>
+				</fieldset>
+			</form>';
+		}
 	?>
 	<div class="lesTroisBoutonsdeJimmy">
 	<a href="index.php?action=creatGame" class="btn btn-secondary ">Créer partie</a>
