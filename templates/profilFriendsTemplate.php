@@ -37,7 +37,7 @@
 						 <img class="img-thumbnail" src="'.$friend->PHOTOPROFIL.'">
 						 <label class="friendName">'.$friend->PSEUDO.'<br></label>
 						 <label class="pull-right">
-								 <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="index.php?action=FriendProfil&friend='.$friend->PSEUDO.'" title="View"></a>
+								 <a  class="btn btn-success btn-xs glyphicon glyphicon-user" href="index.php?action=FriendProfil&friend='.$friend->PSEUDO.'" title="View Profil"></a>
 								 <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="index.php?action=deleteFriend&friend='.$friend->PSEUDO.'" title="Delete"></a>
 						 </label>
 						 <div class="break"></div>

@@ -107,5 +107,17 @@
 			$sql = "INSERT INTO `participe`(`IDJOUEUR`, `IDPARTIE`, `SCORE`) VALUES (". $idPlayer .",(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."'),0)";
 			$request = self::query($sql);
 		}
+
+		public static function getNameFromId($id) {
+			$sql = "SELECT partie.NOMPARTIE FROM partie WHERE partie.IDPARTIE ='" . $id . "'";
+			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return $u->IDPARTIE;
+			}
+			else{
+				return NULL;
+			}
+		}
 	} 	 	 	 		
 ?>

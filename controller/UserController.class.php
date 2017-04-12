@@ -127,7 +127,7 @@
 			$view->render();
 		}
 
-		public function validateGameCreation($args){
+		public function validateGameCreation($args){ //TODO redirection vrs la bonne salle : pas le cas ici
 			$name = $args->read('name');
 			if($name == NULL ){
 				$view = new CreatGameView($this,"creatGame");
@@ -147,9 +147,10 @@
 				else{
 					$isPublic = 1;
 				}
+				$args->write('gameName',$name);
 				ListePartie::creatGame($args->read('id'), $isPublic , 0 , $name);
 				ListePartie::AddPlayer($args->read('id'),$name);
-				$this->defaultAction($args); // TODO : modifier en redirection vers la partie concernée.
+				$this->goWaitingRoom($args); 
 
 			}
 		}
@@ -163,6 +164,7 @@
 			$arg->write('gameName',$arg->read('gameName'));
 			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
 			$gameName = $arg->read('gameName');
+			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
 
 			$creator = WaitingRoom::getGameCreator($gameName);
 			$participants= WaitingRoom::getParticipant($gameName);
@@ -177,6 +179,7 @@
 				$view = new WaitingRoomView($this,"waitingRoomBasCreator");
 				$public= WaitingRoom::isPublic($gameName);
 
+				$view->setArg("number", $number);
 				$view->setArg("creator", $creator);
 				$view->setArg("gameName", $gameName);
 				$view->setArg("participant", $participants);
@@ -189,6 +192,7 @@
 				$public= WaitingRoom::isPublic($gameName);
 
 				$view->setArg("creator", $creator);
+				$view->setArg("number", $number);
 				$view->setArg("gameName", $gameName);
 				$view->setArg("participant", $participants);
 				$view->setArg("public", $public);
@@ -211,6 +215,13 @@
 			$this->goWaitingRoom($arg);
 		}
 
+
+
+
+
+		//--------------------------------------------------------
+		// Gestion de la demande d'ami et acceptation/refus
+		//--------------------------------------------------------
 		public function showFriendAsking($arg){
 			$view = new UserFriendsView($this,"evenementFriendAsking");
 
@@ -268,6 +279,13 @@
 			$view->render();
 		}
 
+
+
+
+
+		//--------------------------------------------------------
+		//Méthode pour la gestion d'invitation dans une partie
+		//--------------------------------------------------------
 		public function addFriendInGame($arg){
 			$arg->write('gameName',$arg->read('gameName'));
 			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
@@ -339,6 +357,59 @@
 			$view->render();
 		}
 		
+		public function acceptGame($arg){
+			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
+			if($number > 10){
+				WaitingRoom::removeInvit($arg->read('game'), $arg->read('user'));
+				$view = new UserView($this,"AccueilConnected");
+
+				//------------------
+				// demande d'amis + demande joindre partie
+				//------------------
+				$evenementFriend = Friends::Evenement_FriendAdding($arg->read('id'));
+				$evenementGame = WaitingRoom::Evenement_FriendAddingInGame($arg->read('id'));
+
+				$view->setArg("Pseudo", $arg->read('user'));
+				$view->setArg("photoP", $arg->read('photoP'));
+				$view->setArg("evenementFriend", $evenementFriend);
+				$view->setArg("evenementGame", $evenementGame);
+				$view->setArg("inscErrorFull", "La salle est pleine");
+
+				$view->render();
+			}
+			else{
+				WaitingRoom::AddInGame($arg->read('game'), $arg->read('user'));
+				
+				$this->goWaitingRoom($arg);
+			}
+		}
+
+		public function refuseGame($arg){
+			WaitingRoom::removeInvit($arg->read('game'), $arg->read('user'));
+				$view = new UserView($this,"AccueilConnected");
+
+				//------------------
+				// demande d'amis + demande joindre partie
+				//------------------
+				$evenementFriend = Friends::Evenement_FriendAdding($arg->read('id'));
+				$evenementGame = WaitingRoom::Evenement_FriendAddingInGame($arg->read('id'));
+
+				$view->setArg("Pseudo", $arg->read('user'));
+				$view->setArg("photoP", $arg->read('photoP'));
+				$view->setArg("evenementFriend", $evenementFriend);
+				$view->setArg("evenementGame", $evenementGame);
+
+				$view->render();
+		}
+
+
+
+
+
+
+		//--------------------------------------------------------
+		//Repere l'action et appelle la méthode adéquate
+		//--------------------------------------------------------
 		public function execute(){
 			$request = Request::getCurrentRequest();
 			$action = $request->getActionName();
@@ -398,6 +469,12 @@
 			}
 			if($action === "evenementGame"){
 				$this->evenementGame($request);
+			}
+			if($action === "acceptGame"){
+				$this->acceptGame($request);
+			}
+			if($action === "refuseGame"){
+				$this->refuseGame($request);
 			}
 		}
 

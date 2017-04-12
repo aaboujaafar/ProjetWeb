@@ -1,6 +1,10 @@
 <div id="JoueurMenu">
 	<br>
 	<?php
+		if(isset($inscErrorFull)){
+			echo '<div class="alert alert-warning" role="alert">
+					<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorFull . '</span></div></br>';
+		}
 		if($evenementFriend != NULL){
 			echo '<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 				<fieldset>

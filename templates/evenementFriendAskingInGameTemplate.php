@@ -7,10 +7,10 @@
 			 <?php
 	 		foreach ($joinedGame as $j){
 				 echo'<li href="#" class="list-group-item text-left">
-				 <label class="friendName">'.$j->IDPARTIE.'<br></label>
+				 <label class="friendName">'.$j->NOMPARTIE.'<br></label>
 				 <label class="pull-right">
-						 <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="index.php?action=acceptFriend&friend='.$j->IDPARTIE.'" title="Accept"></a>
-						 <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="index.php?action=refuseFriend&friend='.$j->IDPARTIE.'" title="Refuse"></a>
+						 <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="index.php?action=acceptGame&game='.$j->NOMPARTIE.'" title="Accept"></a>
+						 <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="index.php?action=refuseGame&game='.$j->NOMPARTIE.'" title="Refuse"></a>
 				 </label>
 				 <div class="break"></div>
 			 </li>'; }?>

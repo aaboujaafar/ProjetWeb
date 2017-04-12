@@ -100,7 +100,7 @@
 		}
 
 		public static function AddInGame($gameName, $friendName) {
-			$isFriend =  static::isFriendInGame($gameName, $friendName) || static::isFriendInGameAsking($gameName, $friendName);
+			$isFriend =  static::isFriendInGame($gameName, $friendName);
 			if($isFriend){
 				return 0;
 			}
@@ -117,7 +117,7 @@
 		}
 
 		public static function Evenement_FriendAddingInGame($id) {
-			$sql = "SELECT * FROM inviter WHERE inviter.IDJOUEUR = '".$id."'";
+			$sql = "SELECT DISTINCT partie.NOMPARTIE FROM partie, inviter WHERE inviter.IDJOUEUR = '".$id."' AND inviter.IDPARTIE = partie.IDPARTIE";
 			$st = self::query($sql);
 			$u = $st->fetchAll();
 			if(isset($u[0])){
@@ -127,5 +127,13 @@
 				return NULL;;
 			}
 		}
+
+
+		public static function NumberOfParticipant($gameName) {
+			$participant =  static::getParticipant($gameName);
+			return count($participant);
+		}
+
+
 	} 	 	 	 		
 ?>
