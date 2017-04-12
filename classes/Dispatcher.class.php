@@ -7,9 +7,7 @@
 		public static function dispatch($request)
 		{
 			$controllerName = $request->getControllerName();
-			if(isset($_COOKIE["user"])) {
-				$controllerName = "user";
-			}
+			//print_r($controllerName);
 			$controllerNameFormated = ucfirst($controllerName)."Controller";
 			if(class_exists($controllerNameFormated)){
 				return new $controllerNameFormated($request);

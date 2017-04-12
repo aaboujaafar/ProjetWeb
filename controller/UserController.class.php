@@ -34,6 +34,7 @@
 			setcookie ("afficheAmis", "", time() - 3600);
 			setcookie ("id", "", time() - 3600);
 			setcookie("gameName",time() - 3600);
+			setcookie("controller","anonymous", time()+ 3600*24);
 
 			$view = new AnonymousView($this,"home");
 			$view->render();
@@ -388,9 +389,9 @@
 			WaitingRoom::removeInvit($arg->read('game'), $arg->read('user'));
 				$view = new UserView($this,"AccueilConnected");
 
-				//------------------
+				//-----------------------------------------------------
 				// demande d'amis + demande joindre partie
-				//------------------
+				//-----------------------------------------------------
 				$evenementFriend = Friends::Evenement_FriendAdding($arg->read('id'));
 				$evenementGame = WaitingRoom::Evenement_FriendAddingInGame($arg->read('id'));
 
@@ -400,6 +401,47 @@
 				$view->setArg("evenementGame", $evenementGame);
 
 				$view->render();
+		}
+
+
+
+
+
+
+
+
+		//-----------------------------------------------------
+		//Lance la partie. Changement de user -> gameController
+		//-----------------------------------------------------
+		public function startGame($arg){
+			$gameName = $arg->read('gameName');
+			$participants= WaitingRoom::getParticipant($gameName);
+
+			$isParticipant = false;
+			foreach ($participants as $participant){
+				if($participant->PSEUDO === $arg->read('user')){
+					$isParticipant = true;
+				}
+			}
+			if($isParticipant){
+				$newRequest = Request::getCurrentRequest();
+				$newRequest->write('controller','game');
+				$newRequest->write('action','Anonymous');
+				setcookie("controller","game", time()+ 3600*24);
+				setcookie("gameName",$gameName, time()+ 3600*24);
+				try {
+					// Instantiate the adequat controller according to the current request
+					$controller = Dispatcher::dispatch($newRequest);
+
+					// Execute the requested action
+					$controller->execute();
+				} catch (Exception $e) {
+					echo 'Error : ' . $e->getMessage() . "\n";
+				}
+			}
+			else{
+				$this->defaultAction($arg);
+			}
 		}
 
 
@@ -475,6 +517,9 @@
 			}
 			if($action === "refuseGame"){
 				$this->refuseGame($request);
+			}
+			if($action === "startGame"){
+				$this->startGame($request);
 			}
 		}
 
