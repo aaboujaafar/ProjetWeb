@@ -319,10 +319,12 @@
 			$creator = WaitingRoom::getGameCreator($gameName);
 			$participants= WaitingRoom::getParticipant($gameName);
 			$friends = Friends::getFriends($arg->read('id'));
+			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
 
 			$view = new WaitingRoomView($this,"waitingRoomBasCreator");
 			$public= WaitingRoom::isPublic($gameName);
 
+			$view->setArg("number", $number);
 			$view->setArg("friends", $friends);
 			$view->setArg("creator", $creator);
 			$view->setArg("gameName", $gameName);
