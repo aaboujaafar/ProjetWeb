@@ -7,10 +7,12 @@
 
 		public function defaultAction($arg) {
 			$view = new GameView($this,"game");
-			//print_r($arg->read('gameName'));
-			/*$view->setArg("photoP", $arg->read('photoP'));
-			$view->setArg("evenementFriend", $evenementFriend);
-			$view->setArg("evenementGame", $evenementGame);*/
+			
+			$numberParticipant = Game::NumberOfParticipant($arg->read("gameName"));
+			$cardPut = Game::getCardPut($arg->read("gameName"));
+			print_r($cardPut);
+			$view->setArg("numberParticipant", $numberParticipant);
+			$view->setArg("cardPut", $cardPut);
 
 			$view->render();
 		}
@@ -65,6 +67,9 @@
 			}
 			else if($action === "quit"){
 				$this->quit($request);
+			}
+			else{
+				$this->defaultAction($request);
 			}
 		}
 

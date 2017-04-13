@@ -485,41 +485,44 @@
 			else if($action === "deleteFriend"){
 				$this->deleteFriend($request);
 			}
-			if($action === "goWaitingRoom"){
+			else if($action === "goWaitingRoom"){
 				$this->goWaitingRoom($request);
 			}
-			if($action === "changePublic"){
+			else if($action === "changePublic"){
 				$this->changePublic($request);
 			}
-			if($action === "evenementFriend"){
+			else if($action === "evenementFriend"){
 				$this->showFriendAsking($request);
 			}
-			if($action === "acceptFriend"){
+			else if($action === "acceptFriend"){
 				$this->accepetFriend($request);
 			}
-			if($action === "refuseFriend"){
+			else if($action === "refuseFriend"){
 				$this->refuseFriend($request);
 			}
-			if($action === "addFriend"){
+			else if($action === "addFriend"){
 				$this->addFriend($request);
 			}
-			if($action === "addFriendInGame"){
+			else if($action === "addFriendInGame"){
 				$this->addFriendInGame($request);
 			}
-			if($action === "addInGame"){
+			else if($action === "addInGame"){
 				$this->addInGame($request);
 			}
-			if($action === "evenementGame"){
+			else if($action === "evenementGame"){
 				$this->evenementGame($request);
 			}
-			if($action === "acceptGame"){
+			else if($action === "acceptGame"){
 				$this->acceptGame($request);
 			}
-			if($action === "refuseGame"){
+			else if($action === "refuseGame"){
 				$this->refuseGame($request);
 			}
-			if($action === "startGame"){
+			else if($action === "startGame"){
 				$this->startGame($request);
+			}
+			else{
+				$this->defaultAction($request);
 			}
 		}
 
