@@ -6,15 +6,48 @@
 		}
 
 		public function defaultAction($arg) {
-			$view = new GameView($this,"game");
-			
-			$numberParticipant = Game::NumberOfParticipant($arg->read("gameName"));
-			$cardPut = Game::getCardPut($arg->read("gameName"));
-			print_r($cardPut);
-			$view->setArg("numberParticipant", $numberParticipant);
-			$view->setArg("cardPut", $cardPut);
+			$handCard = Game::getHandCard($arg->read("id"),$arg->read("gameName"));
+			$participant = Game::getParticipant($arg->read("gameName"));
 
-			$view->render();
+			$gameOver = TRUE;
+			$pHand = NULL;
+			if($handCard == NULL){
+				foreach ($participant as $p) {
+					$pHand = Game::getHandCard($p->IDJOUEUR,$arg->read("gameName"));
+					if($pHand != NULL){
+						$gameOver = FALSE;
+					}
+				}
+			}
+			else{
+				$gameOver = FALSE;
+			}
+			if(!$gameOver){
+				$cardPut = Game::getCardPut($arg->read("gameName"));
+				$cardPil1 = Game::getCardOnPil(1,$arg->read("gameName"));
+				$cardPil2 = Game::getCardOnPil(2,$arg->read("gameName"));
+				$cardPil3 = Game::getCardOnPil(3,$arg->read("gameName"));
+				$cardPil4 = Game::getCardOnPil(4,$arg->read("gameName"));
+
+				$view = new GameView($this,"game");
+				$view->setArg("participant", $participant);
+				$view->setArg("cardPut", $cardPut);
+				$view->setArg("handCard", $handCard);
+				$view->setArg("cardPil1", $cardPil1);
+				$view->setArg("cardPil2", $cardPil2);
+				$view->setArg("cardPil3", $cardPil3);
+				$view->setArg("cardPil4", $cardPil4);
+
+				$view->render();
+			}
+			else{
+				//plus aucun joueur n'a de carte en main, toute les cartes ont été posé, la partie est donc terminé : Affichage du vainqueur.
+				//Tant que les joueurs n'ont pas appauyé sur un bouton (telle que Terminé), ils peuvent accèder à cet écran de fin. Dès qu'un joueur appuy sur ce bouton, il sort de la liste des participant (et ne peux plus accéder à la partie)
+				//Dés que tout les joueurs ont appuyés sur le bouton Terminé, la partie est supprimé de la base de donnée
+				$view = new GameView($this,"gameEnd");
+
+				$view->render();
+			}
 		}
 		public function quit($arg) {
 			setcookie("controller","user", time()+ 3600*24);
