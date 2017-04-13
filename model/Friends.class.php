@@ -1,6 +1,7 @@
 <?php
 	class Friends extends Model
-	{				
+	{		
+
 		public static function getFriends($id) {
 			$sql = "SELECT joueur.PSEUDO, joueur.PHOTOPROFIL from joueur, amis WHERE amis.IDAMIS = joueur.IDJOUEUR and amis.IDJOUEUR ='".$id."' AND amis.DEMANDE = 0 ORDER BY joueur.PSEUDO";
 			$st = self::query($sql);
@@ -10,6 +11,18 @@
 			}
 			else{
 				return NULL;;
+			}
+		}
+
+		public static function userExist($name) {
+			$sql = "select PSEUDO from joueur where pseudo='".$name."'";
+			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return TRUE;
+			}
+			else{
+				return FALSE;
 			}
 		}
 

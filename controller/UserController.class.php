@@ -262,18 +262,24 @@
 				$view->setArg('inscErrorText',"Vous ne pouvez pas vous ajouter en ami");
 			}
 			else{
-				$try = Friends::AskFriend($arg->read('id'), $arg->read('friendName'));
-				if($try){
-					$view->setArg('inscOKText',"demande d'ami envoyé");
-				}
+				$userExist = Friends::userExist($arg->read('friendName'));
+				if($userExist){
+					$try = Friends::AskFriend($arg->read('id'), $arg->read('friendName'));
+					if($try){
+						$view->setArg('inscOKText',"demande d'ami envoyé");
+					}
 
-				else{
-					if(Friends::isFriend($arg->read('id'), $arg->read('friendName'))){
-						$view->setArg('inscErrorText',"Vous êtes déjà ami avec ". $arg->read('friendName'));
-					}
 					else{
-						$view->setArg('inscErrorText',"demande d'ami déjà envoyé à ce joueur");
+						if(Friends::isFriend($arg->read('id'), $arg->read('friendName'))){
+							$view->setArg('inscErrorText',"Vous êtes déjà ami avec ". $arg->read('friendName'));
+						}
+						else{
+							$view->setArg('inscErrorText',"demande d'ami déjà envoyé à ce joueur");
+						}
 					}
+				}
+				else{
+					$view->setArg('inscErrorText',"le joueur n'existe pas");
 				}
 			}
 
