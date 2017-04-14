@@ -165,7 +165,7 @@
 			$arg->write('gameName',$arg->read('gameName'));
 			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
 			$gameName = $arg->read('gameName');
-			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
+			$number = WaitingRoom::NumberOfParticipant($gameName);
 
 			$creator = WaitingRoom::getGameCreator($gameName);
 			$participants= WaitingRoom::getParticipant($gameName);
@@ -452,6 +452,47 @@
 			}
 		}
 
+		public function lauchGame($arg){
+			$gameName = $arg->read("gameName");
+			$number = WaitingRoom::NumberOfParticipant($gameName);
+
+			if($number > 10 || $number < 2){
+				$this->goWaitingRoom($arg);
+			}
+			else{
+				WaitingRoom::putPrivate($gameName);
+
+				// supprime toutes les invitations
+				WaitingRoom::deleteAllInvit($gameName);
+
+				//crée une main pour chaque participant
+				$participants= WaitingRoom::getParticipant($gameName);
+				foreach ($participants as $p) {
+					WaitingRoom::createHand($gameName, $p->PSEUDO);
+				}
+
+				//ajoute 10 cartes par main
+				$input = array();
+				for ($i = 1; $i <= 104; $i++) {
+					array_push($input, $i);
+				}
+				shuffle($input);
+				
+				$j = 0;
+				foreach ($participants as $p) {
+					for ($i = 1; $i <= 10; $i++) {
+						WaitingRoom::addCardOnHand($gameName, $p->PSEUDO, $input[$j] );
+						$j = $j + 1;
+					}
+				}
+
+				WaitingRoom::putEnCours($gameName);
+				$this->startGame($arg);
+
+			}
+		}
+		
+
 
 
 
@@ -528,6 +569,9 @@
 			}
 			else if($action === "startGame"){
 				$this->startGame($request);
+			}
+			else if($action === "lauchGame"){
+				$this->lauchGame($request);
 			}
 			else{
 				$this->defaultAction($request);

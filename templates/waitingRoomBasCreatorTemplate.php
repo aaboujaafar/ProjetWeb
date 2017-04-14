@@ -35,12 +35,23 @@
 		echo '<div class="alert alert-success" role="alert">
 				<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscOKFull . '</span></div></br>';
 	}
-	if($number<10){
+	if($number < 10){
 		echo '<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 			<fieldset>
 				<input type="hidden" name="action" value="addFriendInGame" />					
 					<div class="form-group">
 					<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Ajouter un ami
+					</Button>
+				</div>
+			</fieldset>
+		</form>';
+	}
+	if($number < 11 && $number > 1){
+		echo '<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
+			<fieldset>
+				<input type="hidden" name="action" value="lauchGame" />					
+					<div class="form-group">
+					<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Lancer la partie
 					</Button>
 				</div>
 			</fieldset>

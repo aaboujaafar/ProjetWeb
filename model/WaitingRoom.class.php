@@ -134,6 +134,37 @@
 			return count($participant);
 		}
 
+		//------------------------------------------
+		//rend la partie ENCOURS
+		//------------------------------------------
+		public static function putEnCours($gameName) {
+			$sql = "UPDATE partie SET partie.ENCOURS = '1'  WHERE partie.NOMPARTIE = '". $gameName ."'";
+			$st = self::query($sql);
+		}
+
+		//------------------------------------------
+		//crée une main pour la partie
+		//------------------------------------------
+		public static function createHand($gameName, $friendName) {
+			$sql = "INSERT INTO `main`(`IDJOUEUR`, `IDPARTIE`) VALUES ((SELECT joueur.IDJOUEUR FROM joueur WHERE joueur.PSEUDO ='".$friendName."') ,(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE ='".$gameName."'))";
+			$st = self::query($sql);
+		}
+
+		//------------------------------------------
+		//supprime toutes les invitations pour une partie
+		//------------------------------------------
+		public static function deleteAllInvit($gameName) {
+			$sql = "DELETE FROM `inviter` WHERE inviter.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE ='".$gameName."')";
+			$st = self::query($sql);
+		}
+		
+		//------------------------------------------
+		//supprime toutes les invitations pour une partie
+		//------------------------------------------
+		public static function addCardOnHand($gameName, $friendName, $numero) {
+			$sql = "INSERT INTO `contient`(`IDMAIN`, `NUMERO`) VALUES ((SELECT main.IDMAIN FROM main WHERE main.IDJOUEUR =(SELECT joueur.IDJOUEUR FROM joueur WHERE joueur.PSEUDO ='".$friendName."') AND main.IDPARTIE =(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE ='".$gameName."')), ". $numero .")";
+			$st = self::query($sql);
+		}
 
 	} 	 	 	 		
 ?>

@@ -40,7 +40,7 @@
 		}
 
 		public static function numberCardPut($gameName) {
-			$participant =  static::getParticipant($gameName);
+			$participant =  static::getCardPut($gameName);
 			return count($participant);
 		}
 
@@ -76,6 +76,13 @@
 			}
 		}
 
+		//----------------------------------------------------------------------
+		//joue la carte sur la pile(colone 5, par le joueur d'id)
+		//----------------------------------------------------------------------
+		public static function addCardOnPil($card, $gameName, $id) {
+			$sql = "INSERT INTO `poserpile`(`NUMERO`, `IDPARTIE`, `COLONNE`, `PILE`) VALUES (". $card .",(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."'), 5, ". $id .")";
+			$st = self::query($sql);
+		}
 		
 	} 	 	 	 		
 ?>
