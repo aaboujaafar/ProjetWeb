@@ -148,7 +148,7 @@
 			$cardPil4 = Game::getCardOnPil(4,$arg->read("gameName"));
 			$last4 = $cardPil4[count($cardPil4)-1]->NUMERO;
 
-			/*foreach ($cardPut as $cPlayed) { //placement une à une des cartes, calcul des points si la carte atteint le maximum
+			foreach ($cardPut as $cPlayed) { //placement une à une des cartes, calcul des points si la carte atteint le maximum
 				if($cPlayed->NUMERO <  min($last1, $last2, $last3, $last4) ){
 						// la carte se pose la ou il y a le minimum de point
 				}
@@ -176,6 +176,8 @@
 						$pil = $cardPil4;
 						$col =4;
 					}
+					//print_r(Game::getScore($gameName, $cPlayed->IDJOUEUR));
+					
 					// $pil contient la pile dans laquelle on doit joueur la carte $cPlayed
 					if(count($pil) < 5){  //on peut poser la carte sans problème
 
@@ -192,13 +194,14 @@
 						$sc = Game::getScore($gameName, $cPlayed->IDJOUEUR);
 						$sc = $sc + $point;
 						Game::setScore($gameName, $cPlayed->IDJOUEUR ,$sc);
+						
 						//on supprime les cartes de la pille
 
 						//on met la carte en 1ere position
 						
 					}
 				}
-			}*/
+			}
 		}
 
 

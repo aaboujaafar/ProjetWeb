@@ -91,5 +91,60 @@
 			$sql = "DELETE FROM `contient` WHERE contient.IDMAIN = (SELECT main.IDMAIN FROM main WHERE main.IDJOUEUR = ". $id ." AND main.IDPARTIE =(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."')) AND contient.NUMERO = ". $card;
 			$st = self::query($sql);
 		}	
+
+		//----------------------------------------------------------------------
+		//supprime la carte de la pile (collone = 5)
+		//----------------------------------------------------------------------
+		public static function removeCardFromPile($numeroC, $gameName) {
+			$sql = "DELETE FROM `poserpile` WHERE poserpile.NUMERO = ". $numeroC ." AND poserpile.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."') AND poserpile.COLONNE = 5";
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//ajoute la carte en jeu à la position ...
+		//----------------------------------------------------------------------
+		public static function addCardOnGame($numeroC, $col, $gameName, $hauteur ) {
+			$sql = "INSERT INTO `poserpile`(`NUMERO`, `IDPARTIE`, `COLONNE`, `PILE`) VALUES (". $numeroC .", (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."'), ". $col .", ".  $hauteur.")";
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//recupere les point associé à une carte
+		//----------------------------------------------------------------------
+		public static function getPointCard($numeroC) {
+			$sql = "SELECT carte.POINT FROM carte WHERE carte.NUMERO = " . $numeroC;
+			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return $u->POINT;
+			}
+			else{
+				return NULL;
+			}
+		}
+
+		//----------------------------------------------------------------------
+		//recupere les point du joueur dans la partie
+		//----------------------------------------------------------------------
+		public static function getScore($gameName, $idPlayer) {
+			$sql = "SELECT participe.SCORE FROM participe WHERE participe.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."') AND participe.IDJOUEUR = ". $idPlayer;
+			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return $u->SCORE;
+			}
+			else{
+				return NULL;
+			}
+		}
+		
+		//----------------------------------------------------------------------
+		//mets à jour les points du joueur dans la partie
+		//----------------------------------------------------------------------
+		public static function setScore($gameName, $idPlayer, $sc) {
+			$sql = "UPDATE `participe` SET `SCORE`= ". $sc ." WHERE participe.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."') AND participe.IDJOUEUR = ". $idPlayer;
+			$st = self::query($sql);
+		}
+		
 	} 	 	 	 		
 ?>
