@@ -83,6 +83,13 @@
 			$sql = "INSERT INTO `poserpile`(`NUMERO`, `IDPARTIE`, `COLONNE`, `PILE`) VALUES (". $card .",(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."'), 5, ". $id .")";
 			$st = self::query($sql);
 		}
-		
+
+		//----------------------------------------------------------------------
+		//supprime une carte d'une main d'un joueur
+		//----------------------------------------------------------------------
+		public static function removeCardFromHand($card, $gameName, $id) {
+			$sql = "DELETE FROM `contient` WHERE contient.IDMAIN = (SELECT main.IDMAIN FROM main WHERE main.IDJOUEUR = ". $id ." AND main.IDPARTIE =(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."')) AND contient.NUMERO = ". $card;
+			$st = self::query($sql);
+		}	
 	} 	 	 	 		
 ?>

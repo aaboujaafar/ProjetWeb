@@ -117,8 +117,8 @@
 			$handCard = Game::getHandCard($arg->read("id"), $gameName);
 
 			if($nbCardPut < $nbParticipant-1){ //je ne suis pas le dernier pour ce tour de jeu
-				Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
 				Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
+				Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
 			}
 			else{ // je suis le dernier à joueur pour ce tour de jeu
 				
@@ -126,8 +126,8 @@
 
 				}
 				else{ //dernier à joueur, PAS dernier tour de jeu
-					Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
 					Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
+					Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
 				}
 			}
 		}
@@ -147,7 +147,8 @@
 
 			$cardPil4 = Game::getCardOnPil(4,$arg->read("gameName"));
 			$last4 = $cardPil4[count($cardPil4)-1]->NUMERO;
-			foreach ($cardPut as $cPlayed) { //placement une à une des cartes, calcul des points si la carte atteint le maximum
+
+			/*foreach ($cardPut as $cPlayed) { //placement une à une des cartes, calcul des points si la carte atteint le maximum
 				if($cPlayed->NUMERO <  min($last1, $last2, $last3, $last4) ){
 						// la carte se pose la ou il y a le minimum de point
 				}
@@ -197,7 +198,7 @@
 						
 					}
 				}
-			}
+			}*/
 		}
 
 

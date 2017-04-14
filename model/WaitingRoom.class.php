@@ -159,12 +159,12 @@
 		}
 		
 		//------------------------------------------
-		//supprime toutes les invitations pour une partie
+		//ajoute une carte dans la main d'un joueur
 		//------------------------------------------
 		public static function addCardOnHand($gameName, $friendName, $numero) {
 			$sql = "INSERT INTO `contient`(`IDMAIN`, `NUMERO`) VALUES ((SELECT main.IDMAIN FROM main WHERE main.IDJOUEUR =(SELECT joueur.IDJOUEUR FROM joueur WHERE joueur.PSEUDO ='".$friendName."') AND main.IDPARTIE =(SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE ='".$gameName."')), ". $numero .")";
 			$st = self::query($sql);
 		}
-
+		
 	} 	 	 	 		
 ?>
