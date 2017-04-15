@@ -2,13 +2,19 @@
 	<br>
 	<p>ProfilConected
 	<br>
-	<?php
-	echo $Pseudo."<br>";
-	echo "partieT  ".$partieT."<br>";
-	echo "partieG  ".$partieG."<br>";
-	echo "partieP  ".$partieP."<br>";
-	echo "partieP  ".$photoP."<br>";
-	echo "averageWin  ".$averageWin."<br>";
-	?>
+		Rank : les 15 meilleurs joueur du jeu
+			 </li>
+			 <?php
+				if($rank != NULL){
+			 		foreach ($rank as $r){
+						 echo'<li href="#" ">
+						 <img class="img-thumbnail" src="'.$r->PHOTOPROFIL.'">
+						 <label class="friendName">'.$r->PSEUDO.'<br></label>
+						 <label class="friendName">'."-----".$r->NBRPARTIEGAGNEE.'<br></label>
+						 <div class="break"></div>
+					 </li>'; 
+					}
+				}
+			?>
 	</p>
 </div>

@@ -4,7 +4,11 @@
 						<div class="panel" style="background-image:url(<?php echo($photoC)?>);">
 							<div class="name">
 								<span class="bjr-mess"><strong> <?php echo $Pseudo ?></strong></span>
-							<button id="chg-cov" type="button" class="btn pull-right" data-toggle="modal" data-target="#coverSelector"><span class="glyphicon glyphicon-picture"></span> Change cover</button>
+							<?php
+							if($me){
+								echo '<button id="chg-cov" type="button" class="btn pull-right" data-toggle="modal" data-target="#coverSelector"><span class="glyphicon glyphicon-picture"></span> Change cover</button>';
+							}
+							?>
 							<ul class="pull-right">
 							  <li><span data-toggle="tooltip" title="Parties jouées" data-placement="bottom" class="glyphicon glyphicon-king icon"></span><span><?php echo $partieT ?></span></li>
 							  <li><span data-toggle="tooltip" title="Parties gagnées" data-placement="bottom" class="glyphicon glyphicon-thumbs-up icon"></span><span><?php echo $partieG ?></span></li>
@@ -16,6 +20,7 @@
 						</div>
 			 </div>
 			</div>
+
 			<div id="coverSelector" class="modal fade" role="dialog">
 				<div class="modal-dialog modal-sm popup">
 				    <div class="modal-content">

@@ -43,6 +43,10 @@
 		public function showProfil($arg) {
 			$view = new UserProfilView($this,"profilHaut");
 
+			$rank = User::getPlayerRanked();
+
+			$view->setArg("me", TRUE);
+			$view->setArg("rank", $rank);
 			$view->setArg("Pseudo", $arg->read('user'));
 			$view->setArg("photoC", $arg->read('photoC'));
 			$view->setArg("photoP", $arg->read('photoP'));
@@ -59,6 +63,10 @@
 
 			$view = new FriendProfilView($this,"profilHaut");
 			if($friend != NULL){
+				$rank = User::getPlayerRanked();
+
+				$view->setArg("me", FALSE);
+				$view->setArg("rank", $rank);
 				$view->setArg("Pseudo", $friend->PSEUDO);
 				$view->setArg("photoC",  $friend->PHOTOCOVER);
 				$view->setArg("photoP",  $friend->PHOTOPROFIL);
