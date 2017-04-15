@@ -176,7 +176,6 @@
 						$pil = $cardPil4;
 						$col =4;
 					}
-					//print_r(Game::getScore($gameName, $cPlayed->IDJOUEUR));
 					
 					// $pil contient la pile dans laquelle on doit joueur la carte $cPlayed
 					if(count($pil) < 5){  //on peut poser la carte sans problème
