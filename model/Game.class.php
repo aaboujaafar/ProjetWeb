@@ -145,6 +145,15 @@
 			$sql = "UPDATE `participe` SET `SCORE`= ". $sc ." WHERE participe.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."') AND participe.IDJOUEUR = ". $idPlayer;
 			$st = self::query($sql);
 		}
+
+		//----------------------------------------------------------------------
+		//supprime les cartes de la colonne $colonne
+		//----------------------------------------------------------------------
+		public static function removeCardsFromGame($gameName, $colone) {
+			$sql = "DELETE FROM `poserpile` WHERE  poserpile.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."') AND poserpile.COLONNE = ". $colone;
+			$st = self::query($sql);
+		}
+
 		
 	} 	 	 	 		
 ?>

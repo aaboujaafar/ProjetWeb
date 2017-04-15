@@ -133,26 +133,90 @@
 		}
 
 		public function displayCard($arg) {
+			//préparation des données nécessaire au calcul des points/placement des cartes...
 			$gameName = $arg->read("gameName");
 			$cardPut = Game::getCardPut($gameName);
-
-			$cardPil1 = Game::getCardOnPil(1,$arg->read("gameName"));
-			$last1 = $cardPil1[count($cardPil1)-1]->NUMERO;
-
-			$cardPil2 = Game::getCardOnPil(2,$arg->read("gameName"));
-			$last2 = $cardPil2[count($cardPil2)-1]->NUMERO;
-
-			$cardPil3 = Game::getCardOnPil(3,$arg->read("gameName"));
-			$last3 = $cardPil3[count($cardPil3)-1]->NUMERO;
-
-			$cardPil4 = Game::getCardOnPil(4,$arg->read("gameName"));
-			$last4 = $cardPil4[count($cardPil4)-1]->NUMERO;
+			
 
 			foreach ($cardPut as $cPlayed) { //placement une à une des cartes, calcul des points si la carte atteint le maximum
-				if($cPlayed->NUMERO <  min($last1, $last2, $last3, $last4) ){
-						// la carte se pose la ou il y a le minimum de point
+				//données actualisée entre chaque placement de carte
+				//précaution, mais aucune colonne ne peut être vide dans ce jeu, il y a toujours des cartes dans chaque colonne
+				$last1 = NULL;
+				$cardPil1 = Game::getCardOnPil(1,$arg->read("gameName"));
+				if(count($cardPil1) != 0){
+					$last1 = $cardPil1[count($cardPil1)-1]->NUMERO; 
 				}
-				else{
+
+				$last2 = NULL;
+				$cardPil2 = Game::getCardOnPil(2,$arg->read("gameName"));
+				if(count($cardPil1) == 0){
+					$last2 = $cardPil2[count($cardPil2)-1]->NUMERO;
+				}
+				
+				$last3 = NULL;
+				$cardPil3 = Game::getCardOnPil(3,$arg->read("gameName"));
+				if(count($cardPil1) == 0){
+					$last3 = $cardPil3[count($cardPil3)-1]->NUMERO;
+				}
+				
+				$last4 = NULL;
+				$cardPil4 = Game::getCardOnPil(4,$arg->read("gameName"));
+				if(count($cardPil1) == 0){
+					$last4 = $cardPil4[count($cardPil4)-1]->NUMERO;
+				}
+				
+
+
+				if($cPlayed->NUMERO <  min($last1, $last2, $last3, $last4) ){ // si les 4 colonnes sont remplie, et que notre carte est inférieur à toutes les autres : la carte se pose la ou il y a le minimum de point
+					$point1 = 0; //point dans la colonne 1
+					foreach ($cardPil1 as $p) {
+						$point1 = $point1 + Game::getPointCard($p->NUMERO);
+					}
+					$point2 = 0; //point dans la colonne 2
+					foreach ($cardPil2 as $p) {
+						$point2 = $point2 + Game::getPointCard($p->NUMERO);
+					}	
+					$point3 = 0; //point dans la colonne 3
+					foreach ($cardPil3 as $p) {
+						$point3 = $point3 + Game::getPointCard($p->NUMERO);
+					}	
+					$point4 = 0; //point dans la colonne 4
+					foreach ($cardPil4 as $p) {
+						$point4 = $point4 + Game::getPointCard($p->NUMERO);
+					}
+					$num = NULL;
+					$temp = 0;
+					if($temp < $point1){
+						$num = 1;
+						$temp = $point1;
+					}
+					if($temp > $point2){
+						$num = 2;
+						$temp = $point2;
+					}
+					if($temp > $point3){
+						$num = 3;
+						$temp = $point3;
+					}
+					if($temp > $point4){
+						$num = 4;
+						$temp = $point4;
+					}
+					//$num contient la colonne avec le minimum de point, et $temp les points associès à cette colonne
+					$sc = Game::getScore($gameName, $cPlayed->IDJOUEUR);
+					$sc = $sc + $temp;
+					Game::setScore($gameName, $cPlayed->IDJOUEUR ,$sc);
+						
+					//on supprime les cartes de la pille
+					Game::removeCardsFromGame($gameName, $num);
+
+					//on met la carte en 1ere position
+					Game::removeCardFromPile($cPlayed->NUMERO, $gameName);
+					Game::addCardOnGame($cPlayed->NUMERO, $num, $gameName, 1 );
+				}
+
+
+				else{  // il existe une colonne dans laquelle notre carte peut se poser (supérieur).
 					$temp = 0;
 					$pil = NULL;
 					$col = NULL;					
@@ -195,9 +259,11 @@
 						Game::setScore($gameName, $cPlayed->IDJOUEUR ,$sc);
 						
 						//on supprime les cartes de la pille
+						Game::removeCardsFromGame($gameName, $col);
 
 						//on met la carte en 1ere position
-						
+						Game::removeCardFromPile($cPlayed->NUMERO, $gameName);
+						Game::addCardOnGame($cPlayed->NUMERO, $col, $gameName, 1 );
 					}
 				}
 			}
