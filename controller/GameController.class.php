@@ -68,6 +68,26 @@
 				//Dés que tout les joueurs ont appuyés sur le bouton Terminé, la partie est supprimé de la base de donnée
 				$view = new GameView($this,"gameEnd");
 
+				$participant = Game::getParticipant($gameName);
+				$view->setArg("participant", $participant);
+
+				$sc = 10000;
+				$winer = NULL;
+				foreach ($participant as $p){
+					if($p->SCORE < $sc){
+						$winer = $p;
+						$sc = $p->SCORE;
+					}
+				}
+				if($arg->read("id") == $winer->IDJOUEUR){
+					$sc = "vous avez gagné";
+				}
+				else{
+					$sc = "le gagnant est ". $winer->PSEUDO;
+				}
+
+				$view->setArg("resultat", $sc);
+
 				$view->render();
 			}
 		}
@@ -119,15 +139,22 @@
 			if($nbCardPut < $nbParticipant-1){ //je ne suis pas le dernier pour ce tour de jeu
 				Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
 				Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
+				$this->defaultAction($arg);
 			}
 			else{ // je suis le dernier à joueur pour ce tour de jeu
 				
 				if(count($handCard) == 1){ //dernier à jouer, dernier tour de jeu
-
+					Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
+					Game::addCardOnPil($card, $gameName, $arg->read("id"));      		//pose la carte
+					$this->displayCard($arg);      										//fait le placemnt des cartes posées
+					$this->endWait($arg)                                 	
+					$this->defaultAction($arg);
 				}
 				else{ //dernier à joueur, PAS dernier tour de jeu
 					Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
-					Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
+					Game::addCardOnPil($card, $gameName, $arg->read("id"));      		//pose la carte
+					$this->displayCard($arg);											//fait le placement des cartes posées
+					$this->defaultAction($arg);
 				}
 			}
 		}
@@ -164,7 +191,7 @@
 				if(count($cardPil1) == 0){
 					$last4 = $cardPil4[count($cardPil4)-1]->NUMERO;
 				}
-				
+
 
 
 				if($cPlayed->NUMERO <  min($last1, $last2, $last3, $last4) ){ // si les 4 colonnes sont remplie, et que notre carte est inférieur à toutes les autres : la carte se pose la ou il y a le minimum de point
@@ -269,6 +296,57 @@
 			}
 		}
 
+		public function endWait($arg) {
+			$gameName = $arg->read("gameName");
+			$participant = Game::getParticipant($gameName);
+
+			$sc = 10000;
+			$winer = NULL;
+			foreach ($participant as $p){
+				if($p->SCORE < $sc){
+					$winer = $p;
+					$sc = $p->SCORE;
+				}
+			}
+			// $winer contient le gagnant de la partie
+
+			//ajout d'une partie gagnée pour le vainqueur et une partie joué en plus pour tout le monde
+			$gagne = NULL;
+			$tot = NULL;
+			foreach ($participant as $p) {
+				$gagne = Game::getTotPlay($p->IDJOUEUR);
+				$gagne = $gagne + 1;
+				Game::setTotPlay($p->IDJOUEUR, $gagne);
+
+				if($p->IDJOUEUR == $winer->IDJOUEUR){
+					$tot = Game::getWin($p->IDJOUEUR);
+					$tot = $tot + 1;
+					Game::setWin($p->IDJOUEUR, $tot);
+				}
+			}
+
+			//supprime toutes les cartes restantes sur le plateau
+			Game::removeAllCardsFromGame();
+
+			//supprime les mains (mains déjà vides)
+			Game::removeHand($gameName);
+		}
+
+
+		public function lastEnd($arg) {
+			$gameName = $arg->read("gameName");
+			$nbParticipant = Game::NumberOfParticipant($gameName);
+
+			if($nbParticipant > 1){   //je ne suis pas le dernier joueur en jeu : quitte la partie
+				Game::removeParticipation( $gameName, $arg->read("id") );
+			}
+			else{ //je suis le dernier joueur en jeu : quitte la partie et supprime la partie de la bdd
+				Game::removeParticipation( $gameName, $arg->read("id") );
+				Game::removePartie($gameName);
+			}
+			$this->quit($arg);
+		}
+		
 
 
 		//--------------------------------------------------------
@@ -289,8 +367,8 @@
 			else if($action === "playCard"){
 				$this->playCard($request);
 			}
-			else if($action === "displayCard"){
-				$this->displayCard($request);
+			else if($action === "lastEnd"){
+				$this->lastEnd($request);
 			}
 			else{
 				$this->defaultAction($request);

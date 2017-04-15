@@ -486,6 +486,16 @@
 					}
 				}
 
+				//place les 4 cartes de départ sur le plateau
+				Game::addCardOnGame($input[$j], 1, $gameName, 1 );
+				$j = $j + 1;
+				Game::addCardOnGame($input[$j], 2, $gameName, 1 );
+				$j = $j + 1;
+				Game::addCardOnGame($input[$j], 3, $gameName, 1 );
+				$j = $j + 1;
+				Game::addCardOnGame($input[$j], 4, $gameName, 1 );
+
+
 				WaitingRoom::putEnCours($gameName);
 				$this->startGame($arg);
 

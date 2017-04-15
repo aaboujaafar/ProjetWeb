@@ -154,6 +154,69 @@
 			$st = self::query($sql);
 		}
 
+		//----------------------------------------------------------------------
+		//supprime toutes les cartes restantes sur la plateau
+		//----------------------------------------------------------------------
+		public static function removeAllCardsFromGame($gameName) {
+			$sql = "DELETE FROM `poserpile` WHERE  poserpile.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."')";
+			$st = self::query($sql);
+		}
+
 		
+		//----------------------------------------------------------------------
+		//recupere le nombre de partie total joué par le joueur
+		//----------------------------------------------------------------------
+		public static function getTotPlay($idPlayer) {
+			$sql = "SELECT joueur.NBRPARTIEJOUEE FROM joueur WHERE joueur.IDJOUEUR = ". $idPlayer;
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//mets à jour le nombre de partie total joué par le joueur 
+		//----------------------------------------------------------------------
+		public static function setTotPlay($idPlayer, $nbPartie) {
+			$sql = "UPDATE `joueur` SET `NBRPARTIEJOUEE`=". $nbPartie ." WHERE joueur.IDJOUEUR = ". $idPlayer;
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//recupere le nombre de partie gagnée par le joueur
+		//----------------------------------------------------------------------
+		public static function getWin($idPlayer) {
+			$sql = "SELECT joueur.NBRPARTIEGAGNEE FROM joueur WHERE joueur.IDJOUEUR = ". $idPlayer;
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//mets à jour le nombre de partie gagnée par le joueur 
+		//----------------------------------------------------------------------
+		public static function setWin($idPlayer, $nbPartie) {
+			$sql = "UPDATE `joueur` SET `NBRPARTIEGAGNEE`=". $nbPartie ." WHERE joueur.IDJOUEUR = ". $idPlayer;
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//supprime toutes les cartes restantes sur la plateau
+		//----------------------------------------------------------------------
+		public static function removeHand($gameName) {
+			$sql = "DELETE FROM `main` WHERE main.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."')";
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//supprime la participation d'un joueur à une partie
+		//----------------------------------------------------------------------
+		public static function removeParticipation($gameName, $idPlayer) {
+			$sql = "DELETE FROM `participe` WHERE participe.IDJOUEUR = ". $idPlayer ." AND participe.IDPARTIE = (SELECT partie.IDPARTIE FROM partie WHERE partie.NOMPARTIE = '". $gameName ."')";
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------------------------------
+		//supprime la partie de la bdd
+		//----------------------------------------------------------------------
+		public static function removePartie($gameName) {
+			$sql = "DELETE FROM `partie` WHERE partie.NOMPARTIE = '". $gameName."'";
+			$st = self::query($sql);
+		}
 	} 	 	 	 		
 ?>
