@@ -147,7 +147,7 @@
 					Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
 					Game::addCardOnPil($card, $gameName, $arg->read("id"));      		//pose la carte
 					$this->displayCard($arg);      										//fait le placemnt des cartes posées
-					$this->endWait($arg)                                 	
+					$this->endWait($arg);                             	
 					$this->defaultAction($arg);
 				}
 				else{ //dernier à joueur, PAS dernier tour de jeu
