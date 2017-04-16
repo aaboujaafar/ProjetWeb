@@ -1,13 +1,18 @@
 <div id="JoueurMenu">
-	<p>game en cours</p><br>
+	<div class="row">
 	<?php
-		echo "<br>Jeu:<br>";
+	echo '<ul class="list-group col-md-12">
+		<li class="list-group-item title titrePB" >Les parties en cours</li>';
 		if($startGame != NULL){
 			foreach ($startGame as $sg){
-				echo $sg->NOMPARTIE; echo "<br>";
+				echo'<li class="list-group-item top15gamer">
+				<span id="pseudoTop">'.$sg->NOMPARTIE.'</span>
+				 </li>';
 			}
 		}
+		echo '</ul>';
 	?>
+</div>
 	<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 	<fieldset>
 		<input type="hidden" name="action" value="startGame" />
