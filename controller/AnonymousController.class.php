@@ -182,6 +182,9 @@
 			else if($action === "validateConnexion"){
 				$this->validateConnexion($request);
 			}
+			else{
+				$this->defaultAction($request);
+			}
 		}
 
 	}

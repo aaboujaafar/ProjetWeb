@@ -114,12 +114,42 @@
 		public function joinGame($arg) {
 			$view = new JoinGameView($this,"joinGame");
 
-			$publicGame = ListePartie::getPartiePublic($arg->read('id'));
-			$userGame = ListePartie::getParticipantGame($arg->read('id'));
-			$ownerGame = ListePartie::getOwnerGame($arg->read('id'));
+			$nbrTemp = NULL;
 
+			//partie publique
+			$publicGame = ListePartie::getPartiePublic($arg->read('id'));
+			if($publicGame != NULL){
+				$nbrPublicGame = array();
+				foreach ($publicGame as $pg) {
+					$nbrTemp = Game::NumberOfParticipant($pg->NOMPARTIE);
+					array_push($nbrPublicGame, $nbrTemp);
+				}
+				$view->setArg("nbrPublicGame", $nbrPublicGame);
+			}
 			$view->setArg("publicGame", $publicGame);
+
+			//partie en tant que participant
+			$userGame = ListePartie::getParticipantGame($arg->read('id'));
+			if($userGame != NULL){
+				$nbrUserGame = array();
+				foreach ($userGame as $ug) {
+					$nbrTemp = Game::NumberOfParticipant($ug->NOMPARTIE);
+					array_push($nbrUserGame, $nbrTemp);
+				}
+				$view->setArg("nbrUserGame", $nbrUserGame);
+			}
 			$view->setArg("userGame", $userGame);
+
+			//partie en tant que créateur
+			$ownerGame = ListePartie::getOwnerGame($arg->read('id'));
+			if($ownerGame != NULL){
+				$nbrOwnerGame = array();
+				foreach ($ownerGame as $og) {
+					$nbrTemp = Game::NumberOfParticipant($og->NOMPARTIE);
+					array_push($nbrOwnerGame, $nbrTemp);
+				}
+				$view->setArg("nbrOwnerGame", $nbrOwnerGame);
+			}
 			$view->setArg("ownerGame", $ownerGame);
 
 			$view->render();
