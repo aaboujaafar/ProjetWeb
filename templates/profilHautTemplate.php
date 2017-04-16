@@ -29,9 +29,11 @@
 				        <h4 class="modal-title">Changer la photo de couverture</h4>
 				      </div>
 				      <div class="modal-body">
-									<form id="popUpForm" class="form-horizontal well" method="post" action="process_form.php" enctype="multipart/form-data">
+									<form id="popUpForm" class="form-horizontal well" method="post" action="index.php" enctype="multipart/form-data">
                             <div class="form-group">
                                 <div class="col-lg-10">
+                                	<input type="hidden" name="action" value="uploadPhoto" />
+                                	<input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
                                     <input type="file" class="form-control" name="image" accept="image/*">
                                 </div>
                             </div>

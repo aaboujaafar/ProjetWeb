@@ -143,6 +143,21 @@
 		}
 
 		//------------------------------------------
+		//retourne l'état de la partie
+		//------------------------------------------
+		public static function getEnCours($gameName) {
+			$sql = "SELECT partie.ENCOURS FROM partie WHERE partie.NOMPARTIE = '". $gameName ."'";
+			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return $u->ENCOURS;
+			}
+			else{
+				return NULL;
+			}
+		}
+
+		//------------------------------------------
 		//crée une main pour la partie
 		//------------------------------------------
 		public static function createHand($gameName, $friendName) {

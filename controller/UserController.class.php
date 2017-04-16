@@ -175,39 +175,52 @@
 		public function goWaitingRoom($arg) {
 			$gameName = $arg->read('gameName');
 			$number = WaitingRoom::NumberOfParticipant($gameName);
+			$started = WaitingRoom::getEnCours($gameName);
 
 			$creator = WaitingRoom::getGameCreator($gameName);
 			$participants= WaitingRoom::getParticipant($gameName);
 			$isParticipant = false;
-			foreach ($participants as $participant){
-				if($participant->PSEUDO === $arg->read('user')){
-					$isParticipant = true;
+			if($participants != NULL){
+				foreach ($participants as $participant){
+					if($participant->PSEUDO === $arg->read('user')){
+						$isParticipant = true;
+					}
 				}
 			}
 
-			if($creator->PSEUDO === $arg->read('user')){
-				$view = new WaitingRoomView($this,"waitingRoomBasCreator");
-				$public= WaitingRoom::isPublic($gameName);
+			if($creator != NULL && $creator->PSEUDO === $arg->read('user')){
+				if( !$started){
+					$view = new WaitingRoomView($this,"waitingRoomBasCreator");
+					$public= WaitingRoom::isPublic($gameName);
 
-				$view->setArg("number", $number);
-				$view->setArg("creator", $creator);
-				$view->setArg("gameName", $gameName);
-				$view->setArg("participant", $participants);
-				$view->setArg("public", $public);
+					$view->setArg("number", $number);
+					$view->setArg("creator", $creator);
+					$view->setArg("gameName", $gameName);
+					$view->setArg("participant", $participants);
+					$view->setArg("public", $public);
 
-				$view->render();
+					$view->render();
+				}
+				else{
+					$this->startGame($arg);
+				}
 			}
 			else if($isParticipant){
-				$view = new WaitingRoomView($this,"waitingRoomBasParticipant");
-				$public= WaitingRoom::isPublic($gameName);
+				if( !$started){
+					$view = new WaitingRoomView($this,"waitingRoomBasParticipant");
+					$public= WaitingRoom::isPublic($gameName);
 
-				$view->setArg("creator", $creator);
-				$view->setArg("number", $number);
-				$view->setArg("gameName", $gameName);
-				$view->setArg("participant", $participants);
-				$view->setArg("public", $public);
-				
-				$view->render();
+					$view->setArg("creator", $creator);
+					$view->setArg("number", $number);
+					$view->setArg("gameName", $gameName);
+					$view->setArg("participant", $participants);
+					$view->setArg("public", $public);
+					
+					$view->render();
+				}
+				else{
+					$this->startGame($arg);
+				}
 			}
 			else{
 				$this->defaultAction($arg);
@@ -508,6 +521,25 @@
 
 			}
 		}
+
+
+		public function uploadPhoto($arg){
+			$uploaddir = '/photo/'; 
+
+			$uploadfile = $uploaddir . basename($_FILES['image']['name']);
+
+			echo '<pre>';
+			if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
+			    echo "Le fichier est valide, et a été téléchargé
+			           avec succès. Voici plus d'informations :\n";
+			} else {
+			    echo "Attaque potentielle par téléchargement de fichiers.
+			          Voici plus d'informations :\n";
+			}
+
+			echo 'Voici quelques informations de débogage :';
+			print_r($_FILES);
+		}
 		
 
 
@@ -589,6 +621,9 @@
 			}
 			else if($action === "lauchGame"){
 				$this->lauchGame($request);
+			}
+			else if($action === "uploadPhoto"){
+				$this->uploadPhoto($request);
 			}
 			else{
 				$this->defaultAction($request);
