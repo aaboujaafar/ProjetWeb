@@ -6,9 +6,6 @@
 		}
 
 		public function defaultAction($arg) {
-			$gagne = Game::getTotPlay($arg->read('id'));
-			$gagne = $gagne + 1;
-			Game::setTotPlay($arg->read('id'), $gagne);
 			$view = new UserView($this,"AccueilConnected");
 
 			//------------------
@@ -523,25 +520,44 @@
 		}
 
 
-		public function uploadPhoto($arg){
-			$uploaddir = '/photo/'; 
+		public function uploadPhotoCover($arg){
+			$uploaddir = './photo/'; 
+			$_FILES['image']['name']= $arg->read('user') .'-imgCover.png';
 
 			$uploadfile = $uploaddir . basename($_FILES['image']['name']);
+			User::setPhotoCover($arg->read('id'), 'photo/'. $arg->read('user') .'-imgCover.png');
 
-			echo '<pre>';
+			setcookie("photoC",'photo/'. $arg->read('user') .'-imgCover.png', time()+ 3600*24);
+			$arg->write('photoC','photo/'. $arg->read('user') .'-imgCover.png');
+
+			$this->showProfil($arg);
+
 			if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
-			    echo "Le fichier est valide, et a été téléchargé
-			           avec succès. Voici plus d'informations :\n";
+			    //fichier téléchargé avec succès
 			} else {
-			    echo "Attaque potentielle par téléchargement de fichiers.
-			          Voici plus d'informations :\n";
+			   //attaque potentiel par téléchargement de fichier
 			}
+		}
 
-			echo 'Voici quelques informations de débogage :';
-			print_r($_FILES);
+		public function uploadPhotoProfil($arg){
+			$uploaddir = './photo/'; 
+			$_FILES['image']['name']= $arg->read('user') .'-imgPicture.png';
+
+			$uploadfile = $uploaddir . basename($_FILES['image']['name']);
+			User::setPhotoProfil($arg->read('id'), 'photo/'. $arg->read('user') .'-imgPicture.png');
+
+			setcookie("photoP",'photo/'. $arg->read('user') .'-imgPicture.png', time()+ 3600*24);
+			$arg->write('photoP','photo/'. $arg->read('user') .'-imgPicture.png');
+
+			$this->showProfil($arg);
+
+			if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
+			    //fichier téléchargé avec succès
+			} else {
+			   //attaque potentiel par téléchargement de fichier
+			}
 		}
 		
-
 
 
 
@@ -622,9 +638,12 @@
 			else if($action === "lauchGame"){
 				$this->lauchGame($request);
 			}
-			else if($action === "uploadPhoto"){
-				$this->uploadPhoto($request);
+			else if($action === "uploadPhotoCover"){
+				$this->uploadPhotoCover($request);
 			}
+			else if($action === "uploadPhotoProfil"){
+				$this->uploadPhotoProfil($request);
+			}			
 			else{
 				$this->defaultAction($request);
 			}

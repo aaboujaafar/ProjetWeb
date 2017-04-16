@@ -34,7 +34,7 @@
 				if($friends != NULL){
 			 		foreach ($friends as $friend){
 						 echo'<li href="#" class="list-group-item text-left">
-						 <img class="img-thumbnail" src="'.$friend->PHOTOPROFIL.'">
+						 <img width="15%" class="img-thumbnail" src="'.$friend->PHOTOPROFIL.'">
 						 <label class="friendName">'.$friend->PSEUDO.'<br></label>
 						 <label class="pull-right">
 								 <a  class="btn btn-success btn-xs glyphicon glyphicon-user" href="index.php?action=FriendProfil&friend='.$friend->PSEUDO.'" title="View Profil"></a>

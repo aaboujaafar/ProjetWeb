@@ -8,7 +8,7 @@
 				if($rank != NULL){
 			 		foreach ($rank as $r){
 						 echo'<li href="#" ">
-						 <img class="img-thumbnail" src="'.$r->PHOTOPROFIL.'">
+						 <img width="15%" class="img-thumbnail" src="'.$r->PHOTOPROFIL.'">
 						 <label class="friendName">'.$r->PSEUDO.'<br></label>
 						 <label class="friendName">'."-----".$r->NBRPARTIEGAGNEE.'<br></label>
 						 <div class="break"></div>
