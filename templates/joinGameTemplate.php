@@ -2,7 +2,7 @@
 	<div class="row">
 		<h1>Les différentes parties possibles</h1>
 	<?php
-		echo '<ul class="list-group col-md-6">
+		echo '<ul class="list-group col-md-4">
 			<li class="list-group-item title titrePB" >Les parties publiques</li>';
 		if($publicGame != NULL){
 			foreach ($publicGame as $pg){
@@ -12,7 +12,7 @@
 			}
 		}
 		echo '</ul>';
-		echo '<ul class="list-group col-md-6">
+		echo '<ul class="list-group col-md-4">
 			<li class="list-group-item title titrePB" >Les parties en tant que participant</li>';
 		if($userGame != NULL){
 			foreach ($userGame as $ug){
@@ -22,7 +22,7 @@
 			}
 		}
 		echo '</ul>';
-		echo '<ul class="list-group col-md-6">
+		echo '<ul class="list-group col-md-4">
 			<li class="list-group-item title titrePB" >Les parties en tant que créateur</li>';
 		if($ownerGame != NULL){
 			foreach ($ownerGame as $og){
