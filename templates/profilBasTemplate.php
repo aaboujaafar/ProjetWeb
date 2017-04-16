@@ -1,20 +1,15 @@
-<div id="JoueurMenu">
-	<br>
-	<p>ProfilConected
-	<br>
-		Rank : les 15 meilleurs joueur du jeu
-			 </li>
+<div id="profilBas">
+<ul class="list-group col-md-5">
+	<li class="list-group-item title titrePB" >Les 15 meilleurs joueurs du jeu</li>
 			 <?php
 				if($rank != NULL){
 			 		foreach ($rank as $r){
-						 echo'<li href="#" ">
-						 <img class="img-thumbnail" src="'.$r->PHOTOPROFIL.'">
-						 <label class="friendName">'.$r->PSEUDO.'<br></label>
-						 <label class="friendName">'."-----".$r->NBRPARTIEGAGNEE.'<br></label>
-						 <div class="break"></div>
-					 </li>'; 
+						 echo'<li class="list-group-item top15gamer">
+						 <img src="'.$r->PHOTOPROFIL.'"/><span id="pseudoTop">'.$r->PSEUDO.'</span><span class="badge monBadgePB">'.$r->NBRPARTIEGAGNEE.'</span>
+					 		</li>';
 					}
 				}
 			?>
-	</p>
+
+	</ul>
 </div>

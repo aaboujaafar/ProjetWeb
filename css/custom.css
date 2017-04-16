@@ -3,7 +3,8 @@
     src: url(../fonts/BEBAS.woff);
 }
 body{
-	background-image: url('http://lea.verou.me/ft2010/img/darker_wood.jpg');
+  padding:0px 20px;
+	background-image: url('http://hdwallpaperbackgrounds.net/wp-content/uploads/2016/07/white-background-5.jpg');
 
 }
 .form-group label{
@@ -142,7 +143,6 @@ body{
   padding-right: 10px;
 }
 .panel{
-  /*background-image:url("https://scontent-cdg2-1.xx.fbcdn.net/v/t31.0-8/17017039_10206544624094298_6037340313071994155_o.jpg?oh=114e15f4655967ea0f0a68cf3fc87cb4&oe=59547340");*/
   height: 300px;
   background-repeat: no-repeat;
   background-size: 100% auto;
@@ -227,4 +227,38 @@ margin-left:20px;
 #amis{
   width : 400px ;
   height: 90vh;
+}
+
+
+.top15gamer{
+  list-style: none;
+  padding: 5px;
+}
+.top15gamer img{
+    width: 50px;
+    height: 50px;
+    border: solid 2px #222;
+    border-radius: 50px;
+}
+#pseudoTop{
+  margin-left: 20px;
+  font-weight: bold;
+}
+.monBadgePB{
+  margin-top: 15px;
+  margin-right: 10px;
+  background-color: red;
+}
+#profilBas{
+  margin-top: 80px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.titrePB{
+  text-align: center;
+  font-weight: 900;
+  background-color: #222;
+  font-family: 'Bebas Regular';
+  color: white;
+
 }
