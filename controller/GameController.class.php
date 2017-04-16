@@ -94,6 +94,19 @@
 		public function quit($arg) {
 			setcookie("controller","user", time()+ 3600*24);
 
+			//mets à jour le score du joueur
+			$user = User::getUserOnly($arg->read('user'));
+			setcookie("partieG",$user->NBRPARTIEGAGNEE, time()+ 3600*24);
+			setcookie("partieP",($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE), time()+ 3600*24);
+			setcookie("partieT",$user->NBRPARTIEJOUEE, time()+ 3600*24);
+			if($user->NBRPARTIEJOUEE ==0){
+				setcookie("averageWin",0, time()+ 3600*24);
+			}
+			else{
+				setcookie("averageWin",($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE), time()+ 3600*24);
+			}
+
+
 			$view = new UserView($this,"AccueilConnected");
 
 			//----------------------------------------
@@ -319,7 +332,7 @@
 					$tot = $tot + 1;
 					Game::setWin($p->IDJOUEUR, $tot);
 				}
-			}
+			}	
 
 			//supprime toutes les cartes restantes sur le plateau
 			Game::removeAllCardsFromGame($gameName);

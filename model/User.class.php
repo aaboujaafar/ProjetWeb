@@ -52,6 +52,21 @@
 			}
 		}
 
+		//----------------------------------------------
+		//change la photo de cover
+		//----------------------------------------------
+		public static function setPhotoCover($id, $name) {
+			$sql = "UPDATE `joueur` SET `PHOTOCOVER`= '". $name ."' WHERE joueur.IDJOUEUR = " . $id;
+			$st = self::query($sql);
+		}
+
+		//----------------------------------------------
+		//change la photo de Profil
+		//----------------------------------------------
+		public static function setPhotoProfil($id, $name) {
+			$sql = "UPDATE `joueur` SET `PHOTOPROFIL`= '". $name ."' WHERE joueur.IDJOUEUR = " . $id;
+			$st = self::query($sql);
+		}
 		
 	} 	 	 	 		
 ?>
