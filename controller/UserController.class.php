@@ -6,6 +6,9 @@
 		}
 
 		public function defaultAction($arg) {
+			$gagne = Game::getTotPlay($arg->read('id'));
+			$gagne = $gagne + 1;
+			Game::setTotPlay($arg->read('id'), $gagne);
 			$view = new UserView($this,"AccueilConnected");
 
 			//------------------

@@ -68,7 +68,7 @@
 				//Dés que tout les joueurs ont appuyés sur le bouton Terminé, la partie est supprimé de la base de donnée
 				$view = new GameView($this,"gameEnd");
 
-				$participant = Game::getParticipant($gameName);
+				$participant = Game::getParticipant($arg->read("gameName"));
 				$view->setArg("participant", $participant);
 
 				$sc = 10000;
@@ -176,24 +176,21 @@
 
 				$last2 = NULL;
 				$cardPil2 = Game::getCardOnPil(2,$arg->read("gameName"));
-				if(count($cardPil1) == 0){
+				if(count($cardPil2) != 0){
 					$last2 = $cardPil2[count($cardPil2)-1]->NUMERO;
 				}
 				
 				$last3 = NULL;
 				$cardPil3 = Game::getCardOnPil(3,$arg->read("gameName"));
-				if(count($cardPil1) == 0){
+				if(count($cardPil3) != 0){
 					$last3 = $cardPil3[count($cardPil3)-1]->NUMERO;
 				}
 				
 				$last4 = NULL;
 				$cardPil4 = Game::getCardOnPil(4,$arg->read("gameName"));
-				if(count($cardPil1) == 0){
+				if(count($cardPil4) != 0){
 					$last4 = $cardPil4[count($cardPil4)-1]->NUMERO;
 				}
-
-
-
 				if($cPlayed->NUMERO <  min($last1, $last2, $last3, $last4) ){ // si les 4 colonnes sont remplie, et que notre carte est inférieur à toutes les autres : la carte se pose la ou il y a le minimum de point
 					$point1 = 0; //point dans la colonne 1
 					foreach ($cardPil1 as $p) {
@@ -246,7 +243,7 @@
 				else{  // il existe une colonne dans laquelle notre carte peut se poser (supérieur).
 					$temp = 0;
 					$pil = NULL;
-					$col = NULL;					
+					$col = NULL;		
 					if($cPlayed->NUMERO > $last1){
 						$temp = $last1;
 						$pil = $cardPil1;
@@ -267,7 +264,6 @@
 						$pil = $cardPil4;
 						$col =4;
 					}
-					
 					// $pil contient la pile dans laquelle on doit joueur la carte $cPlayed
 					if(count($pil) < 5){  //on peut poser la carte sans problème
 
@@ -326,7 +322,7 @@
 			}
 
 			//supprime toutes les cartes restantes sur le plateau
-			Game::removeAllCardsFromGame();
+			Game::removeAllCardsFromGame($gameName);
 
 			//supprime les mains (mains déjà vides)
 			Game::removeHand($gameName);

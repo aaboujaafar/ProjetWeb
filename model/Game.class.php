@@ -169,6 +169,13 @@
 		public static function getTotPlay($idPlayer) {
 			$sql = "SELECT joueur.NBRPARTIEJOUEE FROM joueur WHERE joueur.IDJOUEUR = ". $idPlayer;
 			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return $u->NBRPARTIEJOUEE;
+			}
+			else{
+				return NULL;
+			}
 		}
 
 		//----------------------------------------------------------------------
@@ -185,6 +192,14 @@
 		public static function getWin($idPlayer) {
 			$sql = "SELECT joueur.NBRPARTIEGAGNEE FROM joueur WHERE joueur.IDJOUEUR = ". $idPlayer;
 			$st = self::query($sql);
+			$u = $st->fetch();
+			if(isset($u->props)){
+				return $u->NBRPARTIEGAGNEE;
+			}
+			else{
+				return NULL;
+			}
+
 		}
 
 		//----------------------------------------------------------------------
