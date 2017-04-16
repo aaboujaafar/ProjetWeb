@@ -27,7 +27,7 @@
 		if($ownerGame != NULL){
 			foreach ($ownerGame as $og){
 				echo'<li class="list-group-item top15gamer">
-				<span id="pseudoTop">'.$ug->NOMPARTIE.'</span>
+				<span id="pseudoTop">'.$og->NOMPARTIE.'</span>
 				 </li>';
 			}
 		}
