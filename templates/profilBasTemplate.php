@@ -5,7 +5,7 @@
 				if($rank != NULL){
 			 		foreach ($rank as $r){
 						echo'<li class="list-group-item top15gamer">
-						<img src="'.$r->PHOTOPROFIL.'"/><span id="pseudoTop">'.$r->PSEUDO.'</span><span class="badge monBadgePB">'.$r->NBRPARTIEGAGNEE.'</span>
+						<img src="'.$r->PHOTOPROFIL.'"/><span id="pseudoTop">'.$r->PSEUDO.'</span><span class="badge monBadgePB" data-toggle="tooltip" title="Score">'.$r->NBRPARTIEGAGNEE.'</span>
 						 </li>';
 					}
 				}
