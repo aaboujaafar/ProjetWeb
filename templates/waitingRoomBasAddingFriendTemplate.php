@@ -12,6 +12,7 @@
 <form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 	<fieldset>
 		<input type="hidden" name="action" value="changePublic" />
+		<input type="hidden" name="gameName" value= <?php echo '"'. $gameName .'"'?> />
 		<div class="form-group">
 			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >
 			<?php 
@@ -29,7 +30,8 @@
 
 <form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 	<fieldset>
-		<input type="hidden" name="action" value="goWaitingRoom" />					
+		<input type="hidden" name="action" value="goWaitingRoom" />	
+		<input type="hidden" name="gameName" value= <?php echo '"'. $gameName .'"'?> />				
 		<div class="form-group">
 			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Annuler
 			</Button>
@@ -51,7 +53,7 @@
 						 <img class="img-thumbnail" src="'.$friend->PHOTOPROFIL.'">
 						 <label class="friendName">'.$friend->PSEUDO.'<br></label>
 						 <label class="pull-right">
-								 <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="index.php?action=addInGame&friend='.$friend->PSEUDO.'" title="View"></a>
+								 <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="index.php?action=addInGame&friend='.$friend->PSEUDO.'&gameName='. $gameName .'" title="View"></a>
 						 </label>
 						 <div class="break"></div>
 					 </li>'; 

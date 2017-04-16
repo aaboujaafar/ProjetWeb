@@ -173,8 +173,6 @@
 		}
 
 		public function goWaitingRoom($arg) {
-			$arg->write('gameName',$arg->read('gameName'));
-			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
 			$gameName = $arg->read('gameName');
 			$number = WaitingRoom::NumberOfParticipant($gameName);
 
@@ -305,8 +303,6 @@
 		//Méthode pour la gestion d'invitation dans une partie
 		//--------------------------------------------------------
 		public function addFriendInGame($arg){
-			$arg->write('gameName',$arg->read('gameName'));
-			setcookie("gameName",$arg->read('gameName'), time()+ 3600*24);
 			$gameName = $arg->read('gameName');
 
 			$creator = WaitingRoom::getGameCreator($gameName);
@@ -399,7 +395,7 @@
 			}
 			else{
 				WaitingRoom::AddInGame($arg->read('game'), $arg->read('user'));
-				
+				$arg->write("gameName",$arg->read('game'));
 				$this->goWaitingRoom($arg);
 			}
 		}

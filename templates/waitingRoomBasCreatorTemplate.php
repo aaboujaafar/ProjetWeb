@@ -12,6 +12,7 @@
 <form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 	<fieldset>
 		<input type="hidden" name="action" value="changePublic" />
+		<input type="hidden" name="gameName" value= <?php echo '"'. $gameName .'"'?> />
 		<div class="form-group">
 			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >
 			<?php 
@@ -38,7 +39,8 @@
 	if($number < 10){
 		echo '<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 			<fieldset>
-				<input type="hidden" name="action" value="addFriendInGame" />					
+				<input type="hidden" name="action" value="addFriendInGame" />
+				<input type="hidden" name="gameName" value= "'. $gameName .'"/>					
 					<div class="form-group">
 					<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Ajouter un ami
 					</Button>
@@ -49,7 +51,8 @@
 	if($number < 11 && $number > 1){
 		echo '<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 			<fieldset>
-				<input type="hidden" name="action" value="lauchGame" />					
+				<input type="hidden" name="action" value="lauchGame" />	
+				<input type="hidden" name="gameName" value= "'. $gameName .'"/>				
 					<div class="form-group">
 					<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Lancer la partie
 					</Button>
