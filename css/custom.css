@@ -28,10 +28,12 @@ body{
 	border-bottom : solid gray 2px;
 	font-family: 'Ranga', cursive;
 	letter-spacing: 2px;
+  outline: none;
 }
 .form-group input:focus{
 	background-color:rgba(255,255,255,0.1);
 	border: none;
+  outline: none;
 	border-bottom : solid #40A497 2px;
 }
 .navbar{
