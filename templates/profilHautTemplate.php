@@ -1,4 +1,4 @@
-<div id="JoueurMenu">
+<div id="profilHaut">
 			<div class="row well ">
 				<div class="col-md-12 cov">
 						<div class="panel" style="background-image:url(<?php echo($photoC)?>);">
