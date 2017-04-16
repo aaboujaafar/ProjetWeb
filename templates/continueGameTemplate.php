@@ -19,7 +19,7 @@
 		<input type="hidden" name="gameName" value="BestGameEver" />
 		<div class="form-group">
 			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >
-				rejoindre la partie
+				Rejoindre la partie
 			</Button>
 		</div>
 	</fieldset>
