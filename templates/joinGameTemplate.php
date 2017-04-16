@@ -1,26 +1,40 @@
 <div id="JoueurMenu">
-	<p>game</p><br>
+	<div class="row">
+		<h1>Les différentes parties possibles</h1>
 	<?php
-		echo "<br>partie public:<br>";
+		echo '<ul class="list-group col-md-6">
+			<li class="list-group-item title titrePB" >Les parties publiques</li>';
 		if($publicGame != NULL){
 			foreach ($publicGame as $pg){
-				echo $pg->NOMPARTIE; echo "<br>";
+				echo'<li class="list-group-item top15gamer">
+				<span id="pseudoTop">'.$pg->NOMPARTIE.'</span>
+				 </li>';
 			}
 		}
-		echo "<br>partie en tant que participant:<br>";
+		echo '</ul>';
+		echo '<ul class="list-group col-md-6">
+			<li class="list-group-item title titrePB" >Les parties en tant que participant</li>';
 		if($userGame != NULL){
 			foreach ($userGame as $ug){
-				echo $ug->NOMPARTIE; echo "<br>";
+				echo'<li class="list-group-item top15gamer">
+				<span id="pseudoTop">'.$ug->NOMPARTIE.'</span>
+				 </li>';
 			}
 		}
-		echo "<br>partie en tant que créateur:<br>";
+		echo '</ul>';
+		echo '<ul class="list-group col-md-6">
+			<li class="list-group-item title titrePB" >Les parties en tant que créateur</li>';
 		if($ownerGame != NULL){
 			foreach ($ownerGame as $og){
-				echo $og->NOMPARTIE; echo "<br>";
+				echo'<li class="list-group-item top15gamer">
+				<span id="pseudoTop">'.$ug->NOMPARTIE.'</span>
+				 </li>';
 			}
 		}
+		echo '</ul><br>';
 	?>
-	<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="get">
+</div>
+	<br><form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="get">
 	<fieldset>
 		<input type="hidden" name="action" value="goWaitingRoom" />
 		<input type="hidden" name="gameName" value="tan" />
