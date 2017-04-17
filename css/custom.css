@@ -369,3 +369,18 @@ body{
    height: 20px;
    margin-bottom: 5px;
  }
+
+ /* waiting room css*/
+ #photoW{
+   padding-left:10px;
+ }
+ #partieInfos h1{
+   color: white;
+ }
+ #partieInfos span{
+   color: white;
+   margin-left: -30px;
+ }
+ .listeParticipants{
+   margin-top: 30px;
+ }
