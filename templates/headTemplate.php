@@ -5,6 +5,8 @@
 		<title>6 Qui prend !</title>
 		<link rel="stylesheet" href="css/bootstrap.css" type="text/css"  />
 		<link rel="stylesheet" href="css/custom.css" type="text/css"  />
+		<link rel="stylesheet" type="text/css" href="css/csshake.min.css">
+		<link rel="stylesheet" type="text/css" href="css/hover-min.css">
 		<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
 		<!-- jQuery library -->
