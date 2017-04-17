@@ -348,6 +348,11 @@ body{
 .monBadgeRP{
   background-color: #BCA33C;
 }
+.joinGameTitle{
+  text-align: center;
+  color: white;
+  font-family: 'Bebas Regular';
+}
 
 /* Créationde partie */
 .btn-creation{

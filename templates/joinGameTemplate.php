@@ -1,6 +1,8 @@
-<div id="JoueurMenu">
+<div id="joinGame">
+	<div class="joinGameTitle">
+			<h1>Les différentes parties possibles</h1>
+	</div>
 	<div class="row">
-		<h1>Les différentes parties possibles</h1>
 	<?php
 		echo '<ul class="list-group col-md-4">
 			<li class="list-group-item title titrePB" >Les parties publiques</li>';
@@ -19,9 +21,9 @@
 		if($userGame != NULL){
 			$i =0;
 			foreach ($userGame as $ug){
-				echo'<li class="list-group-item top15gamer">
+				echo'<a href="index.php?action=goWaitingRoom&gameName='.$ug->NOMPARTIE.'"><li class="list-group-item top15gamer">
 				<span id="pseudoTop">'.$ug->NOMPARTIE.'</span><span class="badge monBadgeRP" data-toggle="tooltip" title="Nombre de participants">'.$nbrUserGame[$i].'</span>
-				 </li>';
+				 </a></li>';
 				 $i+=1;
 			}
 		}
