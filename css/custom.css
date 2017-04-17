@@ -238,13 +238,29 @@ body{
 .bjr-mess{
 	margin-left:250px;
 }
+
+
+/* Accueil co css*/
+
 .lesTroisBoutonsdeJimmy{
-	position: relative;
-	margin-top:10%;
-	margin-left:40%;
+  margin-top: 40vh;
+  text-align: center;
+  margin-left: 30%;
 }
-.lesTroisBoutonsdeJimmy button{
-margin-left:20px;
+.bouton{
+  text-decoration: none;
+  margin-left: 15px;
+  border-radius: 0px;
+  padding: 15px;
+  color :#282828;
+  font-family: 'Bebas Regular';
+  border: solid 2px #BCA33C;
+  background-color: white;
+}
+.bouton:hover{
+  text-decoration: none;
+  color :#BCA33C;
+  background-color: #282828;
 }
 
 /* Formulaire du popup*/

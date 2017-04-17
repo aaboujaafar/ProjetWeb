@@ -31,8 +31,10 @@
 		}
 	?>
 	<div class="lesTroisBoutonsdeJimmy">
-	<a href="index.php?action=creatGame" class="btn btn-secondary ">Créer partie</a>
-	<a href="index.php?action=joinGame" class="btn btn-secondary">Rejoindre partie</a>
-	<a href="index.php?action=continueGame" class="btn btn-secondary">Continuer partie</a>
+		<div class="row">
+			<a href="index.php?action=creatGame" class="hvr-grow bouton col-lg-2">Créer partie</a>
+			<a href="index.php?action=joinGame" class="hvr-grow bouton col-lg-2">Rejoindre partie</a>
+			<a href="index.php?action=continueGame" class="hvr-grow bouton col-lg-2">Continuer partie</a>
+		</div>
 	</div>
 </div>
