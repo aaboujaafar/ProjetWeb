@@ -44,8 +44,11 @@
 	<fieldset>
 		<input type="hidden" name="action" value="goWaitingRoom" />
 		<input type="hidden" name="gameName" value="tan" />
-		<div class="form-group">
-			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >TEST : rejoindre creator</Button>
+		<div class="row">
+
+		</div>
+		<div class="form-group col-md-5">
+			<button class="boutonMenu hvr-grow bouton" id="bouton" type="submit" >Rejoindre creator</Button>
 		</div>
 		</fieldset>
 	</form>

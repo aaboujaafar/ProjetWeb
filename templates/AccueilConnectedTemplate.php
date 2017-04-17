@@ -32,9 +32,9 @@
 	?>
 	<div class="lesTroisBoutonsdeJimmy">
 		<div class="row">
-			<a href="index.php?action=creatGame" class="hvr-grow bouton col-lg-2">Créer partie</a>
-			<a href="index.php?action=joinGame" class="hvr-grow bouton col-lg-2">Rejoindre partie</a>
-			<a href="index.php?action=continueGame" class="hvr-grow bouton col-lg-2">Continuer partie</a>
+			<a href="index.php?action=creatGame" class="hvr-grow bouton col-lg-2 col-sm-3">Creer partie</a>
+			<a href="index.php?action=joinGame" class="hvr-grow bouton col-lg-2 col-sm-3">Rejoindre partie</a>
+			<a href="index.php?action=continueGame" class="hvr-grow bouton col-lg-2 col-sm-3">Continuer partie</a>
 		</div>
 	</div>
 </div>
