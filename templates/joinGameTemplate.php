@@ -1,5 +1,5 @@
 <div id="joinGame">
-	<div class="joinGameTitle">
+	<div class="pageTitle">
 			<h1>Les différentes parties possibles</h1>
 	</div>
 	<div class="row">
@@ -21,7 +21,7 @@
 		if($userGame != NULL){
 			$i =0;
 			foreach ($userGame as $ug){
-				echo'<a href="index.php?action=goWaitingRoom&gameName='.$ug->NOMPARTIE.'"><li class="list-group-item top15gamer">
+				echo'<li class="list-group-item top15gamer">
 				<span id="pseudoTop">'.$ug->NOMPARTIE.'</span><span class="badge monBadgeRP" data-toggle="tooltip" title="Nombre de participants">'.$nbrUserGame[$i].'</span>
 				 </a></li>';
 				 $i+=1;
