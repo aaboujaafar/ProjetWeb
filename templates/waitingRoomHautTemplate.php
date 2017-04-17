@@ -21,8 +21,9 @@
 	foreach($participant as $p){
 		if($creator->PSEUDO !== $p->PSEUDO){
 			echo'<li class="list-group-item top15gamer">
-			<img id="pseudoTop" src="'.$p->PHOTOPROFIL.'"/> <span id="photoW">'.$p->PSEUDO.' </span> </li></ul>';
+			<img id="pseudoTop" src="'.$p->PHOTOPROFIL.'"/> <span id="photoW">'.$p->PSEUDO.'</span></li>';
 		}
 	}
+	echo ('</ul>');
 	?>
 </div>

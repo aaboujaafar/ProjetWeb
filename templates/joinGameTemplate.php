@@ -1,6 +1,6 @@
 <div id="joinGame">
 	<div class="pageTitle">
-			<h1>Les différentes parties possibles</h1>
+			<h1>Les differentes parties possibles</h1>
 	</div>
 	<div class="row">
 	<?php
@@ -9,9 +9,9 @@
 		if($publicGame != NULL){
 			$i =0;
 			foreach ($publicGame as $pg){
-				echo'<li class="list-group-item top15gamer">
-				<span id="pseudoTop">'.$pg->NOMPARTIE.'</span><span class="badge monBadgeRP" data-toggle="tooltip" title="Nombre de participants" data-placement="bottom">'.$nbrPublicGame[$i].'</span>
-				 </li>';
+				echo'<li class="list-group-item top15gamer joinGame">
+				<a href="index.php?action=acceptGame&game='.$pg->NOMPARTIE.'"><span id="pseudoTop">'.$pg->NOMPARTIE.'</span><span class="badge monBadgeRP pull-right" data-toggle="tooltip" title="Nombre de participants" data-placement="bottom">'.$nbrPublicGame[$i].'</span>
+				 </a></li>';
 				 $i+=1;
 			}
 		}
@@ -21,8 +21,8 @@
 		if($userGame != NULL){
 			$i =0;
 			foreach ($userGame as $ug){
-				echo'<li class="list-group-item top15gamer">
-				<span id="pseudoTop">'.$ug->NOMPARTIE.'</span><span class="badge monBadgeRP" data-toggle="tooltip" title="Nombre de participants">'.$nbrUserGame[$i].'</span>
+				echo'<li class="list-group-item top15gamer joinGame">
+				<a href="index.php?action=goWaitingRoom&gameName='.$ug->NOMPARTIE.'"><span id="pseudoTop">'.$ug->NOMPARTIE.'</span><span class="badge monBadgeRP pull-right" data-toggle="tooltip" title="Nombre de participants">'.$nbrUserGame[$i].'</span>
 				 </a></li>';
 				 $i+=1;
 			}
@@ -33,25 +33,14 @@
 		if($ownerGame != NULL){
 			$i =0;
 			foreach ($ownerGame as $og){
-				echo'<li class="list-group-item top15gamer">
-				<span id="pseudoTop">'.$og->NOMPARTIE.'</span><span class="badge monBadgeRP" data-toggle="tooltip" title="Nombre de participants">'.$nbrOwnerGame[$i].'</span>
-				 </li>';
+				echo'<li class="list-group-item top15gamer joinGame">
+				<a href="index.php?action=goWaitingRoom&gameName='.$og->NOMPARTIE.'"><span id="pseudoTop">'.$og->NOMPARTIE.'</span><span class="badge monBadgeRP pull-right" data-toggle="tooltip" title="Nombre de participants">'.$nbrOwnerGame[$i].'</span>
+				 </a></li>';
 				 $i+=1;
 			}
 		}
 		echo '</ul><br>';
 	?>
 </div>
-	<br><form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="get">
-	<fieldset>
-		<input type="hidden" name="action" value="goWaitingRoom" />
-		<input type="hidden" name="gameName" value="tan" />
-		<div class="row">
 
-		</div>
-		<div class="form-group col-md-5">
-			<button class="boutonMenu hvr-grow bouton" id="bouton" type="submit" >Rejoindre creator</Button>
-		</div>
-		</fieldset>
-	</form>
 </div>

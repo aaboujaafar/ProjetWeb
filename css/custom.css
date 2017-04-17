@@ -353,6 +353,13 @@ body{
   color: white;
   font-family: 'Bebas Regular';
 }
+.joinGame a{
+  display:block;
+  color:#222;
+}
+.joinGame a:hover{
+  text-decoration: none;
+}
 
 /* Créationde partie */
 .btn-creation{
