@@ -615,65 +615,11 @@
 				}
 				else{
 					if($newPassword1 !== $newPassword2){
-
+						$view->setArg('inscErrorText','Veuillez saisir le nouveau mot de passe de manière identique');
 					}
 					else{
-						
-					}
-				}
-			}
-
-			
-			
-			else{
-				
-				if($user == NULL ){
-					$view = new LoginView($this,'login');
-					$view->setArg('inscErrorText','Mot de passe incorrecte, veuillez insérer le bon mot de passe');
-					$view->render();
-				}
-				else{
-					$newRequest = Request::getCurrentRequest();
-					$newRequest->write('controller','user');
-					$newRequest->write('action','Anonymous');
-					$newRequest->write('user',$user->PSEUDO);
-					$newRequest->write('partieG',$user->NBRPARTIEGAGNEE);
-					$newRequest->write('partieP',($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE));
-					$newRequest->write('partieT',$user->NBRPARTIEJOUEE);
-					$newRequest->write('id',$user->IDJOUEUR);
-					if($user->NBRPARTIEJOUEE ==0){
-						$newRequest->write('averageWin',0);
-					}
-					else{
-						$newRequest->write('averageWin',($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE));
-					}
-					$newRequest->write('photoP',$user->PHOTOPROFIL);
-					$newRequest->write('photoC',$user->PHOTOCOVER);
-
-					setcookie("user",$user->PSEUDO, time()+ 3600*24);
-					setcookie("partieG",$user->NBRPARTIEGAGNEE, time()+ 3600*24);
-					setcookie("partieP",($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE), time()+ 3600*24);
-					setcookie("partieT",$user->NBRPARTIEJOUEE, time()+ 3600*24);
-					if($user->NBRPARTIEJOUEE ==0){
-						setcookie("averageWin",0, time()+ 3600*24);
-					}
-					else{
-						setcookie("averageWin",($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE), time()+ 3600*24);
-					}
-					setcookie("photoP",$user->PHOTOPROFIL, time()+ 3600*24);
-					setcookie("photoC",$user->PHOTOCOVER, time()+ 3600*24);
-					setcookie("id",$user->IDJOUEUR, time()+ 3600*24);
-					setcookie("controller","user", time()+ 3600*24);
-
-
-					try {
-						// Instantiate the adequat controller according to the current request
-						$controller = Dispatcher::dispatch($newRequest);
-
-						// Execute the requested action
-						$controller->execute();
-					} catch (Exception $e) {
-						echo 'Error : ' . $e->getMessage() . "\n";
+						User::changePassword($arg->read("id"), $oldPassword, $newPassword1);
+						$view->setArg('inscErrorText','Veuillez saisir le nouveau mot de passe de manière identique');
 					}
 				}
 			}

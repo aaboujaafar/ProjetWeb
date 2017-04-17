@@ -67,6 +67,14 @@
 			$sql = "UPDATE `joueur` SET `PHOTOPROFIL`= '". $name ."' WHERE joueur.IDJOUEUR = " . $id;
 			$st = self::query($sql);
 		}
+
+		//----------------------------------------------
+		//change le mot de passe d'un joueur (besoin de l'ancien mot de passe)
+		//----------------------------------------------
+		public static function changePassword($id, $oldPass, $newPass) {
+			$sql = "UPDATE `joueur` SET `MDP`= '". $newPass ."' WHERE joueur.IDJOUEUR = " . $id . "AND joueur.MDP ='". $oldPass . "'";
+			$st = self::query($sql);
+		}
 		
 	} 	 	 	 		
 ?>
