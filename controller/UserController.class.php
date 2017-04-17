@@ -588,6 +588,96 @@
 			}
 		}
 
+		public function changePassword($arg){
+			$oldPassword = $args->read('oldPassword');
+			$newPassword1 = $args->read('newPassword1');
+			$newPassword2 = $args->read('newPassword2');
+
+			$view = new UserProfilView($this,"profilHaut");
+			$rank = User::getPlayerRanked();
+			$view->setArg("me", TRUE);
+			$view->setArg("rank", $rank);
+			$view->setArg("Pseudo", $arg->read('user'));
+			$view->setArg("photoC", $arg->read('photoC'));
+			$view->setArg("photoP", $arg->read('photoP'));
+			$view->setArg("partieT", $arg->read('partieT'));
+			$view->setArg("partieG", $arg->read('partieG'));
+			$view->setArg("partieP", $arg->read('partieP'));
+			$view->setArg("averageWin", $arg->read('averageWin'));		
+
+			if($oldPassword == NULL || $newPassword1 == NULL || $newPassword2 == NULL){
+				$view->setArg('inscErrorText','Il manque des données, veuillez renseigner tous les champs');
+			}
+			else{
+				$user = User::getUser($arg->read("user"), $oldPassword);
+				if($user == NULL ){
+					$view->setArg('inscErrorText','Ancien mot de passe erroné, veuillez insérer le bon mot de passe');
+				}
+				else{
+					if($newPassword1 !== $newPassword2){
+
+					}
+					else{
+						
+					}
+				}
+			}
+
+			
+			
+			else{
+				
+				if($user == NULL ){
+					$view = new LoginView($this,'login');
+					$view->setArg('inscErrorText','Mot de passe incorrecte, veuillez insérer le bon mot de passe');
+					$view->render();
+				}
+				else{
+					$newRequest = Request::getCurrentRequest();
+					$newRequest->write('controller','user');
+					$newRequest->write('action','Anonymous');
+					$newRequest->write('user',$user->PSEUDO);
+					$newRequest->write('partieG',$user->NBRPARTIEGAGNEE);
+					$newRequest->write('partieP',($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE));
+					$newRequest->write('partieT',$user->NBRPARTIEJOUEE);
+					$newRequest->write('id',$user->IDJOUEUR);
+					if($user->NBRPARTIEJOUEE ==0){
+						$newRequest->write('averageWin',0);
+					}
+					else{
+						$newRequest->write('averageWin',($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE));
+					}
+					$newRequest->write('photoP',$user->PHOTOPROFIL);
+					$newRequest->write('photoC',$user->PHOTOCOVER);
+
+					setcookie("user",$user->PSEUDO, time()+ 3600*24);
+					setcookie("partieG",$user->NBRPARTIEGAGNEE, time()+ 3600*24);
+					setcookie("partieP",($user->NBRPARTIEJOUEE - $user->NBRPARTIEGAGNEE), time()+ 3600*24);
+					setcookie("partieT",$user->NBRPARTIEJOUEE, time()+ 3600*24);
+					if($user->NBRPARTIEJOUEE ==0){
+						setcookie("averageWin",0, time()+ 3600*24);
+					}
+					else{
+						setcookie("averageWin",($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE), time()+ 3600*24);
+					}
+					setcookie("photoP",$user->PHOTOPROFIL, time()+ 3600*24);
+					setcookie("photoC",$user->PHOTOCOVER, time()+ 3600*24);
+					setcookie("id",$user->IDJOUEUR, time()+ 3600*24);
+					setcookie("controller","user", time()+ 3600*24);
+
+
+					try {
+						// Instantiate the adequat controller according to the current request
+						$controller = Dispatcher::dispatch($newRequest);
+
+						// Execute the requested action
+						$controller->execute();
+					} catch (Exception $e) {
+						echo 'Error : ' . $e->getMessage() . "\n";
+					}
+				}
+			}
+		}
 
 
 
@@ -673,6 +763,9 @@
 			}
 			else if($action === "uploadPhotoProfil"){
 				$this->uploadPhotoProfil($request);
+			}
+			else if($action === "changePassword"){
+				$this->changePassword($request);
 			}
 			else{
 				$this->defaultAction($request);

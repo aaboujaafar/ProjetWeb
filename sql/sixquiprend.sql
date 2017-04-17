@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Jeu 13 Avril 2017 à 14:51
+-- Généré le :  Lun 17 Avril 2017 à 14:21
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -186,18 +186,35 @@ CREATE TABLE `contient` (
 
 INSERT INTO `contient` (`IDMAIN`, `NUMERO`) VALUES
 (1, 5),
+(5, 5),
 (1, 6),
 (1, 7),
 (1, 8),
+(4, 8),
+(5, 12),
+(4, 13),
+(5, 16),
+(4, 19),
+(5, 20),
+(4, 26),
+(4, 27),
+(5, 31),
 (2, 33),
 (2, 34),
 (2, 35),
 (2, 36),
 (2, 37),
-(3, 90),
+(5, 40),
+(4, 53),
+(4, 64),
+(5, 69),
+(4, 83),
+(5, 85),
+(5, 89),
 (3, 91),
 (3, 92),
 (3, 93),
+(4, 93),
 (3, 94);
 
 -- --------------------------------------------------------
@@ -210,6 +227,13 @@ CREATE TABLE `inviter` (
   `IDPARTIE` int(11) NOT NULL,
   `IDJOUEUR` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `inviter`
+--
+
+INSERT INTO `inviter` (`IDPARTIE`, `IDJOUEUR`) VALUES
+(24, 1);
 
 -- --------------------------------------------------------
 
@@ -235,7 +259,7 @@ CREATE TABLE `joueur` (
 --
 
 INSERT INTO `joueur` (`PSEUDO`, `MDP`, `ADRESSEMAIL`, `NBRPARTIEJOUEE`, `NBRPARTIEGAGNEE`, `IDJOUEUR`, `NOM`, `PRENOM`, `PHOTOCOVER`, `PHOTOPROFIL`) VALUES
-('tanakal', 'mdptanakal', 'tanakal@minesdedouai.fr', 35, 26, 1, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
+('tanakal', 'mdptanakal', 'tanakal@minesdedouai.fr', 32, 27, 1, NULL, NULL, 'photo/tanakal-imgCover.png', 'photo/tanakal-imgPicture.png'),
 ('valentine', 'laTug', 'valentine@minesdedouai.fr', 0, 0, 2, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('claire', 'TheLast', 'claire@minesdedouai.fr', 0, 0, 3, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('Nicolas', 'Power', 'nicolas@minesdedouai.fr', 0, 0, 4, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
@@ -260,7 +284,7 @@ INSERT INTO `joueur` (`PSEUDO`, `MDP`, `ADRESSEMAIL`, `NBRPARTIEJOUEE`, `NBRPART
 ('Bernard', 'mdr', 'bernard@minesdedouai.fr', 0, 0, 23, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('admin', 'admin', 'admin@minesdedouai.fr', 0, 0, 24, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('z', 'z', 'z@z', 0, 0, 145, 'z', 'z', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
-('a', 'a', 'a@a', 0, 0, 146, 'aaa', 'a', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
+('a', 'a', 'a@a', 25, 1, 146, 'aaa', 'a', 'photo/a-imgCover.png', 'photo/a-imgPicture.png'),
 ('e', 'e', 'e@e', 0, 0, 147, 'e', 'e', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('t', 't', 't@t', 0, 0, 148, 't', 't', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('TerGood', 'TG', 'tG@hotmail.com', 0, 0, 149, 'Terry', 'Goodkinh', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
@@ -287,7 +311,9 @@ CREATE TABLE `main` (
 INSERT INTO `main` (`IDMAIN`, `IDJOUEUR`, `IDPARTIE`) VALUES
 (1, 4, 4),
 (2, 2, 4),
-(3, 1, 4);
+(3, 1, 4),
+(4, 1, 19),
+(5, 146, 19);
 
 -- --------------------------------------------------------
 
@@ -309,9 +335,10 @@ INSERT INTO `participe` (`IDJOUEUR`, `IDPARTIE`, `SCORE`) VALUES
 (1, 1, '0'),
 (1, 2, '0'),
 (1, 3, '0'),
-(1, 4, '20'),
+(1, 4, '50'),
 (1, 16, '0'),
-(1, 17, '0'),
+(1, 19, '1'),
+(1, 21, '0'),
 (2, 1, '0'),
 (2, 2, '0'),
 (2, 4, '31'),
@@ -347,7 +374,11 @@ INSERT INTO `participe` (`IDJOUEUR`, `IDPARTIE`, `SCORE`) VALUES
 (22, 5, '0'),
 (23, 2, '0'),
 (23, 10, '0'),
-(146, 17, '0');
+(146, 19, '0'),
+(146, 20, '0'),
+(146, 22, '0'),
+(146, 23, '0'),
+(146, 24, '0');
 
 -- --------------------------------------------------------
 
@@ -379,7 +410,12 @@ INSERT INTO `partie` (`IDPARTIE`, `IDJOUEUR`, `PUBLIQUE`, `ENCOURS`, `NOMPARTIE`
 (9, 24, 1, 0, 'NainCompris'),
 (10, 23, 0, 0, '23Game'),
 (16, 1, 1, 0, 'testGame'),
-(17, 1, 0, 0, 'tan');
+(19, 1, 0, 1, 'tan'),
+(20, 146, 0, 0, 'apartie'),
+(21, 1, 0, 0, 'rty'),
+(22, 146, 0, 0, 'azerty'),
+(23, 146, 0, 0, 'tpartie'),
+(24, 146, 0, 0, 'll');
 
 -- --------------------------------------------------------
 
@@ -402,19 +438,25 @@ INSERT INTO `poserpile` (`NUMERO`, `IDPARTIE`, `COLONNE`, `PILE`) VALUES
 (1, 4, '3', 1),
 (2, 4, '3', 2),
 (3, 4, '3', 3),
+(7, 19, '1', 1),
 (9, 4, '5', 4),
 (10, 4, '4', 1),
 (20, 4, '4', 2),
 (30, 4, '4', 3),
+(35, 19, '3', 1),
+(38, 19, '2', 1),
 (40, 4, '4', 4),
 (50, 4, '4', 5),
 (55, 4, '2', 1),
 (57, 4, '2', 2),
 (59, 4, '2', 3),
+(66, 19, '4', 1),
 (80, 4, '1', 1),
 (81, 4, '1', 2),
 (82, 4, '1', 3),
-(88, 4, '1', 4);
+(88, 4, '1', 4),
+(90, 4, '5', 1),
+(97, 19, '4', 2);
 
 --
 -- Index pour les tables exportées
@@ -491,10 +533,15 @@ ALTER TABLE `poserpile`
 ALTER TABLE `joueur`
   MODIFY `IDJOUEUR` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 --
+-- AUTO_INCREMENT pour la table `main`
+--
+ALTER TABLE `main`
+  MODIFY `IDMAIN` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT pour la table `partie`
 --
 ALTER TABLE `partie`
-  MODIFY `IDPARTIE` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `IDPARTIE` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- Contraintes pour les tables exportées
 --
