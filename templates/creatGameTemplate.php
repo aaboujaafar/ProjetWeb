@@ -1,4 +1,8 @@
-<h2>Créer une partie</h2>
+
+<div id="createGame">
+	<div class="pageTitle">
+			<h1>Creer une partie</h1>
+	</div>
 	<?php
 		if(isset($inscErrorText))
 		echo '<div class="alert alert-danger" role="alert">
@@ -24,6 +28,7 @@
 		</div>
 		</div>
 	</br>
-			<button class="boutonMenu btn btn-creation hvr-bob col-sm-offset-5" id="bouton" type="submit" >Créer la partie</Button>
+			<button class="boutonMenu bouton hvr-grow col-sm-offset-5" id="bouton" type="submit" >Creer la partie</Button>
 		</fieldset>
 	</form>
+</div>

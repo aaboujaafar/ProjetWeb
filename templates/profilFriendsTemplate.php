@@ -18,7 +18,7 @@
 				</div>
 
 				<div class="form-group">
-					<button class="boutonMenu bouton hvr-grow" id="bouton" type="submit" >Ajouter un ami</Button>
+					<button class="boutonMenu boutonB bouton hvr-grow" id="bouton" type="submit" >Ajouter un ami</Button>
 				</div>
 			</fieldset>
 		</form>
