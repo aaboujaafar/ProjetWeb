@@ -3,6 +3,7 @@
 	<div class="pageTitle">
 			<h1>Creer une partie</h1>
 	</div>
+	<br>
 	<?php
 		if(isset($inscErrorText))
 		echo '<div class="alert alert-danger" role="alert">
@@ -22,13 +23,13 @@
 
 		<div class="form-group">
 			<label class="col-md-3 control-label">Partie public</label>
-			<div class="col-md-9 checkbox">
+			<div class="col-md-6 col-sm-offset-2 checkbox">
 			 <input type="checkbox" id="big-checkbox" name="public" value="public" />
 			</div>
 		</div>
 		</div>
 	</br>
-			<button class="boutonMenu bouton hvr-grow col-sm-offset-5" id="bouton" type="submit" >Creer la partie</Button>
+			<button class="boutonMenu bouton hvr-grow col-sm-offset-4" id="bouton" type="submit" >Creer la partie</Button>
 		</fieldset>
 	</form>
 </div>

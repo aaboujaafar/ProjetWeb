@@ -1,7 +1,7 @@
 <div id="profilBas">
 	<div class="col-md-5">
 	<ul class="list-group">
-		<li class="list-group-item title titrePB" >Les 15 meilleurs joueurs du jeu</li>
+		<li class="list-group-item title titrePB" >Les 10 meilleurs joueurs du jeu</li>
 			<?php
 				if($rank != NULL){
 			 		foreach ($rank as $r){

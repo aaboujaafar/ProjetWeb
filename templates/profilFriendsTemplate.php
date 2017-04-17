@@ -2,18 +2,18 @@
 <!--ajout d'un amis -->
 	<?php
 		if(isset($inscErrorText)){
-		echo '<div class="alert alert-warning" role="alert">
-				<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorText . '</span></div></br>';}
+		echo '<div class="alert alert-warning list-group col-md-4 col-md-offset-4" role="alert">
+				<span class="error"><span class="glyphicon glyphicon-exclamation-sign col-md-offset-3">&nbsp</span>' . $inscErrorText . '</span></div></br>';}
 		if(isset($inscOKText)){
-		echo '<div class="alert alert-success" role="alert">
-				<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscOKText . '</span></div></br>';}
+		echo '<div class="alert alert-success col-md-4 col-md-offset-4" role="alert">
+				<span class="error"><span class="glyphicon glyphicon-exclamation-sign col-md-offset-3">&nbsp</span>' . $inscOKText . '</span></div></br>';}
 	?>
 		 <form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 			<fieldset>
 				<input type="hidden" name="action" value="addFriend" />
 				<div class="form-group">
-					<div class="col-sm-10">
-						 <input type="text" name="friendName" id="test"  placeholder="insérer le nom de votre ami" required/>
+					<div class="col-sm-8 col-md-offset-2">
+						 <input type="text" name="friendName" id="test"  placeholder="      insérer le nom de votre ami" required/>
 					</div>
 				</div>
 
@@ -23,7 +23,7 @@
 			</fieldset>
 		</form>
 
-	 <ul class="list-group col-md-7 col-md-offset-2">
+	 <ul class="list-group col-md-6 col-md-offset-3">
 		<li class="list-group-item title titrePB" >Liste des amis</li>
 			 <?php
 				if($friends != NULL){

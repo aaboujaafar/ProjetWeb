@@ -1,17 +1,6 @@
 <div id="salleAttenteH" class="row">
 	<div id="partieInfos" class="col-md-6 col-md-offset-5">
 		<h1><?php echo $gameName; ?></h1> <br>
-		<span > Partie publique :
-		<?php
-			if($public){
-				echo 'Oui';
-			}
-			else{
-				echo 'Non';
-			}
-		?>
-		</span>
-		</br>
 	</div>
 	<?php
 	echo '<ul class="listeParticipants list-group col-md-8 col-md-offset-2 ">

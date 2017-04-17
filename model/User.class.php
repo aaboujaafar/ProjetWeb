@@ -41,7 +41,7 @@
 		//donne la liste des joueurs classé dans l'orde
 		//----------------------------------------------
 		public static function getPlayerRanked() {
-			$sql = "SELECT joueur.PSEUDO, joueur.NBRPARTIEGAGNEE, joueur.PHOTOPROFIL FROM joueur ORDER BY joueur.NBRPARTIEGAGNEE DESC LIMIT 15";
+			$sql = "SELECT joueur.PSEUDO, joueur.NBRPARTIEGAGNEE, joueur.PHOTOPROFIL FROM joueur ORDER BY joueur.NBRPARTIEGAGNEE DESC LIMIT 10";
 			$st = self::query($sql);
 			$u = $st->fetchAll();
 			if(isset($u[0])){

@@ -8,5 +8,4 @@
 		echo 'Privé';
 	}
 ?> 
-<br><br><br>En attente du créateur, Veuillez patienter
 </p></b></FONT>

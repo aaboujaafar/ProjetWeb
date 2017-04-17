@@ -2,6 +2,7 @@
 	<div class="pageTitle">
 			<h1>Les differentes parties possibles</h1>
 	</div>
+	<br>
 	<div class="row">
 	<?php
 		echo '<ul class="list-group col-md-4">

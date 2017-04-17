@@ -9,7 +9,7 @@
 				<fieldset>
 					<input type="hidden" name="action" value="evenementFriend" />
 					<div class="form-group">
-						<button class="boutonMenu pull-left bouton hvr-grow" id="bouton" type="submit" >
+						<button class="boutonMenu bouton hvr-grow col-sm-offset-1" id="bouton" type="submit" >
 							Demande(s) dami(s) en Attente
 						</Button>
 					</div>
@@ -21,7 +21,7 @@
 				<fieldset>
 					<input type="hidden" name="action" value="evenementGame" />
 					<div class="form-group">
-						<button class="boutonMenu bouton hvr-grow pull-right" id="bouton" type="submit" >
+						<button class="boutonMenu bouton hvr-grow col-sm-offset-7" id="bouton" type="submit" >
 							Vous avez ete invite dans une partie
 						</Button>
 					</div>

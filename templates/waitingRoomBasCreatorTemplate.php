@@ -1,11 +1,11 @@
 <div class="row">
 	<?php
 		if(isset($inscErrorFull)){
-			echo '<div class="alert alert-warning" role="alert">
+			echo '<div class="alert alert-warning col-md-6 col-sm-offset-3" role="alert">
 					<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorFull . '</span></div>';
 		}
 		if(isset($inscOKFull)){
-			echo '<div class="alert alert-success" role="alert">
+			echo '<div class="alert alert-success col-md-6 col-sm-offset-3" role="alert">
 					<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscOKFull . '</span></div>';
 		}
 	?>

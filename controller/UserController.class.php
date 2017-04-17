@@ -160,7 +160,14 @@
 			$view = new ContinueGameView($this,"continueGame");
 
 			$startGame = ListePartie::getPartieStarted($arg->read('id'));
-
+			if($startGame != NULL){
+				$nbrUserGame = array();
+				foreach ($startGame as $ug) {
+					$nbrTemp = Game::NumberOfParticipant($ug->NOMPARTIE);
+					array_push($nbrUserGame, $nbrTemp);
+				}
+				$view->setArg("nbrUserGame", $nbrUserGame);
+			}
 			$view->setArg("startGame", $startGame);
 
 			$view->render();
@@ -415,7 +422,7 @@
 
 		public function acceptGame($arg){
 			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
-			if($number > 9){
+			if($number > 10){
 				WaitingRoom::removeInvit($arg->read('game'), $arg->read('user'));
 				$view = new UserView($this,"AccueilConnected");
 
