@@ -1,4 +1,6 @@
-<h2>Connexion</h2>
+<div class="pageTitle">
+	<h1>Connexion</h1>
+</div>
 	<?php
 		if(isset($inscErrorText))
 		echo '<div class="alert alert-danger" role="alert">
@@ -23,7 +25,7 @@
 		</div>
 		
 		<div class="form-group">
-			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Se connecter</Button>
+			<button class="boutonMenu bouton hvr-grow col-sm-offset-5" id="bouton" type="submit" >Se connecter</Button>
 		</div>
 		</fieldset>
 	</form>

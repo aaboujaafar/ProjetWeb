@@ -1,4 +1,6 @@
-<h2>Inscription</h2>
+<div class="pageTitle">
+	<h1>Inscription</h1>
+</div>
 	<?php
 		if(isset($inscErrorText))
 		echo '<div class="alert alert-danger" role="alert">
@@ -44,7 +46,7 @@
 		</div>
 		
 		<div class="form-group">
-			<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >S'inscrire</Button>
+			<button class="boutonMenu bouton hvr-grow col-sm-offset-5" id="bouton" type="submit" >S'inscrire</Button>
 		</div>
 		</fieldset>
 	</form>
