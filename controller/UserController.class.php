@@ -589,9 +589,9 @@
 		}
 
 		public function changePassword($arg){
-			$oldPassword = $args->read('oldPassword');
-			$newPassword1 = $args->read('newPassword1');
-			$newPassword2 = $args->read('newPassword2');
+			$oldPassword = $arg->read('oldPassword');
+			$newPassword1 = $arg->read('newPassword1');
+			$newPassword2 = $arg->read('newPassword2');
 
 			$view = new UserProfilView($this,"profilHaut");
 			$rank = User::getPlayerRanked();
@@ -619,10 +619,11 @@
 					}
 					else{
 						User::changePassword($arg->read("id"), $oldPassword, $newPassword1);
-						$view->setArg('inscErrorText','Veuillez saisir le nouveau mot de passe de manière identique');
+						$view->setArg('inscOkText','Mots de passe changer avec succès');
 					}
 				}
 			}
+			$view->render();
 		}
 
 

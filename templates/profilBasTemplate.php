@@ -1,5 +1,6 @@
 <div id="profilBas">
-	<ul class="list-group col-md-5">
+	<div class="col-md-5">
+	<ul class="list-group">
 		<li class="list-group-item title titrePB" >Les 15 meilleurs joueurs du jeu</li>
 			<?php
 				if($rank != NULL){
@@ -15,13 +16,19 @@
 	<?php
 		if($me){
 			if(isset($inscErrorText)){
-				echo '<div class="alert alert-danger" role="alert">
-						<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorText . '</span>
+				echo '<div class="chgt col-md-7">
+						<div class="alert alert-danger" role="alert ">
+							<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorText . '</span>
+						</div></br>';
+			}
+			if(isset($inscOkText)){
+				echo '<div class="chgt col-md-7">
+						<div class="alert alert-success" role="alert ">
+							<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscOkText . '</span>
 						</div></br>';
 			}
 			echo 
-				'<div class = "col-md-5"
-					<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
+					'<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 						<fieldset>
 							<input type="hidden" name="action" value="changePassword" />
 							<div class="form-group">
@@ -53,3 +60,4 @@
 				</div>';
 		}
 	?>
+</div>
