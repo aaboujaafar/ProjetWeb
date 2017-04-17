@@ -18,13 +18,12 @@
 				</div>
 
 				<div class="form-group">
-					<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Ajouter un ami
-					</Button>
+					<button class="boutonMenu bouton hvr-grow" id="bouton" type="submit" >Ajouter un ami</Button>
 				</div>
 			</fieldset>
 		</form>
 
-	 <ul class="list-group col-md-12">
+	 <ul class="list-group col-md-7 col-md-offset-2">
 		<li class="list-group-item title titrePB" >Liste des amis</li>
 			 <?php
 				if($friends != NULL){
