@@ -3,7 +3,9 @@
     src: url(../fonts/BEBAS.woff);
 }
 body{
-	background-image: url('http://hdwallpaperbackgrounds.net/wp-content/uploads/2016/07/white-background-5.jpg');
+	background-image: url('img/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 
 }
 
@@ -90,7 +92,7 @@ body{
 	background-color:rgba(255,255,255,0.1);
 	border: none;
   outline: none;
-	border-bottom : solid #40A497 2px;
+	border-bottom : solid #BCA33C 2px;
 }
 .navbar{
 	font-family: 'Bebas Regular';
@@ -305,7 +307,7 @@ margin-left:20px;
 .monBadgePB{
   margin-top: 15px;
   margin-right: 10px;
-  background-color: red;
+  background-color: #BCA33C;
 }
 .monBadgeF{
   margin-top: 15px;
@@ -327,5 +329,23 @@ margin-left:20px;
 
 /* Rejoindre partie css*/
 .monBadgeRP{
-  background-color: red;
+  background-color: #BCA33C;
 }
+
+/* Créationde partie */
+.btn-creation{
+  font-family: 'Ranga', cursive;
+  font-weight: bold;
+  font-size: 18px;
+  background-color:#BCA33C;
+  padding: auto;
+  border: 1px solid #BCA35C;
+}
+.btn-creation:hover{
+  background-color:#BCA35C;
+}
+#big-checkbox {
+   width: 20px;
+   height: 20px;
+   margin-bottom: 5px;
+ }

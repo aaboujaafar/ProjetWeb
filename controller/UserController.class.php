@@ -189,7 +189,7 @@
 				$args->write('gameName',$name);
 				ListePartie::creatGame($args->read('id'), $isPublic , 0 , $name);
 				ListePartie::AddPlayer($args->read('id'),$name);
-				$this->goWaitingRoom($args); 
+				$this->goWaitingRoom($args);
 
 			}
 		}
@@ -242,7 +242,7 @@
 					$view->setArg("gameName", $gameName);
 					$view->setArg("participant", $participants);
 					$view->setArg("public", $public);
-					
+
 					$view->render();
 				}
 				else{
@@ -261,7 +261,7 @@
 			}
 			else{
 				WaitingRoom::putPublic($arg->read('gameName'));
-			}		
+			}
 			$this->goWaitingRoom($arg);
 		}
 
@@ -276,7 +276,7 @@
 			$view = new UserFriendsView($this,"evenementFriendAsking");
 
 			$friendsAsking = Friends::Evenement_FriendAdding($arg->read('id'));
-			
+
 			$view->setArg("friendsAsking", $friendsAsking);
 
 			$view->setArg("Pseudo", $arg->read('user'));
@@ -361,7 +361,7 @@
 		}
 
 		public function addInGame($arg){
-			
+
 			$inGameAsking = waitingRoom::isFriendInGameAsking($arg->read('gameName'), $arg->read('friend'));
 			$inGame = waitingRoom::isFriendInGame($arg->read('gameName'), $arg->read('friend'));
 
@@ -404,7 +404,7 @@
 			$view = new UserFriendsView($this,"evenementFriendAskingInGame");
 
 			$joinedGame = WaitingRoom::Evenement_FriendAddingInGame($arg->read('id'));
-			
+
 			$view->setArg("joinedGame", $joinedGame);
 
 			$view->setArg("Pseudo", $arg->read('user'));
@@ -412,7 +412,7 @@
 
 			$view->render();
 		}
-		
+
 		public function acceptGame($arg){
 			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
 			if($number > 10){
@@ -524,7 +524,7 @@
 					array_push($input, $i);
 				}
 				shuffle($input);
-				
+
 				$j = 0;
 				foreach ($participants as $p) {
 					for ($i = 1; $i <= 10; $i++) {
@@ -551,7 +551,7 @@
 
 
 		public function uploadPhotoCover($arg){
-			$uploaddir = './photo/'; 
+			$uploaddir = './photo/';
 			$_FILES['image']['name']= $arg->read('user') .'-imgCover.png';
 
 			$uploadfile = $uploaddir . basename($_FILES['image']['name']);
@@ -570,7 +570,7 @@
 		}
 
 		public function uploadPhotoProfil($arg){
-			$uploaddir = './photo/'; 
+			$uploaddir = './photo/';
 			$_FILES['image']['name']= $arg->read('user') .'-imgPicture.png';
 
 			$uploadfile = $uploaddir . basename($_FILES['image']['name']);
@@ -587,7 +587,7 @@
 			   //attaque potentiel par téléchargement de fichier
 			}
 		}
-		
+
 
 
 
@@ -673,7 +673,7 @@
 			}
 			else if($action === "uploadPhotoProfil"){
 				$this->uploadPhotoProfil($request);
-			}			
+			}
 			else{
 				$this->defaultAction($request);
 			}
