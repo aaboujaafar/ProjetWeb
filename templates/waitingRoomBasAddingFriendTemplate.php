@@ -1,11 +1,11 @@
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-5">
 		<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 			<fieldset>
 				<input type="hidden" name="action" value="changePublic" />
 				<input type="hidden" name="gameName" value= <?php echo '"'. $gameName .'"'?> />
 				<div class="form-group">
-					<button class="boutonMenu bouton col-sm-offset-5" id="bouton" type="submit" >
+					<button class="boutonMenu bouton col-sm-offset-3" id="bouton" type="submit" >
 					<?php
 					if($public){
 						echo 'Rendre Privee';
@@ -18,13 +18,13 @@
 			</fieldset>
 		</form>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-5">
 		<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 			<fieldset>
 				<input type="hidden" name="action" value="goWaitingRoom" />
 				<input type="hidden" name="gameName" value= <?php echo '"'. $gameName .'"'?> />
 				<div class="form-group">
-					<button class="boutonMenu bouton col-sm-offset-5" id="bouton" type="submit" >Annuler
+					<button class="boutonMenu bouton col-sm-offset-12" id="bouton" type="submit" >Annuler
 					</Button>
 				</div>
 			</fieldset>
@@ -32,7 +32,7 @@
 	</div>
 </div>
 		<div class="list-content" id="ajoutAmis">
-			<?php echo '<ul class="list-group col-md-5 col-md-offset-3">
+			<?php echo '<ul class="list-group col-md-6 col-md-offset-3">
 				<li class="list-group-item titrePB" >Ajoute un ami</li>';
 						if($friends != NULL){
 					 		foreach ($friends as $friend){

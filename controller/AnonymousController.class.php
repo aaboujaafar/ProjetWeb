@@ -145,9 +145,10 @@
 						else{
 							setcookie("averageWin",($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE), time()+ 3600*24);
 						}
-						setcookie("photoP",$user->PHOTOCOVER, time()+ 3600*24);
-						setcookie("photoC",$user->PHOTOPROFIL, time()+ 3600*24);
+						setcookie("photoP",$user->PHOTOPROFIL, time()+ 3600*24);
+						setcookie("photoC",$user->PHOTOCOVER, time()+ 3600*24);
 						setcookie("id",$user->IDJOUEUR, time()+ 3600*24);
+						setcookie("controller","user", time()+ 3600*24);
 
 						try {
 							// Instantiate the adequat controller according to the current request

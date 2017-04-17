@@ -29,7 +29,7 @@
 		}
 		echo '</ul>';
 		echo '<ul class="list-group col-md-4">
-			<li class="list-group-item title titrePB" >Les parties en tant que créateur</li>';
+			<li class="list-group-item title titrePB" >Les parties en tant que createur</li>';
 		if($ownerGame != NULL){
 			$i =0;
 			foreach ($ownerGame as $og){

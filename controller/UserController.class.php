@@ -415,7 +415,7 @@
 
 		public function acceptGame($arg){
 			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
-			if($number > 10){
+			if($number > 9){
 				WaitingRoom::removeInvit($arg->read('game'), $arg->read('user'));
 				$view = new UserView($this,"AccueilConnected");
 
