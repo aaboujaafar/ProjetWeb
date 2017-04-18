@@ -1,5 +1,6 @@
 <div id="cartePlateau">
 		<?php
+			echo'<h1>'.$name.'</h1><br><div class="col-md-6 col-sm-6">';
 			if($cardPil1 != NULL){
 				foreach ($cardPil1 as $p1) {
 					echo '<img src="img/cartes/'.$p1->NUMERO.'.png"/>';
@@ -9,7 +10,7 @@
 			for ($i = $c; $i < 5; $i++) {
     			echo '<img src="img/cartes/vide.png"/>';
 			}	
-			
+			echo '</br>';
 			if($cardPil2 != NULL){
 				foreach ($cardPil2 as $p2) {
 					echo '<img src="img/cartes/'.$p2->NUMERO.'.png"/>';
@@ -19,8 +20,8 @@
 			for ($i = $c; $i < 5; $i++) {
     			echo '<img src="img/cartes/vide.png"/>';
 			}
-			echo "<br>";
-
+			echo'</div>';
+			echo'<div class="col-md-6 col-sm-6">';
 			if($cardPil3 != NULL){
 				foreach ($cardPil3 as $p3) {
 					echo '<img src="img/cartes/'.$p3->NUMERO.'.png"/>';
@@ -30,7 +31,7 @@
 			for ($i = $c; $i < 5; $i++) {
     			echo '<img src="img/cartes/vide.png"/>';
 			}
-
+			echo '</br>';
 			if($cardPil4 != NULL){
 				foreach ($cardPil4 as $p4) {
 					echo '<img src="img/cartes/'.$p4->NUMERO.'.png"/>';
@@ -40,48 +41,43 @@
 			for ($i = $c; $i < 5; $i++) {
     			echo '<img src="img/cartes/vide.png"/>';
 			}
-			echo "<br>";
+			echo'</div>';
 		?>
-</div>
+</div><br>
 
 <div id="main">
-	<FONT color="red"><b>
 		<?php
-			echo "Ma main :<br>";
 			if($handCard != NULL){
 				foreach ($handCard as $hc) {
-					echo '<img src="img/cartes/'.$hc->NUMERO.'.png"/>';
+					echo '<a href="index.php?action=playCard&card='.$hc->NUMERO.'"/><img src="img/cartes/'.$hc->NUMERO.'.png"/></a>';
 				}
 			}
 			echo "<br>";
 			?>
-	</b></FONT>
-</div>
-
-<div id="cardPut">
-	<FONT color="blue"><b>
-	<br><br>
-		<?php
-			echo "Nombre de carte posé par tout les joueurs pendant cette manche(soit compris) / nombre de joueur :<br>";
-			if($cardPut != NULL){
-				echo "carte posée: " . count($cardPut) . " / ". count($participant);
-			}
-			else{
-				echo "carte posée: 0 / ". count($participant);
-			}
-			echo "<br>";
-			?>
-	</b></FONT>
 </div>
 
 <div id="participant">
-	<FONT color="green"><b>
-	<br><br>
+	<ol class="breadcrumb joueurs">
 		<?php
-			echo "joueur et score<br>";
+
 			foreach ($participant as $p) {
-				echo "Joueur: ".$p->PSEUDO." | photoProfil: ".$p->PHOTOPROFIL." | score: ". $p->SCORE ." ---------- <br>";
+				echo'<li class="top15gamer">
+						<span id="pseudoTop">'.$p->PSEUDO.'</span><span class="badge monBadgePB" data-toggle="tooltip" title="Score">'.$p->SCORE.'</span>
+						 </li>';
 			}
 		?>
-	</b></FONT>
+		<?php
+			if($cardPut != NULL){
+				echo '<li class="top15gamer cartesJouee">
+						<span id="pseudoTop">' . count($cardPut) . ' / '. count($participant).'</span>
+						 </li>';
+			}
+			else{
+				echo '<li class="top15gamer cartesJouee">
+						<span id="pseudoTop">0 / '. count($participant).'</span>
+						 </li>';
+			}
+			?></ol>
+</div>
+<div id="cardPut">
 </div>

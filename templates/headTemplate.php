@@ -6,12 +6,10 @@
 		<link rel="stylesheet" href="css/bootstrap.css" type="text/css"  />
 		<link rel="stylesheet" href="css/custom.css" type="text/css"  />
 		<link rel="stylesheet" type="text/css" href="css/csshake.min.css">
-		<link rel="stylesheet" type="text/css" href="css/hover-min.css">
-		<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/hover-min.css"> 
 		<!-- jQuery library -->
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="js/jquery-3.2.1.min.js"></script>
+	  <script src="js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<div id="page">

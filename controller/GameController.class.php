@@ -46,7 +46,7 @@
 					$view->setArg("cardPil2", $cardPil2);
 					$view->setArg("cardPil3", $cardPil3);
 					$view->setArg("cardPil4", $cardPil4);
-
+					$view->setArg("name", $arg->read("gameName"));
 					$view->render();
 				}
 				else{// le joueur n'a pas joué ce tour-ci
@@ -58,6 +58,7 @@
 					$view->setArg("cardPil2", $cardPil2);
 					$view->setArg("cardPil3", $cardPil3);
 					$view->setArg("cardPil4", $cardPil4);
+					$view->setArg("name", $arg->read("gameName"));
 
 					$view->render();
 				}				
@@ -83,7 +84,7 @@
 					$sc = "vous avez gagné";
 				}
 				else{
-					$sc = "le gagnant est ". $winer->PSEUDO;
+					$sc = 'le gagnant est <span class="winnerFin">'. $winer->PSEUDO.'</span>';
 				}
 
 				$view->setArg("resultat", $sc);
@@ -142,6 +143,7 @@
 		}
 
 		public function playCard($arg) {
+			$cardPut = Game::getCardPut($arg->read("gameName"));
 			$card = $arg->read("card");
 			$gameName = $arg->read("gameName");
 

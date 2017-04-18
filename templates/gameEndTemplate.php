@@ -1,20 +1,10 @@
-<div id="cartePlateau">
-<FONT color="white"><b><p align="center">
-	OVER (à mettre en forme) <br>
-	Resultat : <?php echo $resultat; ?>
-	<br><br>
-	</p></b></FONT>
-	
-	<?php
-	echo '<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
-			<fieldset>
+<div id="fin">
+<h1><?php echo $resultat; ?></h1>
+
+	<form role="form" data-toggle="validator" class="form-horizontal formulaireFin" action="index.php" method="post">
 				<input type="hidden" name="action" value="lastEnd" />					
-					<div class="form-group">
-					<button class="boutonMenu btn btn-danger col-sm-offset-5" id="bouton" type="submit" >Terminer
+					<button class="boutonMenu bouton boutonFin" id="bouton" type="submit" >Terminer
 					</Button>
-				</div>
-			</fieldset>
-		</form>';
-	?>
+		</form>
 
 </div>
