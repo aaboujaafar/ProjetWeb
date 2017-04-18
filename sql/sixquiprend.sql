@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 18 Avril 2017 à 15:45
+-- Généré le :  Mar 18 Avril 2017 à 20:10
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -48,12 +48,23 @@ INSERT INTO `amis` (`IDJOUEUR`, `IDAMIS`, `DEMANDE`) VALUES
 (1, 146, 0),
 (1, 153, 0),
 (1, 160, 0),
+(1, 161, 0),
 (2, 146, 1),
+(5, 146, 0),
+(6, 146, 0),
+(7, 146, 0),
 (9, 146, 1),
 (146, 1, 0),
+(146, 5, 0),
+(146, 6, 0),
+(146, 7, 0),
+(146, 161, 0),
 (153, 1, 0),
 (160, 1, 0),
-(160, 146, 1);
+(160, 146, 1),
+(161, 1, 0),
+(161, 24, 1),
+(161, 146, 0);
 
 -- --------------------------------------------------------
 
@@ -192,46 +203,63 @@ CREATE TABLE `contient` (
 --
 
 INSERT INTO `contient` (`IDMAIN`, `NUMERO`) VALUES
-(11, 1),
-(10, 2),
-(12, 3),
-(11, 5),
-(10, 7),
-(11, 8),
-(11, 15),
-(11, 16),
-(13, 16),
-(12, 19),
-(13, 20),
-(11, 23),
-(12, 25),
-(10, 26),
-(10, 28),
-(13, 30),
-(13, 31),
-(11, 32),
-(11, 34),
-(10, 36),
-(12, 36),
-(11, 50),
-(10, 53),
-(13, 53),
-(10, 57),
-(10, 60),
-(12, 63),
-(12, 64),
-(13, 66),
-(10, 73),
-(12, 75),
-(12, 76),
-(12, 81),
-(13, 84),
-(13, 85),
-(13, 88),
-(10, 91),
-(11, 92),
-(12, 102),
-(13, 104);
+(15, 2),
+(15, 10),
+(16, 12),
+(15, 13),
+(15, 16),
+(17, 21),
+(16, 23),
+(19, 23),
+(17, 24),
+(17, 25),
+(18, 25),
+(14, 26),
+(19, 30),
+(14, 31),
+(19, 38),
+(17, 39),
+(14, 41),
+(19, 41),
+(17, 42),
+(18, 42),
+(17, 43),
+(15, 45),
+(15, 46),
+(15, 47),
+(14, 48),
+(18, 49),
+(15, 51),
+(15, 52),
+(16, 53),
+(18, 55),
+(19, 58),
+(18, 60),
+(18, 61),
+(14, 64),
+(14, 68),
+(18, 70),
+(16, 71),
+(19, 71),
+(14, 74),
+(17, 76),
+(16, 77),
+(14, 83),
+(18, 83),
+(16, 87),
+(16, 88),
+(16, 89),
+(16, 92),
+(19, 94),
+(14, 96),
+(16, 97),
+(15, 99),
+(17, 101),
+(19, 101),
+(17, 102),
+(19, 102),
+(14, 103),
+(18, 103);
 
 -- --------------------------------------------------------
 
@@ -249,15 +277,9 @@ CREATE TABLE `inviter` (
 --
 
 INSERT INTO `inviter` (`IDPARTIE`, `IDJOUEUR`) VALUES
-(29, 2),
 (28, 3),
-(28, 5),
-(29, 5),
-(28, 6),
-(29, 6),
-(29, 7),
-(29, 8),
-(28, 9);
+(28, 9),
+(41, 161);
 
 -- --------------------------------------------------------
 
@@ -283,7 +305,7 @@ CREATE TABLE `joueur` (
 --
 
 INSERT INTO `joueur` (`PSEUDO`, `MDP`, `ADRESSEMAIL`, `NBRPARTIEJOUEE`, `NBRPARTIEGAGNEE`, `IDJOUEUR`, `NOM`, `PRENOM`, `PHOTOCOVER`, `PHOTOPROFIL`) VALUES
-('tanakal', 'mdptanakal', 'tanakal@minesdedouai.fr', 32, 27, 1, NULL, NULL, 'photo/tanakal-imgCover.png', 'photo/tanakal-imgPicture.png'),
+('tanakal', 'mdptanakal', 'tanakal@minesdedouai.fr', 34, 28, 1, NULL, NULL, 'photo/tanakal-imgCover.png', 'photo/tanakal-imgPicture.png'),
 ('valentine', 'laTug', 'valentine@minesdedouai.fr', 0, 0, 2, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('claire', 'TheLast', 'claire@minesdedouai.fr', 0, 0, 3, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('Nicolas', 'Power', 'nicolas@minesdedouai.fr', 0, 0, 4, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
@@ -307,8 +329,9 @@ INSERT INTO `joueur` (`PSEUDO`, `MDP`, `ADRESSEMAIL`, `NBRPARTIEJOUEE`, `NBRPART
 ('Mark', '0000', 'mark@minesdedouai.fr', 0, 0, 22, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('Bernard', 'mdr', 'bernard@minesdedouai.fr', 0, 0, 23, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
 ('admin', 'admin', 'admin@minesdedouai.fr', 0, 0, 24, NULL, NULL, 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
-('a', 'a', 'a@a', 25, 1, 146, 'aaa', 'a', 'photo/a-imgCover.png', 'photo/a-imgPicture.png'),
-('jim', 'mdpjim', 'j@j', 0, 0, 160, 'jim', 'ram', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png');
+('a', 'a', 'a@a', 27, 2, 146, 'aaa', 'a', 'photo/a-imgCover.png', 'photo/a-imgPicture.png'),
+('jim', 'mdpjim', 'j@j', 0, 0, 160, 'jim', 'ram', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png'),
+('user', 'user', 'prof@imt-lille-douai.douaiCLaMeilleur', 0, 0, 161, 'user', 'user', 'photo/anonymous-imgCover.png', 'photo/anonymous-imgPicture.png');
 
 -- --------------------------------------------------------
 
@@ -327,10 +350,12 @@ CREATE TABLE `main` (
 --
 
 INSERT INTO `main` (`IDMAIN`, `IDJOUEUR`, `IDPARTIE`) VALUES
-(10, 1, 27),
-(11, 146, 27),
-(12, 1, 30),
-(13, 146, 30);
+(14, 1, 29),
+(15, 5, 29),
+(16, 7, 29),
+(17, 146, 29),
+(18, 1, 39),
+(19, 161, 39);
 
 -- --------------------------------------------------------
 
@@ -349,17 +374,28 @@ CREATE TABLE `participe` (
 --
 
 INSERT INTO `participe` (`IDJOUEUR`, `IDPARTIE`, `SCORE`) VALUES
-(1, 27, '0'),
 (1, 28, '0'),
 (1, 29, '0'),
-(1, 30, '0'),
 (1, 31, '0'),
-(146, 27, '0'),
+(1, 39, '0'),
+(1, 41, '0'),
+(5, 28, '0'),
+(5, 29, '0'),
+(6, 28, '0'),
+(7, 29, '0'),
+(24, 28, '0'),
+(24, 35, '0'),
+(24, 36, '0'),
 (146, 29, '0'),
-(146, 30, '0'),
 (146, 31, '0'),
 (146, 32, '0'),
-(146, 33, '0');
+(146, 33, '0'),
+(146, 34, '0'),
+(146, 40, '0'),
+(161, 37, '0'),
+(161, 38, '0'),
+(161, 39, '0'),
+(161, 40, '0');
 
 -- --------------------------------------------------------
 
@@ -380,13 +416,19 @@ CREATE TABLE `partie` (
 --
 
 INSERT INTO `partie` (`IDPARTIE`, `IDJOUEUR`, `PUBLIQUE`, `ENCOURS`, `NOMPARTIE`) VALUES
-(27, 1, 0, 1, 'bestGameEver'),
 (28, 1, 1, 0, 'gameTanakal'),
-(29, 1, 0, 0, 'BoucleInfini'),
-(30, 1, 0, 1, 'leJeuFinal'),
+(29, 1, 0, 1, 'BoucleInfini'),
 (31, 146, 0, 0, 'partieDeA'),
 (32, 146, 1, 0, 'partieDeAPublique'),
-(33, 146, 0, 0, '6 Qui ramasse');
+(33, 146, 0, 0, '6 Qui ramasse'),
+(34, 146, 0, 0, 'test'),
+(35, 24, 1, 0, 'PartieAdmin'),
+(36, 24, 0, 0, '2emePartieAdmin'),
+(37, 161, 0, 0, 'privatePartieMienne'),
+(38, 161, 0, 0, 'PartieUser'),
+(39, 1, 0, 1, 'PartieContreUser'),
+(40, 146, 0, 0, 'partieVsUser'),
+(41, 1, 0, 0, 'lastButNotTheLeast');
 
 -- --------------------------------------------------------
 
@@ -406,14 +448,17 @@ CREATE TABLE `poserpile` (
 --
 
 INSERT INTO `poserpile` (`NUMERO`, `IDPARTIE`, `COLONNE`, `PILE`) VALUES
-(6, 30, '4', 1),
-(30, 27, '2', 1),
-(35, 30, '3', 1),
-(38, 27, '3', 1),
-(47, 30, '2', 1),
-(80, 30, '1', 1),
-(87, 27, '4', 1),
-(97, 27, '1', 1);
+(5, 39, '2', 1),
+(6, 39, '3', 1),
+(9, 29, '2', 1),
+(32, 29, '1', 1),
+(34, 29, '5', 146),
+(40, 39, '3', 2),
+(54, 39, '1', 1),
+(57, 39, '4', 1),
+(75, 29, '4', 1),
+(84, 29, '3', 1),
+(99, 39, '4', 2);
 
 --
 -- Index pour les tables exportées
@@ -488,17 +533,17 @@ ALTER TABLE `poserpile`
 -- AUTO_INCREMENT pour la table `joueur`
 --
 ALTER TABLE `joueur`
-  MODIFY `IDJOUEUR` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `IDJOUEUR` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 --
 -- AUTO_INCREMENT pour la table `main`
 --
 ALTER TABLE `main`
-  MODIFY `IDMAIN` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `IDMAIN` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT pour la table `partie`
 --
 ALTER TABLE `partie`
-  MODIFY `IDPARTIE` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `IDPARTIE` int(9) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- Contraintes pour les tables exportées
 --

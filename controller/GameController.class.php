@@ -147,29 +147,42 @@
 			$card = $arg->read("card");
 			$gameName = $arg->read("gameName");
 
-			$nbCardPut = Game::numberCardPut($gameName);
-			$nbParticipant = Game::NumberOfParticipant($gameName);
-			$handCard = Game::getHandCard($arg->read("id"), $gameName);
-
-			if($nbCardPut < $nbParticipant-1){ //je ne suis pas le dernier pour ce tour de jeu
-				Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
-				Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
+			$hadPlayed = FALSE;
+			if($cardPut != NULL){
+				foreach ($cardPut as $cp) {
+					if($cp->IDJOUEUR == $arg->read("id")){
+						$hadPlayed = TRUE;
+					}
+				}
+			}
+			if($hadPlayed){
 				$this->defaultAction($arg);
 			}
-			else{ // je suis le dernier à joueur pour ce tour de jeu
-				
-				if(count($handCard) == 1){ //dernier à jouer, dernier tour de jeu
+			else{
+				$nbCardPut = Game::numberCardPut($gameName);
+				$nbParticipant = Game::NumberOfParticipant($gameName);
+				$handCard = Game::getHandCard($arg->read("id"), $gameName);
+
+				if($nbCardPut < $nbParticipant-1){ //je ne suis pas le dernier pour ce tour de jeu
 					Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
-					Game::addCardOnPil($card, $gameName, $arg->read("id"));      		//pose la carte
-					$this->displayCard($arg);      										//fait le placemnt des cartes posées
-					$this->endWait($arg);                             	
+					Game::addCardOnPil($card, $gameName, $arg->read("id"));      	//pose la carte
 					$this->defaultAction($arg);
 				}
-				else{ //dernier à joueur, PAS dernier tour de jeu
-					Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
-					Game::addCardOnPil($card, $gameName, $arg->read("id"));      		//pose la carte
-					$this->displayCard($arg);											//fait le placement des cartes posées
-					$this->defaultAction($arg);
+				else{ // je suis le dernier à joueur pour ce tour de jeu
+					
+					if(count($handCard) == 1){ //dernier à jouer, dernier tour de jeu
+						Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
+						Game::addCardOnPil($card, $gameName, $arg->read("id"));      		//pose la carte
+						$this->displayCard($arg);      										//fait le placemnt des cartes posées
+						$this->endWait($arg);                             	
+						$this->defaultAction($arg);
+					}
+					else{ //dernier à joueur, PAS dernier tour de jeu
+						Game::removeCardFromHand($card, $gameName, $arg->read("id"));     	//retiere la carte de la main
+						Game::addCardOnPil($card, $gameName, $arg->read("id"));      		//pose la carte
+						$this->displayCard($arg);											//fait le placement des cartes posées
+						$this->defaultAction($arg);
+					}
 				}
 			}
 		}
