@@ -1,43 +1,56 @@
 <div id="cartePlateau">
-	<FONT color="white"><b>
-		<?php 
-		echo "plateau :<br>";
+		<?php
 			if($cardPil1 != NULL){
 				foreach ($cardPil1 as $p1) {
-					echo "carte: ".$p1->NUMERO." | point: ".$p1->POINT." ---------- ";
+					echo '<img src="img/cartes/'.$p1->NUMERO.'.png"/>';
 				}
+			}
+			$c=count($cardPil1);
+			for ($i = $c; $i < 5; $i++) {
+    			echo '<img src="img/cartes/vide.png"/>';
 			}	
-			echo "<br>";
+			
 			if($cardPil2 != NULL){
 				foreach ($cardPil2 as $p2) {
-					echo "carte: ".$p2->NUMERO." | point: ".$p2->POINT." ---------- ";
+					echo '<img src="img/cartes/'.$p2->NUMERO.'.png"/>';
 				}
-			}	
+			}
+			$c=count($cardPil2);
+			for ($i = $c; $i < 5; $i++) {
+    			echo '<img src="img/cartes/vide.png"/>';
+			}
 			echo "<br>";
+
 			if($cardPil3 != NULL){
 				foreach ($cardPil3 as $p3) {
-					echo "carte: ".$p3->NUMERO." | point: ".$p3->POINT." ---------- ";
+					echo '<img src="img/cartes/'.$p3->NUMERO.'.png"/>';
 				}
-			}	
-			echo "<br>";
+			}
+			$c=count($cardPil3);
+			for ($i = $c; $i < 5; $i++) {
+    			echo '<img src="img/cartes/vide.png"/>';
+			}
+
 			if($cardPil4 != NULL){
 				foreach ($cardPil4 as $p4) {
-					echo "carte: ".$p4->NUMERO." | point: ".$p4->POINT." ---------- ";
+					echo '<img src="img/cartes/'.$p4->NUMERO.'.png"/>';
 				}
-			}	
+			}
+			$c=count($cardPil4);
+			for ($i = $c; $i < 5; $i++) {
+    			echo '<img src="img/cartes/vide.png"/>';
+			}
 			echo "<br>";
 		?>
-		<br> Ayoub : replacer ca par des images (faire/trouver les images, les stoker, mettre leurs path dans la base de données (je m'en occupe une fois qu'on a les images) et afficher tout ca). Pour l'instant, prépare des images vierge pour tester <br><br>
-	</b></FONT>
 </div>
 
 <div id="main">
 	<FONT color="red"><b>
-		<?php 
+		<?php
 			echo "Ma main :<br>";
 			if($handCard != NULL){
 				foreach ($handCard as $hc) {
-					echo "carte: ".$hc->NUMERO." | point: ".$hc->POINT." ---------- ";
+					echo '<img src="img/cartes/'.$hc->NUMERO.'.png"/>';
 				}
 			}
 			echo "<br>";
@@ -48,7 +61,7 @@
 <div id="cardPut">
 	<FONT color="blue"><b>
 	<br><br>
-		<?php 
+		<?php
 			echo "Nombre de carte posé par tout les joueurs pendant cette manche(soit compris) / nombre de joueur :<br>";
 			if($cardPut != NULL){
 				echo "carte posée: " . count($cardPut) . " / ". count($participant);
@@ -64,11 +77,11 @@
 <div id="participant">
 	<FONT color="green"><b>
 	<br><br>
-		<?php 
+		<?php
 			echo "joueur et score<br>";
 			foreach ($participant as $p) {
 				echo "Joueur: ".$p->PSEUDO." | photoProfil: ".$p->PHOTOPROFIL." | score: ". $p->SCORE ." ---------- <br>";
-			}	
+			}
 		?>
 	</b></FONT>
 </div>
