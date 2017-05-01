@@ -6,14 +6,19 @@
 		}
 
 		public function defaultAction($arg) {
-			$handCard = Game::getHandCard($arg->read("id"),$arg->read("gameName"));
-			$participant = Game::getParticipant($arg->read("gameName"));
-
+			$gameName = $arg->read("gameName");
+			if(isset($_COOKIE["gameName"]) && !ctype_digit ($_COOKIE["gameName"])) {
+					$gameName = $_COOKIE["gameName"];
+			}
+			
+			$handCard = Game::getHandCard($arg->read("id"),$gameName);
+			$participant = Game::getParticipant($gameName);
+			//if($arg->read("gameName") == );
 			$gameOver = TRUE;
 			$pHand = NULL;
 			if($handCard == NULL){
 				foreach ($participant as $p) {
-					$pHand = Game::getHandCard($p->IDJOUEUR,$arg->read("gameName"));
+					$pHand = Game::getHandCard($p->IDJOUEUR,$gameName);
 					if($pHand != NULL){
 						$gameOver = FALSE;
 					}
@@ -24,11 +29,11 @@
 			}
 			if(!$gameOver){ //le jeu n'est pas terminé (il reste au moins 1 carte dans la main d'un joueur)
 				$hadPlayed = FALSE;
-				$cardPut = Game::getCardPut($arg->read("gameName"));
-				$cardPil1 = Game::getCardOnPil(1,$arg->read("gameName"));
-				$cardPil2 = Game::getCardOnPil(2,$arg->read("gameName"));
-				$cardPil3 = Game::getCardOnPil(3,$arg->read("gameName"));
-				$cardPil4 = Game::getCardOnPil(4,$arg->read("gameName"));
+				$cardPut = Game::getCardPut($gameName);
+				$cardPil1 = Game::getCardOnPil(1,$gameName);
+				$cardPil2 = Game::getCardOnPil(2,$gameName);
+				$cardPil3 = Game::getCardOnPil(3,$gameName);
+				$cardPil4 = Game::getCardOnPil(4,$gameName);
 				
 				if($cardPut != NULL){
 					foreach ($cardPut as $cp) {
@@ -46,7 +51,7 @@
 					$view->setArg("cardPil2", $cardPil2);
 					$view->setArg("cardPil3", $cardPil3);
 					$view->setArg("cardPil4", $cardPil4);
-					$view->setArg("name", $arg->read("gameName"));
+					$view->setArg("name", $gameName);
 					$view->render();
 				}
 				else{// le joueur n'a pas joué ce tour-ci
@@ -58,7 +63,7 @@
 					$view->setArg("cardPil2", $cardPil2);
 					$view->setArg("cardPil3", $cardPil3);
 					$view->setArg("cardPil4", $cardPil4);
-					$view->setArg("name", $arg->read("gameName"));
+					$view->setArg("name", $gameName);
 
 					$view->render();
 				}				
@@ -69,7 +74,7 @@
 				//Dés que tout les joueurs ont appuyés sur le bouton Terminé, la partie est supprimé de la base de donnée
 				$view = new GameView($this,"gameEnd");
 
-				$participant = Game::getParticipant($arg->read("gameName"));
+				$participant = Game::getParticipant($gameName);
 				$view->setArg("participant", $participant);
 
 				$sc = 10000;
@@ -107,7 +112,7 @@
 				setcookie("averageWin",($user->NBRPARTIEGAGNEE/$user->NBRPARTIEJOUEE), time()+ 3600*24);
 			}
 
-
+			setcookie("gameName",time() - 3600);
 			$view = new UserView($this,"AccueilConnected");
 
 			//----------------------------------------
@@ -359,16 +364,34 @@
 
 		public function lastEnd($arg) {
 			$gameName = $arg->read("gameName");
-			$nbParticipant = Game::NumberOfParticipant($gameName);
-
-			if($nbParticipant > 1){   //je ne suis pas le dernier joueur en jeu : quitte la partie
-				Game::removeParticipation( $gameName, $arg->read("id") );
+			if(isset($_COOKIE["gameName"]) && !ctype_digit ($_COOKIE["gameName"])) {
+					$gameName = $_COOKIE["gameName"];
 			}
-			else{ //je suis le dernier joueur en jeu : quitte la partie et supprime la partie de la bdd
-				Game::removeParticipation( $gameName, $arg->read("id") );
-				Game::removePartie($gameName);
+			$participant = Game::getParticipant($gameName);
+			$pHand = NULL;
+			$gameOver = TRUE;
+			if($participant != NULL){
+				foreach ($participant as $p) {
+					$pHand = Game::getHandCard($p->IDJOUEUR,$gameName);
+					if($pHand != NULL){
+						$gameOver = FALSE;
+					}
+				}
 			}
-			$this->quit($arg);
+			if($gameOver){
+				$nbParticipant = Game::NumberOfParticipant($gameName);
+				if($nbParticipant > 1){   //je ne suis pas le dernier joueur en jeu : quitte la partie
+					Game::removeParticipation( $gameName, $arg->read("id") );
+				}
+				else{ //je suis le dernier joueur en jeu : quitte la partie et supprime la partie de la bdd
+					Game::removeParticipation( $gameName, $arg->read("id") );
+					Game::removePartie($gameName);
+				}
+				$this->quit($arg);
+			}
+			else{
+				$this->defaultAction($request);
+			}		
 		}
 		
 

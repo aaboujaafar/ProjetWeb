@@ -379,7 +379,7 @@
 			$creator = WaitingRoom::getGameCreator($gameName);
 			$participants= WaitingRoom::getParticipant($gameName);
 			$friends = Friends::getFriends($arg->read('id'));
-			$number = WaitingRoom::NumberOfParticipant($arg->read('game'));
+			$number = WaitingRoom::NumberOfParticipant($arg->read('gameName'));
 
 			$view = new WaitingRoomView($this,"waitingRoomBasCreator");
 			$public= WaitingRoom::isPublic($gameName);

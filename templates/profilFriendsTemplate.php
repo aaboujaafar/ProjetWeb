@@ -8,6 +8,8 @@
 		echo '<div class="alert alert-success col-md-4 col-md-offset-4" role="alert">
 				<span class="error"><span class="glyphicon glyphicon-exclamation-sign col-md-offset-3">&nbsp</span>' . $inscOKText . '</span></div></br>';}
 	?>
+	<br>
+	<br>
 		 <form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
 			<fieldset>
 				<input type="hidden" name="action" value="addFriend" />

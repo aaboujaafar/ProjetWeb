@@ -1,7 +1,7 @@
 <div id="event1">
 
 		  <ul class="list-group col-md-7 col-md-offset-2">
-		<li class="list-group-item title titrePB" >Liste des amis</li>
+		<li class="list-group-item title titrePB" >Invitation en partie</li>
 			 <?php
 	 		foreach ($joinedGame as $j){
 				 echo'<li class="list-group-item top15gamer">

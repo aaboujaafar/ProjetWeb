@@ -1,6 +1,6 @@
 <div id="JoueurMenu">
 <ul class="list-group col-md-7 col-md-offset-2">
-		<li class="list-group-item title titrePB" >Liste des amis</li>
+		<li class="list-group-item title titrePB" >Ils vous ont demande en amis</li>
 			 <?php
 	 		foreach ($friendsAsking as $friend){
 				  echo'<li class="list-group-item top15gamer">

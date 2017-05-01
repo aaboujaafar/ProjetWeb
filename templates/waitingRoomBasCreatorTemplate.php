@@ -41,7 +41,7 @@
 					</div>
 				</fieldset>
 			</form></div>';
-		}
+		}	
 		if($number < 11 && $number > 1){
 			echo '<div class="col-md-12"><form role="form" data-toggle="validator" class="col-md-12 form-horizontal" action="index.php" method="post">
 				<fieldset>

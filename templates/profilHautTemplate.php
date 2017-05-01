@@ -14,7 +14,7 @@
 							  <li><span data-toggle="tooltip" title="Parties jouées" data-placement="bottom" class="glyphicon glyphicon-king icon"></span><span><?php echo $partieT ?></span></li>
 							  <li><span data-toggle="tooltip" title="Parties gagnées" data-placement="bottom" class="glyphicon glyphicon-thumbs-up icon"></span><span><?php echo $partieG ?></span></li>
 							  <li><span data-toggle="tooltip" title="Parties perdues" data-placement="bottom" class="glyphicon glyphicon-thumbs-down icon"></span><span><?php echo $partieP ?></span></li>
-							  <li><span data-toggle="tooltip" title="Rapport parties gagnées/jouées" data-placement="bottom" class="glyphicon glyphicon-stats icon"></span><span><?php echo number_format($averageWin, 2, '.', ',') ?></span></li>
+							  <li><span data-toggle="tooltip" title="Rapport parties gagnées/jouées" data-placement="bottom" class="glyphicon glyphicon-stats icon"></span><span><?php echo number_format($averageWin, 2, '.', ',')*100 ?>%</span></li>
 							</ul>
 							</div>
 							<?php
