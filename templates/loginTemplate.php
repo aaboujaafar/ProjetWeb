@@ -25,7 +25,7 @@
 		</div>
 		
 		<div class="form-group">
-			<button class="boutonMenu bouton hvr-grow col-sm-offset-5" id="bouton" type="submit" >Se connecter</Button>
+			<button class="boutonMenu bouton hvr-grow col-sm-offset-4" id="bouton" type="submit" >Se connecter</Button>
 		</div>
 		</fieldset>
 	</form>

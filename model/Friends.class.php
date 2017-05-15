@@ -27,7 +27,7 @@
 		}
 
 		public static function getAFriend($login) {
-			$sql = "select PSEUDO, NBRPARTIEJOUEE, NBRPARTIEGAGNEE, PHOTOPROFIL, PHOTOCOVER, NOM, PRENOM from joueur where pseudo='".$login."'";
+			$sql = "select IDJOUEUR, PSEUDO, NBRPARTIEJOUEE, NBRPARTIEGAGNEE, PHOTOPROFIL, PHOTOCOVER, NOM, PRENOM from joueur where pseudo='".$login."'";
 			$st = self::query($sql);
 			$u = $st->fetch();
 			if(isset($u->props)){

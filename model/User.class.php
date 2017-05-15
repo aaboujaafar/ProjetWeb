@@ -76,5 +76,42 @@
 			$st = self::query($sql);
 		}
 		
+
+
+
+		//----------------------------------------------
+		//pour l'historique des 10 dernières partie jouées
+		//----------------------------------------------
+		public static function getHistorique($id) {
+			$sql = "SELECT * FROM `historique` WHERE historique.IDJOUEUR = " . $id . " ORDER BY historique.NBPARTIE";
+			$st = self::query($sql);
+			$u = $st->fetchAll();
+			if(isset($u[0])){
+				return $u;
+			}
+			else{
+				return NULL;
+			}
+		}
+
+		public static function UpdateHistorique($idJoueur, $NbPartie, $gagne) {
+			$sql = "UPDATE `historique` SET `IDJOUEUR`= " . $idJoueur . ",`NBPARTIE`= " . $NbPartie . ",`GAGNE`= " . $gagne . " WHERE historique.IDJOUEUR = " . $idJoueur . " AND historique.NBPARTIE = " . $NbPartie;
+			$st = self::query($sql);
+		}
+
+		public static function addHistory($idJoueur, $NbPartie, $gagne) {
+			$sql = "INSERT INTO `historique`(`IDJOUEUR`, `NBPARTIE`, `GAGNE`) VALUES (" . $idJoueur . "," . $NbPartie . "," . $gagne . ")";
+			$st = self::query($sql);
+		}
+
+		public static function getHistoriqueSize($id) {
+			$historique =  static::getHistorique($id);
+			if($historique == NULL){
+				return 0;
+			}
+			else{
+				return count($historique);
+			}
+		}
 	} 	 	 	 		
 ?>

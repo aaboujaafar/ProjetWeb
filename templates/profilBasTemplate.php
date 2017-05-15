@@ -1,63 +1,27 @@
 <div id="profilBas">
-	<div class="col-md-5">
-	<ul class="list-group">
-		<li class="list-group-item title titrePB" >Les 10 meilleurs joueurs du jeu</li>
-			<?php
-				if($rank != NULL){
-			 		foreach ($rank as $r){
-						echo'<li class="list-group-item top15gamer">
-						<img src="'.$r->PHOTOPROFIL.'"/><span id="pseudoTop">'.$r->PSEUDO.'</span><span class="badge monBadgePB" data-toggle="tooltip" title="Score">'.$r->NBRPARTIEGAGNEE.'</span>
-						 </li>';
-					}
-				}
-			?>
-	</ul>
-</div>
 	<?php
 		if($me){
 			if(isset($inscErrorText)){
 				echo '<div class="chgt col-md-7">
-						<div class="alert alert-danger" role="alert ">
-							<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorText . '</span>
-						</div></br>';
+							<div class="alert alert-danger" role="alert ">
+								<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscErrorText . '</span>
+							</div>
+						</div>
+					</br>';
 			}
 			if(isset($inscOkText)){
 				echo '<div class="chgt col-md-7">
-						<div class="alert alert-success" role="alert ">
-							<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscOkText . '</span>
-						</div></br>';
+							<div class="alert alert-success" role="alert ">
+								<span class="error"><span class="glyphicon glyphicon-exclamation-sign">&nbsp</span>' . $inscOkText . '</span>
+							</div>
+						</div>
+						</br>';
 			}
-			echo 
-					'<form role="form" data-toggle="validator" class="form-horizontal" action="index.php" method="post">
-						<fieldset>
-							<input type="hidden" name="action" value="changePassword" />
-							<div class="form-group">
-								<label class="col-sm-6 control-label ">Ancien mot de passe <span>*</span></label>
-								<div class="col-sm-6">
-								  <input type="password" name="oldPassword" id="test"  placeholder="ancienMotDePasse" required/>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-sm-6 control-label">Nouveau mot de passe <span>*</span></label>
-								<div class="col-sm-6">
-								  <input type="password" name="newPassword1" placeholder="nouveauMotDePasse" required/>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-sm-6 control-label">Nouveau mot de passe <span>*</span></label>
-								<div class="col-sm-6">
-								  <input  type="password" name="newPassword2" placeholder="nouveauMotDePasse" required/>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<button class="boutonMenu bouton hvr-grow col-sm-offset-5" id="bouton" type="submit" >Changer</Button>
-							</div>
-						</fieldset>
-					</form>
-				</div>';
+		}
+		if($history != NULL){
+			foreach ($history as $h) {
+				echo '<ul>' .$h->GAGNE .'</ul>';
+			}
 		}
 	?>
 </div>

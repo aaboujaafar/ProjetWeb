@@ -6,6 +6,7 @@
     </div>
 	<a class="lienMenu pull-right" href="index.php?action=logout">Deconnexion</a>
 	<a class="lienMenu pull-right" href="index.php?action=quit">Sortir</a>
+	<a class="lienMenu pull-right" href="index.php">Rafraichir</a>
   </div>
 </nav>
 </div>

@@ -351,6 +351,10 @@
 					$tot = Game::getWin($p->IDJOUEUR);
 					$tot = $tot + 1;
 					Game::setWin($p->IDJOUEUR, $tot);
+					$this->MAJHistorique($p->IDJOUEUR, 1);
+				}
+				else{  //utilisé uniquement pour mettre à jour la liste de l'historique en cas de défaite
+					$this->MAJHistorique($p->IDJOUEUR, 0);
 				}
 			}	
 
@@ -392,6 +396,20 @@
 			else{
 				$this->defaultAction($request);
 			}		
+		}
+
+		public function MAJHistorique($idJoueur, $gagne) {
+			$HSize = User::getHistoriqueSize($idJoueur);
+			if($HSize == 10){
+				$H = User::getHistorique($idJoueur);
+				for ($i=0; $i < 9; $i++) { 
+					User::UpdateHistorique($idJoueur, 0, $H[$i+1]->GAGNE);
+				}
+				User::UpdateHistorique($idJoueur, 9, $gagne);
+			}
+			else{
+				User::addHistory($idJoueur, $HSize, $gagne);
+			}
 		}
 		
 

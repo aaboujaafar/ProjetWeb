@@ -44,8 +44,10 @@
 			$view = new UserProfilView($this,"profilHaut");
 
 			$rank = User::getPlayerRanked();
+			$history = User::getHistorique($arg->read('id'));
 
 			$view->setArg("me", TRUE);
+			$view->setArg("history", $history);
 			$view->setArg("rank", $rank);
 			$view->setArg("Pseudo", $arg->read('user'));
 			$view->setArg("photoC", $arg->read('photoC'));
@@ -64,9 +66,11 @@
 			$view = new FriendProfilView($this,"profilHaut");
 			if($friend != NULL){
 				$rank = User::getPlayerRanked();
+				$history = User::getHistorique($friend->IDJOUEUR);
 
 				$view->setArg("me", FALSE);
 				$view->setArg("rank", $rank);
+				$view->setArg("history", $history);
 				$view->setArg("Pseudo", $friend->PSEUDO);
 				$view->setArg("photoC",  $friend->PHOTOCOVER);
 				$view->setArg("photoP",  $friend->PHOTOPROFIL);
@@ -465,6 +469,14 @@
 				$view->render();
 		}
 
+		public function rank($arg){
+				$view = new RankView($this,"rank");
+				$rank = User::getPlayerRanked();
+
+				$view->setArg("rank", $rank);
+				$view->render();
+		}
+
 
 
 
@@ -720,6 +732,9 @@
 			}
 			else if($action === "changePassword"){
 				$this->changePassword($request);
+			}
+			else if($action === "rank"){
+				$this->rank($request);
 			}
 			else{
 				$this->defaultAction($request);
